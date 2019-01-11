@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <tags type="TagSet">
+    <tag>shop</tag>
+  </tags>
+  <bump-message>CannotEnterShop</bump-message>
+  <spawn-as type="StringGenerator">
+    <entry>
+      <value>TorchShop</value>
+      <weight>1</weight>
+    </entry>
+  </spawn-as>
+  
+  <image-path>images/map/items/shops/lights.png</image-path>
+  <initial-inventory type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+  </initial-inventory>
+  <inventory-column>-1</inventory-column>
+  <inventory-row>-1</inventory-row>
+
+  
+  
+  
+  <identifier>TorchShop</identifier>
+  <shop-title>Ye Olde Toole Shoppe</shop-title>
+  
+  <name>torch and tools shop</name>
+  <placement>DeadEnd</placement>
+  <item-count>1</item-count>
+  
+  <price>0</price>
+  <item-type>Shop</item-type>
+  <inventory type="ShopInventoryEntry">
+    <entry>
+      <item-identifier>Torch</item-identifier>
+      <number-in-stock>8</number-in-stock>
+      <number-in-stock-roll>5</number-in-stock-roll>
+      <number-in-stock-die>6</number-in-stock-die>
+    </entry>
+    <entry>
+      <item-identifier>Lantern</item-identifier>
+      <number-in-stock>4</number-in-stock>
+      <number-in-stock-roll>3</number-in-stock-roll>
+      <number-in-stock-die>6</number-in-stock-die>
+    </entry>
+    <entry>
+      <item-identifier>MagicLantern</item-identifier>
+      <number-in-stock>2</number-in-stock>
+      <number-in-stock-roll>1</number-in-stock-roll>
+      <number-in-stock-die>6</number-in-stock-die>
+    </entry>
+    <entry>
+      <item-identifier>Tools</item-identifier>
+      <number-in-stock>4</number-in-stock>
+      <number-in-stock-roll>1</number-in-stock-roll>
+      <number-in-stock-die>6</number-in-stock-die>
+    </entry>
+  </inventory>
+  
+  
+  
+  
+  <x-generator type="IntGenerator">
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+  </x-generator>
+  <y-generator type="IntGenerator">
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+  </y-generator>
+</item>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <itemUnlocks type="StringCounter">
+    <entry>
+      <value>MagentaKey</value>
+      <count>1</count>
+    </entry>
+  </itemUnlocks>
+  <lockType>5</lockType>
+  <pick-up-message>UnlockMagentaDoor</pick-up-message>
+  <bump-message>BumpMagentaDoor</bump-message>
+</item>

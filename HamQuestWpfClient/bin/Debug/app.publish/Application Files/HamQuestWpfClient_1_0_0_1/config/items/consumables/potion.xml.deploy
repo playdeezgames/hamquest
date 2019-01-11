@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <tags type="TagSet">
+    <tag>healing</tag>
+    <tag>item</tag>
+  </tags>
+  <spawn-as type="StringGenerator">
+    <entry>
+      <value>Potion</value>
+      <weight>1</weight>
+    </entry>
+  </spawn-as>
+  
+  <image-path>images/map/items/consumables/potion.png</image-path>
+  <initial-inventory type="IntGenerator">
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+  </initial-inventory>
+  <inventory-column>4</inventory-column>
+  <inventory-row>2</inventory-row>
+
+  
+  
+  
+  <identifier>Potion</identifier>
+  
+  <name>crimson potion</name>
+  <placement>Either</placement>
+  <item-count>24</item-count>
+  <price>150</price>
+  <healing-type>Save</healing-type>
+  <healing-amount>10</healing-amount>
+  <item-type>Healing</item-type>
+  <woundsHealed>0</woundsHealed>
+  <pick-up-message>PickUpPotion</pick-up-message>
+  <use-message>UsePotion</use-message>
+  
+  
+  
+  
+  <x-generator type="IntGenerator">
+    <entry>
+      <value>1</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>13</value>
+      <weight>1</weight>
+    </entry>
+  </x-generator>
+  <y-generator type="IntGenerator">
+    <entry>
+      <value>1</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>13</value>
+      <weight>1</weight>
+    </entry>
+  </y-generator>
+</item>

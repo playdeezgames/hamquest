@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <tags type="TagSet">
+    <tag>weapon</tag>
+    <tag>item</tag>
+    <tag>durable</tag>
+  </tags>
+  <spawn-as type="StringGenerator">
+    <entry>
+      <value>BattleAxe</value>
+      <weight>1</weight>
+    </entry>
+  </spawn-as>
+  
+  <image-path>images/map/items/weapons/battleaxe.png</image-path>
+  <initial-inventory type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+  </initial-inventory>
+  <inventory-column>4</inventory-column>
+  <inventory-row>0</inventory-row>
+
+  
+  
+  
+  <identifier>BattleAxe</identifier>
+  
+  <name>battleaxe</name>
+  <placement>Either</placement>
+  <item-count>0</item-count>
+  
+  <price>0</price>
+  <attack-value>8</attack-value>
+  <durability>50</durability>
+  <two-handed>True</two-handed>
+  <item-type>Weapon</item-type>
+  <pick-up-message>PickUpBattleAxe</pick-up-message>
+  <broken-message>BrokenBattleAxe</broken-message>
+  
+  
+  
+  
+  <x-generator type="IntGenerator">
+    <entry>
+      <value>1</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>13</value>
+      <weight>1</weight>
+    </entry>
+  </x-generator>
+  <y-generator type="IntGenerator">
+    <entry>
+      <value>1</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>13</value>
+      <weight>1</weight>
+    </entry>
+  </y-generator>
+</item>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<creature>
+  <mover type="CreatureMoveHandler"/>
+  <tags type="TagSet">
+    <tag>creature</tag>
+  </tags>
+  <image-path>images/map/creatures/goblinoids/fimir.png</image-path>
+  <identifier>fimir</identifier>
+  <name>fimir</name>
+  <morale-roll type="BoolGenerator">
+    <entry>
+      <value>true</value>
+      <weight>5</weight>
+    </entry>
+    <entry>
+      <value>false</value>
+      <weight>1</weight>
+    </entry>
+  </morale-roll>
+  <item-drops type="StringGenerator">
+    <entry>
+      <value>Lantern</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Chainmail</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Gold</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Silver</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>Shortsword</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value></value>
+      <weight>6</weight>
+    </entry>
+  </item-drops>
+  <attack type="StatisticHolder">3</attack>
+  <attack-roll type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>1</value>
+      <weight>3</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>3</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+  </attack-roll>
+  <health type="StatisticHolder">2</health>
+  <speed type="StatisticHolder">6</speed>
+  <creature-count>12</creature-count>
+  <attack-die>3</attack-die>
+  
+  <spawn-weight>3</spawn-weight>
+  <placement>Either</placement>
+  <number-of-attacks>1</number-of-attacks>
+  <special-attack>None</special-attack>
+  <necromancer-weight>0</necromancer-weight>
+  <summoner-weight>10</summoner-weight>
+  <hit-message>HitFimir</hit-message>
+  <miss-message>MissedFimir</miss-message>
+  <kill-message>KilledFimir</kill-message>
+  <hit-by-message>HitByFimir</hit-by-message>
+  <missed-by-message>MissedByFimir</missed-by-message>
+  <killed-by-message>KilledByFimir</killed-by-message>
+  <experience-points>2</experience-points>
+  <defend-roller type="CreatureDefendRoller"/>
+  <defend-generator>white-die-3</defend-generator>
+</creature>

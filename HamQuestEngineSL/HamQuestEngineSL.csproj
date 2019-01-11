@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AE996B68-5039-4D14-87A6-D4255429AF2C}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HamQuestEngine</RootNamespace>
+    <AssemblyName>HamQuestEngineSL</AssemblyName>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Microsoft SDKs\Silverlight\v5.0\Libraries\Client\System.Xml.Linq.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DescriptorProperties\KeyHandlers\AmuletOfYendorKeyHandler.cs" />
+    <Compile Include="DescriptorProperties\Rollers\CreatureDefendRoller.cs" />
+    <Compile Include="DescriptorProperties\Misc\DefaultRandomNumberGenerator.cs" />
+    <Compile Include="DescriptorProperties\BumpHandlers\IBumpHandler.cs" />
+    <Compile Include="DescriptorProperties\KeyHandlers\IPlayerKeyHandler.cs" />
+    <Compile Include="DescriptorProperties\Rollers\IRoller.cs" />
+    <Compile Include="DescriptorProperties\Rollers\PlayerDefendRoller.cs" />
+    <Compile Include="DescriptorProperties\KeyHandlers\PlayerRestKeyHandler.cs" />
+    <Compile Include="DescriptorProperties\Misc\TextColor.cs" />
+    <Compile Include="DescriptorProperties\Rollers\SimpleRoller.cs" />
+    <Compile Include="GameConstants\ArmorTypes.cs" />
+    <Compile Include="GameConstants\Attributes.cs" />
+    <Compile Include="GameConstants\CellTypes.cs" />
+    <Compile Include="DescriptorProperties\Generators\BoolGenerator.cs" />
+    <Compile Include="DescriptorProperties\Movers\CreatureMoveHandler.cs" />
+    <Compile Include="ExtensionMethods\DescriptorExtenders.cs" />
+    <Compile Include="DescriptorProperties\Movers\IMover.cs" />
+    <Compile Include="DescriptorProperties\Movers\PlayerMoveHandler.cs" />
+    <Compile Include="DescriptorProperties\Counters\StringCounter.cs" />
+    <Compile Include="DescriptorProperties\Generators\IntGenerator.cs" />
+    <Compile Include="GameConstants\Colors.cs" />
+    <Compile Include="GameConstants\CreatureSpecialAttacks.cs" />
+    <Compile Include="GameConstants\FileNames.cs" />
+    <Compile Include="GameConstants\HealingTypes.cs" />
+    <Compile Include="GameConstants\ItemTypes.cs" />
+    <Compile Include="GameConstants\Messages.cs" />
+    <Compile Include="GameConstants\Methods.cs" />
+    <Compile Include="GameConstants\Placements.cs" />
+    <Compile Include="GameConstants\PlayerConfigurationValues.cs" />
+    <Compile Include="GameConstants\PlayerStates.cs" />
+    <Compile Include="GameConstants\Properties.cs" />
+    <Compile Include="GameConstants\PropertyGroups.cs" />
+    <Compile Include="GameConstants\Tags.cs" />
+    <Compile Include="GameCore\Game.cs" />
+    <Compile Include="GameCore\GameClient.cs" />
+    <Compile Include="Maze\CellInfo.cs" />
+    <Compile Include="Maps\Creature.cs" />
+    <Compile Include="DescriptorProperties\Misc\ShopInventoryEntry.cs" />
+    <Compile Include="DescriptorProperties\Generators\StringGenerator.cs" />
+    <Compile Include="DescriptorProperties\PlayerSpecific\PlayerStepTracker.cs" />
+    <Compile Include="DescriptorProperties\PlayerSpecific\PlayerMessageStatistics.cs" />
+    <Compile Include="DescriptorProperties\PlayerSpecific\PlayerStatisticHolder.cs" />
+    <Compile Include="DescriptorProperties\PlayerSpecific\PlayerConfiguration.cs" />
+    <Compile Include="Tables\PropertyGroupTable.cs" />
+    <Compile Include="Tables\MessageTable.cs" />
+    <Compile Include="Tables\CreatureTable.cs" />
+    <Compile Include="Item\Descriptor.cs" />
+    <Compile Include="Directions\Directions.cs" />
+    <Compile Include="Tables\ItemTable.cs" />
+    <Compile Include="Maps\Map.cs" />
+    <Compile Include="Maps\MapCell.cs" />
+    <Compile Include="Maze\Maze.cs" />
+    <Compile Include="GameCore\MessageQueue.cs" />
+    <Compile Include="Creatures\PlayerDescriptor.cs" />
+    <Compile Include="Maze\Portal.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Item\Shop.cs" />
+    <Compile Include="DescriptorProperties\Misc\StatisticsHolder.cs" />
+    <Compile Include="Tables\TableSet.cs" />
+    <Compile Include="Tables\TerrainTable.cs" />
+    <Compile Include="DescriptorProperties\Misc\TagSet.cs" />
+    <Compile Include="Tables\ThemeTable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PDGBoardGamesSL\PDGBoardGamesSL.csproj">
+      <Project>{16C6057E-3C28-4B31-BAE9-EDEAC47F91D7}</Project>
+      <Name>PDGBoardGamesSL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

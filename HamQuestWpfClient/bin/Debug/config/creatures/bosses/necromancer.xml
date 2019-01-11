@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<creature>
+  <mover type="CreatureMoveHandler"/>
+  <tags type="TagSet">
+    <tag>creature</tag>
+  </tags>
+  <image-path>images/map/creatures/bosses/necromancer.png</image-path>
+  <identifier>necromancer</identifier>
+  <name>necromancer</name>
+  <morale-roll type="BoolGenerator">
+    <entry>
+      <value>true</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>false</value>
+      <weight>1</weight>
+    </entry>
+  </morale-roll>
+  <item-drops type="StringGenerator">
+    <entry>
+      <value>Amulet</value>
+      <weight>1</weight>
+    </entry>
+  </item-drops>
+  <attack type="StatisticHolder">1</attack>
+  <health type="StatisticHolder">8</health>
+  <speed type="StatisticHolder">4</speed>
+  <creature-count>1</creature-count>
+  <attack-die>3</attack-die>
+  
+  <spawn-weight>0</spawn-weight>
+  <placement>DeadEnd</placement>
+  <number-of-attacks>1</number-of-attacks>
+  <special-attack>Generator</special-attack>
+  <generatorTable>necromancer-weight</generatorTable>
+  <necromancer-weight>0</necromancer-weight>
+  <summoner-weight>0</summoner-weight>
+  <hit-message>HitNecromancer</hit-message>
+  <miss-message>MissedNecromancer</miss-message>
+  <kill-message>KilledNecromancer</kill-message>
+  <hit-by-message>HitByNecromancer</hit-by-message>
+  <missed-by-message>MissedByNecromancer</missed-by-message>
+  <killed-by-message>KilledByNecromancer</killed-by-message>
+  <experience-points>8</experience-points>
+  <defend-roller type="CreatureDefendRoller"/>
+  <defend-generator>white-die-2</defend-generator>
+</creature>

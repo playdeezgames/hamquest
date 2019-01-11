@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <itemUnlocks type="StringCounter">
+    <entry>
+      <value>BlueKey</value>
+      <count>1</count>
+    </entry>
+  </itemUnlocks>
+  <lockType>4</lockType>
+  <pick-up-message>UnlockBlueDoor</pick-up-message>
+  <bump-message>BumpBlueDoor</bump-message>
+</item>

@@ -1,0 +1,7 @@
+C:\lint\projects\hq\PDBBoardGames.Tests\bin\Debug\PDBBoardGames.Tests.dll
+C:\lint\projects\hq\PDBBoardGames.Tests\bin\Debug\PDBBoardGames.Tests.pdb
+C:\lint\projects\hq\PDBBoardGames.Tests\bin\Debug\PDGBoardGames.dll
+C:\lint\projects\hq\PDBBoardGames.Tests\bin\Debug\PDGBoardGames.pdb
+C:\lint\projects\hq\PDBBoardGames.Tests\obj\Debug\PDBBoardGames.Tests.csprojResolveAssemblyReference.cache
+C:\lint\projects\hq\PDBBoardGames.Tests\obj\Debug\PDBBoardGames.Tests.dll
+C:\lint\projects\hq\PDBBoardGames.Tests\obj\Debug\PDBBoardGames.Tests.pdb

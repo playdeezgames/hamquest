@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<creature>
+  <mover type="PlayerMoveHandler"/>
+  <tags type="TagSet">
+    <tag>player</tag>
+  </tags>
+  <key-handlers type="TagSet">
+    <tag>amulet-of-yendor-key-handler</tag>
+    <tag>rest-key-handler</tag>
+  </key-handlers>
+  <amulet-of-yendor-key-handler type="AmuletOfYendorKeyHandler">
+    <amulet-item-name>Amulet</amulet-item-name>
+  </amulet-of-yendor-key-handler>
+  <quest-item-name>Quest</quest-item-name>
+  <rest-key-handler type="PlayerRestKeyHandler"/>
+  <image-path>images/map/creatures/player/player.png</image-path>
+  <name>player</name>
+  <creature-count>0</creature-count>
+  <attack-die>3</attack-die>
+  <spawn-weight>0</spawn-weight>
+  <placement>NonDeadEnd</placement>
+  <number-of-attacks>1</number-of-attacks>
+  <special-attack>None</special-attack>
+  <necromancer-weight>0</necromancer-weight>
+  <summoner-weight>0</summoner-weight>
+  <identifier>player</identifier>
+  <attack type="PlayerStatisticHolder"></attack>
+  <attack-roll type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+  </attack-roll>
+  <defend type="PlayerStatisticHolder"></defend>
+  <health type="PlayerStatisticHolder"></health>
+  <speed type="PlayerStatisticHolder"></speed>
+  <step-tracker type="PlayerStepTracker"></step-tracker>
+  <message-statistics type="PlayerMessageStatistics"></message-statistics>
+  <item-durabilities type="StringCounter"></item-durabilities>
+  <player-configuration type="PlayerConfiguration">Attack</player-configuration>
+  <speed-roll type="IntGenerator">
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>3</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>4</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>5</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>6</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>5</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>4</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>3</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+  </speed-roll>
+  <gain-experience-point-message>GainExperiencePoint</gain-experience-point-message>
+  <gain-experience-points-message>GainExperiencePoints</gain-experience-points-message>
+  <gain-experience-level-message>GainExperienceLevel</gain-experience-level-message>
+  <killed-message>YouHaveDied</killed-message>
+  <quest-completed-message>QuestCompleted</quest-completed-message>
+  <thief-took-megaham-message>ThiefTookMegaham</thief-took-megaham-message>
+  <thief-took-gold-message>ThiefTookGold</thief-took-gold-message>
+  <ghoul-drained-energy-message>GhoulDrainedEnergy</ghoul-drained-energy-message>
+  <won-game-message>WonGame</won-game-message>
+  <need-completed-megaham-message>NeedCompletedMegaham</need-completed-megaham-message>
+  <need-rainbow-key-message>NeedRainbowKey</need-rainbow-key-message>
+  <cannot-exit-with-amulet-message>CannotExitWithAmulet</cannot-exit-with-amulet-message>
+  <cannot-rest-message>CannotRest</cannot-rest-message>
+  <rest-message>PlayerRest</rest-message>
+  <defend-roller type="PlayerDefendRoller"/>
+  <initial-experience-points>0</initial-experience-points>
+  <initial-experience-level>0</initial-experience-level>
+  <initial-experience-point-goal>10</initial-experience-point-goal>
+  <initial-health>5</initial-health>
+  <health-per-experience-level>1</health-per-experience-level>
+  <experience-goal-multiplier>2</experience-goal-multiplier>
+  <experience-goal-divisor>1</experience-goal-divisor>
+</creature>

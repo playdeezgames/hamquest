@@ -1,0 +1,1165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<messages>
+  <message>
+    <identifier>CannotRest</identifier>
+    <text>You cannot rest while monsters lurk!</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PlayerRest</identifier>
+    <text>You rest a moment to regain your breath.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>DisarmPoisonHam</identifier>
+    <text>You have eaten a poison ham. You drink a vial of green liquid, and suffer no ill effects.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpDartTrap</identifier>
+    <text>You have sprung a dart trap.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpBladeTrap</identifier>
+    <text>You have sprung a blade trap.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpArrowTrap</identifier>
+    <text>You have sprung an arrow trap.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>DartTrap</identifier>
+    <text>You use a set of thieves' tools to disarm the dart trap.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BladeTrap</identifier>
+    <text>You use a set of thieves' tools to disarm the blade trap.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>DisarmArrowTrap</identifier>
+    <text>You use a set of thieves' tools to disarm the arrow trap.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpGemstones</identifier>
+    <text>You pick up a small pile of gemstones.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpTorch</identifier>
+    <text>You have picked up a torch.</text>
+    <tutorial-image-path>images/map/items/lights/torch.png</tutorial-image-path>
+    <tutorial-title-text>Torch (Light Source)</tutorial-title-text>
+    <tutorial-description-text>You have picked up a torch. As light sources go, a torch is not the greatest, but it is better than nothing!</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpLantern</identifier>
+    <text>You have picked up a torch.</text>
+    <tutorial-image-path>images/map/items/lights/lantern.png</tutorial-image-path>
+    <tutorial-title-text>Lantern (Light Source)</tutorial-title-text>
+    <tutorial-description-text>You have picked up a lantern. A lantern is much better than a torch for providing light. It also lasts a great deal longer.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpMagicLantern</identifier>
+    <text>You have picked up a torch.</text>
+    <tutorial-image-path>images/map/items/lights/magiclantern.png</tutorial-image-path>
+    <tutorial-title-text>Magic Lantern (Light Source)</tutorial-title-text>
+    <tutorial-description-text>You have picked up a magic lantern. It is the best light source you can find. Unfortunately, it is rare.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>GainExperiencePoint</identifier>
+    <text>You have gained {0} experience point!</text>
+    <text-color>experience</text-color>
+  </message>
+  <message>
+    <identifier>GainExperiencePoints</identifier>
+    <text>You have gained {0} experience points!</text>
+    <text-color>experience</text-color>
+  </message>
+  <message>
+    <identifier>GainExperienceLevel</identifier>
+    <text>You have gained a new experience level!</text>
+    <text-color>experience</text-color>
+  </message>
+  <message>
+    <identifier>PortalMonsterAmuletBlock</identifier>
+    <text>The Amulet of Yendor you wear blocks the effects of the portal monster.</text>
+    <tutorial-image-path>images/map/items/misc/amulet.png</tutorial-image-path>
+    <tutorial-title-text>Amulet Blocks Teleport</tutorial-title-text>
+    <tutorial-description-text>As long as the amulet is worn, no portal monster can affect you.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PortalAmuletBlock</identifier>
+    <text>The Amulet of Yendor you wear blocks the effects of the portal.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/misc/amulet.png</tutorial-image-path>
+    <tutorial-title-text>Amulet Blocks Exit</tutorial-title-text>
+    <tutorial-description-text>You cannot leave while wearing the amulet.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>UseAmulet</identifier>
+    <text>You invoke the amulet of Yendor!</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/misc/amulet.png</tutorial-image-path>
+    <tutorial-title-text>Klaatu barada nikto!</tutorial-title-text>
+    <tutorial-description-text>You are wisked away to another part of the dungeon.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>YouHaveDied</identifier>
+    <text>You have died. Press F2 to start a new game.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>QuestCompleted</identifier>
+    <text>You have completed the Megaham!  Now you need to find the exit!</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>ThiefTookMegaham</identifier>
+    <text>The thief has taken a piece of the megaham!</text>
+    <text-color>thief</text-color>
+  </message>
+  <message>
+    <identifier>ThiefTookGold</identifier>
+    <text>The thief has taken gold from you!</text>
+    <text-color>thief</text-color>
+  </message>
+  <message>
+    <identifier>GhoulDrainedEnergy</identifier>
+    <text>The ghoul has drained energy from you!</text>
+    <text-color>ghoul</text-color>
+  </message>
+  <message>
+    <identifier>CannotEnterShop</identifier>
+    <text>You cannot enter a shoppe while creatures lurk!</text>
+    <text-color>shop</text-color>
+  </message>
+  <message>
+    <identifier>WonGame</identifier>
+    <text>You have won the game!</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/misc/exit.png</tutorial-image-path>
+    <tutorial-title-text>You Made It!</tutorial-title-text>
+    <tutorial-description-text>Congratulations. You won the game!</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>NeedCompletedMegaham</identifier>
+    <text>You can't leave without the complete megaham!</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/misc/exit.png</tutorial-image-path>
+    <tutorial-title-text>Forgetting Something?</tutorial-title-text>
+    <tutorial-description-text>You cannot leave without the complete Megaham!</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitSkeleton</identifier>
+    <text>You have hit a skeleton.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedSkeleton</identifier>
+    <text>You have missed a skeleton.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledSkeleton</identifier>
+    <text>You have killed a skeleton.</text>
+    <tutorial-image-path>images/map/creatures/undead/skeleton.png</tutorial-image-path>
+    <tutorial-title-text>Skeleton (Undead)</tutorial-title-text>
+    <tutorial-description-text>You have killed a skeleton. Skeletons are the easiest of the undead to kill.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitBySkeleton</identifier>
+    <text>A skeleton hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedBySkeleton</identifier>
+    <text>A skeleton missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledBySkeleton</identifier>
+    <text>A skeleton killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/undead/skeleton.png</tutorial-image-path>
+    <tutorial-title-text>Cut Down in Your Prime!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by a skeleton, one of the weakest monsters in the game. I'd be embarrassed.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitZombie</identifier>
+    <text>You have hit a zombie.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedZombie</identifier>
+    <text>You have missed a zombie.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledZombie</identifier>
+    <text>You have killed a zombie.</text>
+    <tutorial-image-path>images/map/creatures/undead/zombie.png</tutorial-image-path>
+    <tutorial-title-text>Zombie (Undead)</tutorial-title-text>
+    <tutorial-description-text>You have killed a zombie. Zombies are tougher than skeletons, but not as tough as mummies.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByZombie</identifier>
+    <text>A zombie hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByZombie</identifier>
+    <text>A zombie missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByZombie</identifier>
+    <text>A zombie killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/undead/zombie.png</tutorial-image-path>
+    <tutorial-title-text>Brains Eaten!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by a zombie. It finds your brains tasty.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitMummy</identifier>
+    <text>You have hit a mummy.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedMummy</identifier>
+    <text>You have missed a mummy.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledMummy</identifier>
+    <text>You have killed a mummy.</text>
+    <tutorial-image-path>images/map/creatures/undead/mummy.png</tutorial-image-path>
+    <tutorial-title-text>Mummy (Undead)</tutorial-title-text>
+    <tutorial-description-text>You have killed a mummy. Mummies are tougher than zombies, but not as tough as ghouls.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByMummy</identifier>
+    <text>A mummy hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByMummy</identifier>
+    <text>A mummy missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByMummy</identifier>
+    <text>A mummy killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/undead/mummy.png</tutorial-image-path>
+    <tutorial-title-text>Curse Victim!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by a mummy. You are the latest victim of the mummy's curse.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitGhoul</identifier>
+    <text>You have hit a ghoul.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedGhoul</identifier>
+    <text>You have missed a ghoul.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledGhoul</identifier>
+    <text>You have killed a ghoul.</text>
+    <tutorial-image-path>images/map/creatures/undead/ghoul.png</tutorial-image-path>
+    <tutorial-title-text>Ghoul (Undead)</tutorial-title-text>
+    <tutorial-description-text>You have killed a ghoul. Ghouls are the toughest undead creatures.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByGhoul</identifier>
+    <text>A ghoul hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByGhoul</identifier>
+    <text>A ghoul missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByGhoul</identifier>
+    <text>A ghoul killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/undead/ghoul.png</tutorial-image-path>
+    <tutorial-title-text>Soul Devoured!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by a ghoul. It quietly digests your soul.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitNecromancer</identifier>
+    <text>You have hit a necromancer.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedNecromancer</identifier>
+    <text>You have missed a necromancer.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledNecromancer</identifier>
+    <text>You have killed a necromancer.</text>
+    <tutorial-image-path>images/map/creatures/bosses/necromancer.png</tutorial-image-path>
+    <tutorial-title-text>Necromancer (Boss)</tutorial-title-text>
+    <tutorial-description-text>You have killed the necromancer.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByNecromancer</identifier>
+    <text>A necromancer hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByNecromancer</identifier>
+    <text>A necromancer missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByNecromancer</identifier>
+    <text>A necromancer killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/bosses/necromancer.png</tutorial-image-path>
+    <tutorial-title-text>Struck Down by the Necromancer!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by the necromancer. This is strange, because he usually gets his work done through others.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitGoblin</identifier>
+    <text>You have hit a goblin.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedGoblin</identifier>
+    <text>You have missed a goblin.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledGoblin</identifier>
+    <text>You have killed a goblin.</text>
+    <tutorial-image-path>images/map/creatures/goblinoids/goblin.png</tutorial-image-path>
+    <tutorial-title-text>Goblin (Goblinoid)</tutorial-title-text>
+    <tutorial-description-text>You have killed a goblin.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByGoblin</identifier>
+    <text>A goblin hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByGoblin</identifier>
+    <text>A goblin missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByGoblin</identifier>
+    <text>A goblin killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/goblinoids/goblin.png</tutorial-image-path>
+    <tutorial-title-text>Stabbed in the Back!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by a goblin. Considering how weak these creatures are, we'll just tell people that you were eaten by a grue, instead.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitOrk</identifier>
+    <text>You have hit an ork.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedOrk</identifier>
+    <text>You have missed an ork.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledOrk</identifier>
+    <text>You have killed an ork.</text>
+    <tutorial-image-path>images/map/creatures/goblinoids/orc.png</tutorial-image-path>
+    <tutorial-title-text>Ork (Goblinoid)</tutorial-title-text>
+    <tutorial-description-text>You have killed an orc.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByOrk</identifier>
+    <text>An ork hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByOrk</identifier>
+    <text>An ork missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByOrk</identifier>
+    <text>An ork killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/goblinoids/orc.png</tutorial-image-path>
+    <tutorial-title-text>Skull Split!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by an orc. He laughs at your misfortune.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitFimir</identifier>
+    <text>You have hit a fimir.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedFimir</identifier>
+    <text>You have missed a fimir.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledFimir</identifier>
+    <text>You have killed a fimir.</text>
+    <tutorial-image-path>images/map/creatures/goblinoids/fimir.png</tutorial-image-path>
+    <tutorial-title-text>Fimir (Goblinoid)</tutorial-title-text>
+    <tutorial-description-text>You have killed a fimir.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByFimir</identifier>
+    <text>A fimir hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByFimir</identifier>
+    <text>A fimir missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByFimir</identifier>
+    <text>A fimir killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/goblinoids/fimir.png</tutorial-image-path>
+    <tutorial-title-text>Head Bashed In!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by a fimir. Tough luck.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitChaosWarrior</identifier>
+    <text>You have hit a chaos warrior.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedChaosWarrior</identifier>
+    <text>You have missed a chaos warrior.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledChaosWarrior</identifier>
+    <text>You have killed a chaos warrior.</text>
+    <tutorial-image-path>images/map/creatures/chaos/warrior.png</tutorial-image-path>
+    <tutorial-title-text>Chaos Warrior (Chaos)</tutorial-title-text>
+    <tutorial-description-text>You have killed a chaos warrior.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByChaosWarrior</identifier>
+    <text>A chaos warrior hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByChaosWarrior</identifier>
+    <text>A chaos warrior missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByChaosWarrior</identifier>
+    <text>A chaos warrior killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/chaos/warrior.png</tutorial-image-path>
+    <tutorial-title-text>Slain!</tutorial-title-text>
+    <tutorial-description-text>You have killed a chaos warrior. Zargon will  be pleased.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitGargoyle</identifier>
+    <text>You have hit a gargoyle.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedGargoyle</identifier>
+    <text>You have missed a gargoyle.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledGargoyle</identifier>
+    <text>You have killed a gargoyle.</text>
+    <tutorial-image-path>images/map/creatures/chaos/gargoyle.png</tutorial-image-path>
+    <tutorial-title-text>Gargoyle (Chaos)</tutorial-title-text>
+    <tutorial-description-text>You have killed a gargoyle.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByGargoyle</identifier>
+    <text>A gargoyle hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByGargoyle</identifier>
+    <text>A gargoyle missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByGargoyle</identifier>
+    <text>A gargoyle killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/chaos/gargoyle.png</tutorial-image-path>
+    <tutorial-title-text>Stoned to Death!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by a gargoyle. In your final moments, you regret ever owning a pet rock.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitSummoner</identifier>
+    <text>You have hit a summoner.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedSummoner</identifier>
+    <text>You have missed a summoner.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledSummoner</identifier>
+    <text>You have killed a summoner.</text>
+    <tutorial-image-path>images/map/creatures/bosses/summoner.png</tutorial-image-path>
+    <tutorial-title-text>Summoner (Boss)</tutorial-title-text>
+    <tutorial-description-text>You have killed the summoner.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitBySummoner</identifier>
+    <text>A summoner hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedBySummoner</identifier>
+    <text>A summoner missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledBySummoner</identifier>
+    <text>A summoner killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/bosses/summoner.png</tutorial-image-path>
+    <tutorial-title-text>Killed by the Summoner...</tutorial-title-text>
+    <tutorial-description-text>You have been killed by the summoner, which is strange because it is usually his minions that finish a person off....</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitDragon</identifier>
+    <text>You have hit a dragon.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedDragon</identifier>
+    <text>You have missed a dragon.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledDragon</identifier>
+    <text>You have killed a dragon.</text>
+    <tutorial-image-path>images/map/creatures/bosses/dragon.png</tutorial-image-path>
+    <tutorial-title-text>Dragon (Boss)</tutorial-title-text>
+    <tutorial-description-text>You have killed the dragon, which is certainly not an easy thing to do.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByDragon</identifier>
+    <text>A dragon hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByDragon</identifier>
+    <text>A dragon missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByDragon</identifier>
+    <text>A dragon killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/bosses/dragon.png</tutorial-image-path>
+    <tutorial-title-text>Killed by the Dragon...</tutorial-title-text>
+    <tutorial-description-text>You have been killed by the dragon! Don't worry... you aren't the first. Nor are you likely to be the last....</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitThief</identifier>
+    <text>You have hit a thief.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedThief</identifier>
+    <text>You have missed a thief.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledThief</identifier>
+    <text>You have killed a thief.</text>
+    <tutorial-image-path>images/map/creatures/chaos/thief.png</tutorial-image-path>
+    <tutorial-title-text>Thief (Chaos)</tutorial-title-text>
+    <tutorial-description-text>You have killed a thief.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByThief</identifier>
+    <text>A thief hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByThief</identifier>
+    <text>A thief missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByThief</identifier>
+    <text>A thief killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/chaos/thief.png</tutorial-image-path>
+    <tutorial-title-text>Sliced and Diced!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by a thief.  Even now, he is looking through your pockets for change.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitMinotaur</identifier>
+    <text>You have hit a minotaur.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedMinotaur</identifier>
+    <text>You have missed a minotaur.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledMinotaur</identifier>
+    <text>You have killed a minotaur.</text>
+    <tutorial-image-path>images/map/creatures/bosses/minotaur.png</tutorial-image-path>
+    <tutorial-title-text>Minotaur (Boss)</tutorial-title-text>
+    <tutorial-description-text>You have killed the minotaur.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByMinotaur</identifier>
+    <text>A minotaur hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByMinotaur</identifier>
+    <text>A minotaur missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByMinotaur</identifier>
+    <text>A minotaur killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/creatures/bosses/minotaur.png</tutorial-image-path>
+    <tutorial-title-text>Defeated!</tutorial-title-text>
+    <tutorial-description-text>You have been killed by the minotaur.  Now you'll never make it out of the labyrinth alive!</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitTeleportMonster</identifier>
+    <text>You have hit a teleport monster.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedTeleportMonster</identifier>
+    <text>You have missed a teleport monster.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledTeleportMonster</identifier>
+    <text>You have killed a teleport monster.</text>
+    <tutorial-image-path>images/map/items/misc/portal.png</tutorial-image-path>
+    <tutorial-title-text>Portal Monster (Special)</tutorial-title-text>
+    <tutorial-description-text>You have killed a portal monster.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>HitByTeleportMonster</identifier>
+    <text>A teleport monster hit you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>MissedByTeleportMonster</identifier>
+    <text>A teleport monster missed you.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByTeleportMonster</identifier>
+    <text>A teleport monster killed you.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/misc/portal.png</tutorial-image-path>
+    <tutorial-title-text>What???</tutorial-title-text>
+    <tutorial-description-text>You have been killed by a portal monster, which shouldn't be possible.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>UnlockRedDoor</identifier>
+    <text>You have opened the red door.</text>
+    <text-color>default</text-color>
+    <sound-effect>DoorUnlockSound</sound-effect>
+  </message>
+  <message>
+    <identifier>BumpRedDoor</identifier>
+    <text>You need a red key in order to open this door.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/doors/red/north.png</tutorial-image-path>
+    <tutorial-title-text>Locked!</tutorial-title-text>
+    <tutorial-description-text>This door is locked. You will need an appropriately colored key.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>UnlockYellowDoor</identifier>
+    <text>You have opened the yellow door.</text>
+    <text-color>default</text-color>
+    <sound-effect>DoorUnlockSound</sound-effect>
+  </message>
+  <message>
+    <identifier>BumpYellowDoor</identifier>
+    <text>You need a yellow key in order to open this door.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/doors/yellow/north.png</tutorial-image-path>
+    <tutorial-title-text>Locked!</tutorial-title-text>
+    <tutorial-description-text>This door is locked. You will need an appropriately colored key.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>UnlockGreenDoor</identifier>
+    <text>You have opened the green door.</text>
+    <text-color>default</text-color>
+    <sound-effect>DoorUnlockSound</sound-effect>
+  </message>
+  <message>
+    <identifier>BumpGreenDoor</identifier>
+    <text>You need a green key in order to open this door.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/doors/green/north.png</tutorial-image-path>
+    <tutorial-title-text>Locked!</tutorial-title-text>
+    <tutorial-description-text>This door is locked. You will need an appropriately colored key.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>UnlockCyanDoor</identifier>
+    <text>You have opened the cyan door.</text>
+    <text-color>default</text-color>
+    <sound-effect>DoorUnlockSound</sound-effect>
+  </message>
+  <message>
+    <identifier>BumpCyanDoor</identifier>
+    <text>You need a cyan key in order to open this door.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/doors/cyan/north.png</tutorial-image-path>
+    <tutorial-title-text>Locked!</tutorial-title-text>
+    <tutorial-description-text>This door is locked. You will need an appropriately colored key.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>UnlockBlueDoor</identifier>
+    <text>You have opened the blue door.</text>
+    <text-color>default</text-color>
+    <sound-effect>DoorUnlockSound</sound-effect>
+  </message>
+  <message>
+    <identifier>BumpBlueDoor</identifier>
+    <text>You need a blue key in order to open this door.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/doors/blue/north.png</tutorial-image-path>
+    <tutorial-title-text>Locked!</tutorial-title-text>
+    <tutorial-description-text>This door is locked. You will need an appropriately colored key.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>UnlockMagentaDoor</identifier>
+    <text>You have opened the magenta door.</text>
+    <text-color>default</text-color>
+    <sound-effect>DoorUnlockSound</sound-effect>
+  </message>
+  <message>
+    <identifier>BumpMagentaDoor</identifier>
+    <text>You need a magenta key in order to open this door.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/doors/magenta/north.png</tutorial-image-path>
+    <tutorial-title-text>Locked!</tutorial-title-text>
+    <tutorial-description-text>This door is locked. You will need an appropriately colored key.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpRedKey</identifier>
+    <text>You have picked up a red key.</text>
+    <tutorial-image-path>images/map/items/keys/red.png</tutorial-image-path>
+    <tutorial-title-text>A Key!</tutorial-title-text>
+    <tutorial-description-text>This key obviously must go to a similarly colored door.</tutorial-description-text>
+    <text-color>default</text-color>
+    <sound-effect>KeyPickUp</sound-effect>
+  </message>
+  <message>
+    <identifier>PickUpYellowKey</identifier>
+    <text>You have picked up a yellow key.</text>
+    <tutorial-image-path>images/map/items/keys/yellow.png</tutorial-image-path>
+    <tutorial-title-text>A Key!</tutorial-title-text>
+    <tutorial-description-text>This key obviously must go to a similarly colored door.</tutorial-description-text>
+    <text-color>default</text-color>
+    <sound-effect>KeyPickUp</sound-effect>
+  </message>
+  <message>
+    <identifier>PickUpGreenKey</identifier>
+    <text>You have picked up a green key.</text>
+    <tutorial-image-path>images/map/items/keys/green.png</tutorial-image-path>
+    <tutorial-title-text>A Key!</tutorial-title-text>
+    <tutorial-description-text>This key obviously must go to a similarly colored door.</tutorial-description-text>
+    <text-color>default</text-color>
+    <sound-effect>KeyPickUp</sound-effect>
+  </message>
+  <message>
+    <identifier>PickUpCyanKey</identifier>
+    <text>You have picked up a cyan key.</text>
+    <tutorial-image-path>images/map/items/keys/cyan.png</tutorial-image-path>
+    <tutorial-title-text>A Key!</tutorial-title-text>
+    <tutorial-description-text>This key obviously must go to a similarly colored door.</tutorial-description-text>
+    <text-color>default</text-color>
+    <sound-effect>KeyPickUp</sound-effect>
+  </message>
+  <message>
+    <identifier>PickUpBlueKey</identifier>
+    <text>You have picked up a blue key.</text>
+    <tutorial-image-path>images/map/items/keys/blue.png</tutorial-image-path>
+    <tutorial-title-text>A Key!</tutorial-title-text>
+    <tutorial-description-text>This key obviously must go to a similarly colored door.</tutorial-description-text>
+    <text-color>default</text-color>
+    <sound-effect>KeyPickUp</sound-effect>
+  </message>
+  <message>
+    <identifier>PickUpMagentaKey</identifier>
+    <text>You have picked up a magenta key.</text>
+    <tutorial-image-path>images/map/items/keys/magenta.png</tutorial-image-path>
+    <tutorial-title-text>A Key!</tutorial-title-text>
+    <tutorial-description-text>This key obviously must go to a similarly colored door.</tutorial-description-text>
+    <text-color>default</text-color>
+    <sound-effect>KeyPickUp</sound-effect>
+  </message>
+  <message>
+    <identifier>PickUpDagger</identifier>
+    <text>You have picked up a dagger.</text>
+    <tutorial-image-path>images/map/items/weapons/dagger.png</tutorial-image-path>
+    <tutorial-title-text>Dagger (Weapon)</tutorial-title-text>
+    <tutorial-description-text>A dagger is the least effective weapon (although still more effective than no weapon at all).</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BrokenDagger</identifier>
+    <text>You have broken a dagger.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpShortsword</identifier>
+    <text>You have picked up a shortsword.</text>
+    <tutorial-image-path>images/map/items/weapons/shortsword.png</tutorial-image-path>
+    <tutorial-title-text>Short Sword (Weapon)</tutorial-title-text>
+    <tutorial-description-text>A short sword is better than a dagger, but not as good as a long sword.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BrokenShortsword</identifier>
+    <text>You have broken a shortsword.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpLongsword</identifier>
+    <text>You have picked up a longsword.</text>
+    <tutorial-image-path>images/map/items/weapons/longsword.png</tutorial-image-path>
+    <tutorial-title-text>Long Sword (Weapon)</tutorial-title-text>
+    <tutorial-description-text>A long sword is better than a short sword, but not as good as a two handed sword.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BrokenLongsword</identifier>
+    <text>You have broken a longsword.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpTwoHandedSword</identifier>
+    <text>You have picked up a two-handed sword.</text>
+    <tutorial-image-path>images/map/items/weapons/twohandedsword.png</tutorial-image-path>
+    <tutorial-title-text>Two Handed Sword (Weapon)</tutorial-title-text>
+    <tutorial-description-text>A two handed sword is better than a long sword, but not as good as a battle axe. You cannot use a two handed sword with a shield.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BrokenTwoHandedSword</identifier>
+    <text>You have broken a two-handed sword.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpBattleAxe</identifier>
+    <text>You have picked up a battle axe.</text>
+    <tutorial-image-path>images/map/items/weapons/battleaxe.png</tutorial-image-path>
+    <tutorial-title-text>Battle Axe (Weapon)</tutorial-title-text>
+    <tutorial-description-text>A battle axe is the best available weapon.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BrokenBattleAxe</identifier>
+    <text>You have broken a battle axe.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpAmulet</identifier>
+    <text>You have picked up the Amulet of Yendor!</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/misc/amulet.png</tutorial-image-path>
+    <tutorial-title-text>Amulet of Yendor (Special)</tutorial-title-text>
+    <tutorial-description-text>You have picked up the fabled Amulet of Yendor!</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpRainbowKey</identifier>
+    <text>You have picked up the raindbow key.</text>
+    <always-tutorial></always-tutorial>
+    <tutorial-image-path>images/map/items/keys/rainbow.png</tutorial-image-path>
+    <tutorial-title-text>The Rainbow Key (Special)</tutorial-title-text>
+    <tutorial-description-text>You have picked up the rainbow key!</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpTools</identifier>
+    <text>You have picked up thieves' tools.</text>
+    <tutorial-image-path>images/map/items/misc/tools.png</tutorial-image-path>
+    <tutorial-title-text>Thieves' Tools (Special)</tutorial-title-text>
+    <tutorial-description-text>You have picked up a set of thieves' tools!  They are useful for disarming traps, or picking your teeth.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpAntidote</identifier>
+    <text>You have picked up a vial of mysterious liquid.</text>
+    <tutorial-image-path>images/map/items/consumables/antidote.png</tutorial-image-path>
+    <tutorial-title-text>Antidote (Consumable)</tutorial-title-text>
+    <tutorial-description-text>You have picked up a vial of mysterious liquid!</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpShield</identifier>
+    <text>You have picked up a shield.</text>
+    <tutorial-image-path>images/map/items/armors/shield.png</tutorial-image-path>
+    <tutorial-title-text>Shield(Armor)</tutorial-title-text>
+    <tutorial-description-text>A Shield is worn on your non-weapon hand. It adds 1 to your armor statistic. It cannot be combined with two handed weapons, so will not be in use while you have a two handed weapon while in attack mode.  To change between attack and defend modes, press the Tab key.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BrokenShield</identifier>
+    <text>You have broken a shield.</text>
+    <tutorial-image-path>images/map/items/armors/shield.png</tutorial-image-path>
+    <tutorial-title-text>Broken Shield(Armor)</tutorial-title-text>
+    <tutorial-description-text>A shield can only take so many hits and still be effective. The shield you were carrying too one hit too many.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpHelmet</identifier>
+    <text>You have picked up a helmet.</text>
+    <tutorial-image-path>images/map/items/armors/helmet.png</tutorial-image-path>
+    <tutorial-title-text>Helmet(Armor)</tutorial-title-text>
+    <tutorial-description-text>A Helmet is worn on the head. It adds 1 to your armor statistic.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BrokenHelmet</identifier>
+    <text>You have broken a helmet.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpChainmail</identifier>
+    <text>You have picked up a shirt of chainmail.</text>
+    <tutorial-image-path>images/map/items/armors/chainmail.png</tutorial-image-path>
+    <tutorial-title-text>Chainmail(Armor)</tutorial-title-text>
+    <tutorial-description-text>Chainmail is worn on the torso, and so cannot be combined with Platemail. It adds 1 to your armor statistic, but also cuts your speed by a quarter.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BrokenChainmail</identifier>
+    <text>You have broken a shirt of chainmail.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpPlatmail</identifier>
+    <text>You have picked up a shirt of platemail.</text>
+    <tutorial-image-path>images/map/items/armors/platemail.png</tutorial-image-path>
+    <tutorial-title-text>Platemail(Armor)</tutorial-title-text>
+    <tutorial-description-text>This is the heaviest armor in the game.  It is worn on the torso, and so cannot be combined with Chainmail.  It adds 2 to your armor statistic, but also cuts your speed in half.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BrokenPlatemail</identifier>
+    <text>You have broken a shirt of platemail.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpBoots</identifier>
+    <text>You have picked up a pair of boots.</text>
+    <tutorial-image-path>images/map/items/armor/boots.png</tutorial-image-path>
+    <tutorial-title-text>Boots(Armor)</tutorial-title-text>
+    <tutorial-description-text>This is a wonderfully made pair of boots. They make you feel light on your feet. While it doesn't add anything to your armor statistic, it does double your speed.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>BrokenBoots</identifier>
+    <text>You have worn out a pair of boots.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpHam</identifier>
+    <text>You have picked up a lovely ham.</text>
+    <tutorial-image-path>images/map/items/consumables/ham.png</tutorial-image-path>
+    <tutorial-title-text>Ham(Food)</tutorial-title-text>
+    <tutorial-description-text>This is a lovely ham. If you are at less than full health, you will automatically eat a ham to restore one health point. Think of it like having bonus health points.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>UseHam</identifier>
+    <text>You eat some ham to recover strength.</text>
+    <tutorial-image-path>images/map/items/consumables/ham.png</tutorial-image-path>
+    <tutorial-title-text>Eating Ham</tutorial-title-text>
+    <tutorial-description-text>Since you started to move with less than full health, you have eaten some ham to help restore strength.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpPotion</identifier>
+    <text>You have picked up a crimson potion.</text>
+    <tutorial-image-path>images/map/items/consumables/potion.png</tutorial-image-path>
+    <tutorial-title-text>Potion(Drink)</tutorial-title-text>
+    <tutorial-description-text>Crimson potions are like extra lives. Whenever your character is about to die, he will drink a potion, which will restore up to 10 health points.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>UsePotion</identifier>
+    <text>You quaff a potion in the nick of time, making you good as new.</text>
+    <tutorial-image-path>images/map/items/consumables/potion.png</tutorial-image-path>
+    <tutorial-title-text>Drinking a Potion</tutorial-title-text>
+    <tutorial-description-text>You were about to die. Fortunately, you had a potion handy - this time. Close call!</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpCopper</identifier>
+    <text>You have picked up a pile of copper pieces.</text>
+    <tutorial-image-path>images/map/items/treasures/copper.png</tutorial-image-path>
+    <tutorial-title-text>Pile of Copper(Treasure)</tutorial-title-text>
+    <tutorial-description-text>A pile of copper coins can be worth anywhere from 1 to 5 Gold.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpSilver</identifier>
+    <text>You have picked up a pile of silver pieces.</text>
+    <tutorial-image-path>images/map/items/treasures/silver.png</tutorial-image-path>
+    <tutorial-title-text>Pile of Silver(Treasure)</tutorial-title-text>
+    <tutorial-description-text>A pile of silver coins can be worth anywhere from 6 to 25 Gold.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpGold</identifier>
+    <text>You have picked up a pile of gold pieces.</text>
+    <tutorial-image-path>images/map/items/treasures/gold.png</tutorial-image-path>
+    <tutorial-title-text>Pile of Gold(Treasure)</tutorial-title-text>
+    <tutorial-description-text>A pile of gold coins can be worth anywhere from 26 to 50 Gold.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>StolenGold</identifier>
+    <text>Gold has been stolen from you.</text>
+    <tutorial-image-path>images/map/items/treasures/gold.png</tutorial-image-path>
+    <tutorial-title-text>Stolen Gold!</tutorial-title-text>
+    <tutorial-description-text>Some creatures have a special attack of stealing Gold from you.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpElectrum</identifier>
+    <text>You have picked up a pile of electrum pieces.</text>
+    <tutorial-image-path>images/map/items/treasures/electrum.png</tutorial-image-path>
+    <tutorial-title-text>Pile of Electrum(Treasure)</tutorial-title-text>
+    <tutorial-description-text>A pile of electrum coins can be worth anywhere from 51 to 100 Gold. (And yes, I know that Electrum in D&amp;D was valued in between silver and gold... the picture of bluish coins was bigger than the gold picture. Deal with it!)</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpPlatinum</identifier>
+    <text>You have picked up a pile of platinum pieces.</text>
+    <tutorial-image-path>images/map/items/treasures/platinum.png</tutorial-image-path>
+    <tutorial-title-text>Pile of Platinum(Treasure)</tutorial-title-text>
+    <tutorial-description-text>A pile of platinum coins can be worth anywhere from 101 to 200 Gold.</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpPoisonHam</identifier>
+    <text>You have eaten a poison ham.</text>
+    <tutorial-image-path>images/map/items/consumables/ham.png</tutorial-image-path>
+    <tutorial-title-text>Poison Ham</tutorial-title-text>
+    <tutorial-description-text>Some enemies drop poison ham. Eating it will hurt you. However, I believe there is an antidote....</tutorial-description-text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>Welcome1</identifier>
+    <text>Comfort and safety warning: may cause repetitive stress injury after prolonged play.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>Welcome2</identifier>
+    <text>Welcome to HamQuest!</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>Welcome3</identifier>
+    <text>Collect the 16 pieces of the MegaHam, then find the exit!</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>Welcome4</identifier>
+    <text>You have a small supply of food, a dagger, and a torch, but you will need other items to make it through</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>Welcome5</identifier>
+    <text>safely! Good luck!</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>DisarmDartTrap</identifier>
+    <text>You use a set of thieves' tools to disarm the dart trap.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>PickUpAmethysts</identifier>
+    <text>You have picked up a small bundle of amethysts.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>KilledByBladeTrap</identifier>
+    <text>You have been killed by a blade trap.</text>
+    <text-color>default</text-color>
+  </message>
+  <message>
+    <identifier>GoOutTorch</identifier>
+    <text>Your torch has gone out.</text>
+    <text-color>default</text-color>
+  </message>
+</messages>

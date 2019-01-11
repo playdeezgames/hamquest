@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <tags type="TagSet">
+    <tag>armor</tag>
+    <tag>item</tag>
+    <tag>durable</tag>
+  </tags>
+  <spawn-as type="StringGenerator">
+    <entry>
+      <value>Helmet</value>
+      <weight>1</weight>
+    </entry>
+  </spawn-as>
+  
+  <image-path>images/map/items/armors/helmet.png</image-path>
+  <initial-inventory type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+  </initial-inventory>
+  <inventory-column>1</inventory-column>
+  <inventory-row>1</inventory-row>
+
+  
+  
+  
+  <identifier>Helmet</identifier>
+  
+  <name>helmet</name>
+  <placement>Either</placement>
+  <item-count>2</item-count>
+  
+  <price>100</price>
+  <item-type>Armor</item-type>
+  <armor-type>Helmet</armor-type>
+  <defendValue>1</defendValue>
+  <defendRoll type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>1</value>
+      <weight>1</weight>
+    </entry>
+  </defendRoll>
+  <defend-generator>white-die-1</defend-generator>
+  <durability>5</durability>
+  <speed-multiplier>1.0</speed-multiplier>
+  <pick-up-message>PickUpHelmet</pick-up-message>
+  <broken-message>BrokenHelmet</broken-message>
+  
+  
+  
+  
+  <x-generator type="IntGenerator">
+    <entry>
+      <value>1</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>13</value>
+      <weight>1</weight>
+    </entry>
+  </x-generator>
+  <y-generator type="IntGenerator">
+    <entry>
+      <value>1</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>13</value>
+      <weight>1</weight>
+    </entry>
+  </y-generator>
+</item>

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <tags type="TagSet">
+    <tag>trap</tag>
+    <tag>spawns</tag>
+  </tags>
+  <spawn-as type="StringGenerator">
+    <entry>
+      <value>ArrowTrap</value>
+      <weight>1</weight>
+    </entry>
+  </spawn-as>
+  
+  <image-path>images/map/items/misc/trap.png</image-path>
+  <initial-inventory type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+  </initial-inventory>
+  <inventory-column>-1</inventory-column>
+  <inventory-row>-1</inventory-row>
+  <killed-by-message>KilledByArrowTrap</killed-by-message>
+
+
+
+
+  <identifier>ArrowTrap</identifier>
+  
+  <name>arrow trap</name>
+  <placement>Either</placement>
+  <item-count>0</item-count>
+  
+  <price>0</price>
+  <item-type>Trap</item-type>
+  <attack-value>2</attack-value>
+  <pick-up-message>PickUpArrowTrap</pick-up-message>
+  <item-disarms type="StringCounter">
+    <entry>
+      <value>Tools</value>
+      <count>1</count>
+    </entry>
+  </item-disarms>
+  <disarm-message>DisarmArrowTrap</disarm-message>
+  
+  
+  
+  
+  <x-generator type="IntGenerator">
+    <entry>
+      <value>1</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>13</value>
+      <weight>1</weight>
+    </entry>
+  </x-generator>
+  <y-generator type="IntGenerator">
+    <entry>
+      <value>1</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>5</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>6</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>7</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>8</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>9</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>10</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>11</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>12</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>13</value>
+      <weight>1</weight>
+    </entry>
+  </y-generator>
+</item>

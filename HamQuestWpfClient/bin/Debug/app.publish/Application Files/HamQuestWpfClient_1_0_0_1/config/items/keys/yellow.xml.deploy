@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <tags type="TagSet">
+    <tag>key</tag>
+    <tag>item</tag>
+  </tags>
+  <spawn-as type="StringGenerator">
+    <entry>
+      <value>YellowKey</value>
+      <weight>1</weight>
+    </entry>
+  </spawn-as>
+  <image-path>images/map/items/keys/yellow.png</image-path>
+  <inventory-column>1</inventory-column>
+  <inventory-row>3</inventory-row>
+  <identifier>YellowKey</identifier>
+  <lock-type-weight>16</lock-type-weight>
+  <name>citrine key</name>
+  <lockType>1</lockType>
+  <pick-up-message>PickUpYellowKey</pick-up-message>
+</item>

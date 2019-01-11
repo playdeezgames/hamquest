@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<creatures>
+  <creature template="config/creatures/player/player.xml"  type="PlayerDescriptor"/>
+  <creature template="config/creatures/misc/portal.xml"/>
+  <creature template="config/creatures/bosses/dragon.xml"/>
+  <creature template="config/creatures/bosses/minotaur.xml"/>
+  <creature template="config/creatures/bosses/necromancer.xml"/>
+  <creature template="config/creatures/bosses/summoner.xml"/>
+  <creature template="config/creatures/undead/skeleton.xml"/>
+  <creature template="config/creatures/undead/zombie.xml"/>
+  <creature template="config/creatures/undead/mummy.xml"/>
+  <creature template="config/creatures/undead/ghoul.xml"/>
+  <creature template="config/creatures/goblinoids/goblin.xml"/>
+  <creature template="config/creatures/goblinoids/orc.xml"/>
+  <creature template="config/creatures/goblinoids/fimir.xml"/>
+  <creature template="config/creatures/chaos/warrior.xml"/>
+  <creature template="config/creatures/chaos/thief.xml"/>
+  <creature template="config/creatures/chaos/gargoyle.xml"/>
+</creatures>

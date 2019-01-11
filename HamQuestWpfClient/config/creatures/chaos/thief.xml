@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<creature>
+  <mover type="CreatureMoveHandler"/>
+  <tags type="TagSet">
+    <tag>creature</tag>
+  </tags>
+  <image-path>images/map/creatures/chaos/thief.png</image-path>
+  <identifier>thief</identifier>
+  <name>thief</name>
+  <morale-roll type="BoolGenerator">
+    <entry>
+      <value>true</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>false</value>
+      <weight>1</weight>
+    </entry>
+  </morale-roll>
+  <itemRemoves type="StringGenerator">
+    <entry>
+      <value>Quest</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Gold</value>
+      <weight>9</weight>
+    </entry>
+  </itemRemoves>
+  <item-drops type="StringGenerator">
+    <entry>
+      <value>Boots</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Platinum</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Electrum</value>
+      <weight>2</weight>
+    </entry>
+  </item-drops>
+  <attack type="StatisticHolder">2</attack>
+  <attack-roll type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>1</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>1</weight>
+    </entry>
+  </attack-roll>
+  <health type="StatisticHolder">2</health>
+  <speed type="StatisticHolder">18</speed>
+  <creature-count>10</creature-count>
+  <attack-die>3</attack-die>
+  
+  <spawn-weight>4</spawn-weight>
+  <placement>Either</placement>
+  <number-of-attacks>1</number-of-attacks>
+  <special-attack>Thief</special-attack>
+  <necromancer-weight>0</necromancer-weight>
+  <summoner-weight>0</summoner-weight>
+  <hit-message>HitThief</hit-message>
+  <miss-message>MissedThief</miss-message>
+  <kill-message>KilledThief</kill-message>
+  <hit-by-message>HitByThief</hit-by-message>
+  <missed-by-message>MissedByThief</missed-by-message>
+  <killed-by-message>KilledByThief</killed-by-message>
+  <experience-points>2</experience-points>
+  <defend-roller type="CreatureDefendRoller"/>
+  <defend-generator>white-die-4</defend-generator>
+</creature>

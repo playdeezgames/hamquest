@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<creature>
+  <mover type="CreatureMoveHandler"/>
+  <tags type="TagSet">
+    <tag>creature</tag>
+    <tag>dragon</tag>
+    <tag>boss</tag>
+  </tags>
+  <image-path>images/map/creatures/bosses/dragon.png</image-path>
+  <identifier>dragon</identifier>
+  <name>red dragon</name>
+  <morale-roll type="BoolGenerator">
+    <entry>
+      <value>true</value>
+      <weight>1</weight>
+    </entry>
+  </morale-roll>
+  <item-drops type="StringGenerator">
+    <entry>
+      <value>Diamond</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Emerald</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>Ruby</value>
+      <weight>4</weight>
+    </entry>
+  </item-drops>
+  <attack type="StatisticHolder">10</attack>
+  <attack-roll type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+  </attack-roll>
+  <health type="StatisticHolder">20</health>
+  <speed type="StatisticHolder">8</speed>
+  <creature-count>1</creature-count>
+  <attack-die>3</attack-die>
+  
+  <spawn-weight>0</spawn-weight>
+  <placement>DeadEnd</placement>
+  <number-of-attacks>1</number-of-attacks>
+  <special-attack>RedDragon</special-attack>
+  <necromancer-weight>0</necromancer-weight>
+  <summoner-weight>0</summoner-weight>
+  <hit-message>HitDragon</hit-message>
+  <miss-message>MissedDragon</miss-message>
+  <kill-message>KilledDragon</kill-message>
+  <hit-by-message>HitByDragon</hit-by-message>
+  <missed-by-message>MissedByDragon</missed-by-message>
+  <killed-by-message>KilledByDragon</killed-by-message>
+  <experience-points>20</experience-points>
+  <defend-roller type="CreatureDefendRoller"/>
+  <defend-generator>white-die-6</defend-generator>
+</creature>

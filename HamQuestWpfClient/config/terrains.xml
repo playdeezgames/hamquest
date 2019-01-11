@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<terrains>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+    </tags>
+    <identifier>12</identifier>
+    <image-path>images/map/terrain/doorways/north.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="PlayerOnlyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+    </tags>
+    <identifier>13</identifier>
+    <image-path>images/map/terrain/doorways/east.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="PlayerOnlyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+    </tags>
+    <identifier>14</identifier>
+    <image-path>images/map/terrain/doorways/south.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="PlayerOnlyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+    </tags>
+    <identifier>15</identifier>
+    <image-path>images/map/terrain/doorways/west.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="PlayerOnlyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>1</identifier>
+    <image-path>images/map/terrain/walls/east.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+    </tags>
+    <identifier>16</identifier>
+    <image-path>images/map/terrain/misc/floor.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="AlwaysAllowBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>4</identifier>
+    <image-path>images/map/terrain/corners/inside/northeast.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>7</identifier>
+    <image-path>images/map/terrain/corners/inside/northwest.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>5</identifier>
+    <image-path>images/map/terrain/corners/inside/southeast.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>6</identifier>
+    <image-path>images/map/terrain/corners/inside/southwest.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>0</identifier>
+    <image-path>images/map/terrain/walls/north.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>8</identifier>
+    <image-path>images/map/terrain/corners/outside/northeast.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>11</identifier>
+    <image-path>images/map/terrain/corners/outside/northwest.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>9</identifier>
+    <image-path>images/map/terrain/corners/outside/southeast.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>10</identifier>
+    <image-path>images/map/terrain/corners/outside/southwest.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>17</identifier>
+    <image-path>images/map/terrain/misc/solid.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>2</identifier>
+    <image-path>images/map/terrain/walls/south.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+    </tags>
+    <identifier>3</identifier>
+    <image-path>images/map/terrain/walls/west.png</image-path>
+    <passable>False</passable>
+    <bump-handler type="AlwaysDenyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+    </tags>
+    <identifier>18</identifier>
+    <image-path>images/map/terrain/misc/floor.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="AlwaysAllowBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+    </tags>
+    <identifier>19</identifier>
+    <image-path>images/map/terrain/misc/floor.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="AlwaysAllowBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+    </tags>
+    <identifier>20</identifier>
+    <image-path>images/map/terrain/misc/floor.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="AlwaysAllowBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+      <tag>creatureblock</tag>
+    </tags>
+    <identifier>21</identifier>
+    <image-path>images/map/terrain/misc/floor.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="PlayerOnlyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+      <tag>creatureblock</tag>
+    </tags>
+    <identifier>22</identifier>
+    <image-path>images/map/terrain/misc/floor.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="PlayerOnlyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+      <tag>creatureblock</tag>
+    </tags>
+    <identifier>23</identifier>
+    <image-path>images/map/terrain/misc/floor.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="PlayerOnlyBumpHandler"/>
+  </terrain>
+  <terrain>
+    <tags type="TagSet">
+      <tag>passable</tag>
+      <tag>creatureblock</tag>
+    </tags>
+    <identifier>24</identifier>
+    <image-path>images/map/terrain/misc/floor.png</image-path>
+    <passable>True</passable>
+    <bump-handler type="PlayerOnlyBumpHandler"/>
+  </terrain>
+</terrains>

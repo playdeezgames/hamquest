@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <tags type="TagSet">
+    <tag>door</tag>
+  </tags>
+  <spawn-as type="StringGenerator">
+    <entry>
+      <value>GreenDoorEast</value>
+      <weight>1</weight>
+    </entry>
+  </spawn-as>
+  <image-path>images/map/items/doors/green/east.png</image-path>
+  <identifier>GreenDoorEast</identifier>
+  <name>jade door</name>
+</item>

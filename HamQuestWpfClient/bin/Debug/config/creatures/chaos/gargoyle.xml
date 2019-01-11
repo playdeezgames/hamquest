@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<creature>
+  <mover type="CreatureMoveHandler"/>
+  <tags type="TagSet">
+    <tag>creature</tag>
+  </tags>
+  <image-path>images/map/creatures/chaos/gargoyle.png</image-path>
+  <identifier>gargoyle</identifier>
+  <name>gargoyle</name>
+  <morale-roll type="BoolGenerator">
+    <entry>
+      <value>true</value>
+      <weight>1</weight>
+    </entry>
+  </morale-roll>
+  <item-drops type="StringGenerator">
+    <entry>
+      <value>Amethyst</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>TwoHandedSword</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value></value>
+      <weight>2</weight>
+    </entry>
+  </item-drops>
+  <attack type="StatisticHolder">4</attack>
+  <attack-roll type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>1</value>
+      <weight>4</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>6</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>4</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+  </attack-roll>
+  <health type="StatisticHolder">3</health>
+  <speed type="StatisticHolder">6</speed>
+  <creature-count>3</creature-count>
+  <attack-die>3</attack-die>
+  
+  <spawn-weight>1</spawn-weight>
+  <placement>DeadEnd</placement>
+  <number-of-attacks>1</number-of-attacks>
+  <special-attack>None</special-attack>
+  <necromancer-weight>0</necromancer-weight>
+  <summoner-weight>0</summoner-weight>
+  <hit-message>HitGargoyle</hit-message>
+  <miss-message>MissedGargoyle</miss-message>
+  <kill-message>KilledGargoyle</kill-message>
+  <hit-by-message>HitByGargoyle</hit-by-message>
+  <missed-by-message>MissedByGargoyle</missed-by-message>
+  <killed-by-message>KilledByGargoyle</killed-by-message>
+  <experience-points>3</experience-points>
+  <defend-roller type="CreatureDefendRoller"/>
+  <defend-generator>white-die-5</defend-generator>
+</creature>

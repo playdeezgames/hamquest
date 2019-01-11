@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<creature>
+  <mover type="CreatureMoveHandler"/>
+  <tags type="TagSet">
+    <tag>creature</tag>
+  </tags>
+  <image-path>images/map/creatures/bosses/minotaur.png</image-path>
+  <identifier>minotaur</identifier>
+  <name>minotaur</name>
+  <morale-roll type="BoolGenerator">
+    <entry>
+      <value>true</value>
+      <weight>1</weight>
+    </entry>
+  </morale-roll>
+  <item-drops type="StringGenerator">
+    <entry>
+      <value>BattleAxe</value>
+      <weight>1</weight>
+    </entry>
+  </item-drops>
+  <attack type="StatisticHolder">4</attack>
+  <health type="StatisticHolder">10</health>
+  <speed type="StatisticHolder">6</speed>
+  <creature-count>1</creature-count>
+  <attack-die>3</attack-die>
+  
+  <spawn-weight>0</spawn-weight>
+  <placement>DeadEnd</placement>
+  <number-of-attacks>2</number-of-attacks>
+  <special-attack>None</special-attack>
+  <necromancer-weight>0</necromancer-weight>
+  <summoner-weight>1</summoner-weight>
+  <hit-message>HitMinotaur</hit-message>
+  <miss-message>MissedMinotaur</miss-message>
+  <kill-message>KilledMinotaur</kill-message>
+  <hit-by-message>HitByMinotaur</hit-by-message>
+  <missed-by-message>MissedByMinotaur</missed-by-message>
+  <killed-by-message>KilledByMinotaur</killed-by-message>
+  <experience-points>10</experience-points>
+  <defend-roller type="CreatureDefendRoller"/>
+  <defend-generator>4</defend-generator>
+</creature>

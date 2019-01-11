@@ -1,0 +1,563 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9B96F5BE-9D1B-4292-A7AD-DB8CBCE41F61}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HamQuestSLClient</RootNamespace>
+    <AssemblyName>HamQuestSLClient</AssemblyName>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>HamQuestSLClient.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>HamQuestSLClient.App</SilverlightAppEntry>
+    <TestPageFileName>TestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <EnableOutOfBrowser>true</EnableOutOfBrowser>
+    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
+    <UsePlatformExtensions>false</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <LinkedServerProject>
+    </LinkedServerProject>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Windows" />
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameConstants.cs" />
+    <Compile Include="ImageCell.cs" />
+    <Compile Include="ImageCellMap.cs" />
+    <Compile Include="ImageCellStack.cs" />
+    <Compile Include="ImageCellColumn.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MapPanel.xaml.cs">
+      <DependentUpon>MapPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MediaElementManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoundEffects.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoundEffects.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SoundEffectsManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="maps\pway0.cqm" />
+    <Resource Include="maps\pway1.cqm" />
+    <Resource Include="maps\pway10.cqm" />
+    <Resource Include="maps\pway11.cqm" />
+    <Resource Include="maps\pway12.cqm" />
+    <Resource Include="maps\pway13.cqm" />
+    <Resource Include="maps\pway14.cqm" />
+    <Resource Include="maps\pway15.cqm" />
+    <Resource Include="maps\pway2.cqm" />
+    <Resource Include="maps\pway3.cqm" />
+    <Resource Include="maps\pway4.cqm" />
+    <Resource Include="maps\pway5.cqm" />
+    <Resource Include="maps\pway6.cqm" />
+    <Resource Include="maps\pway7.cqm" />
+    <Resource Include="maps\pway8.cqm" />
+    <Resource Include="maps\pway9.cqm" />
+    <Resource Include="maps\pwaydoor0.cqm" />
+    <Resource Include="maps\pwaydoor1.cqm" />
+    <Resource Include="maps\pwaydoor2.cqm" />
+    <Resource Include="maps\pwaydoor3.cqm" />
+    <Resource Include="maps\room.cqm" />
+    <Resource Include="maps\roomdoor0.cqm" />
+    <Resource Include="maps\roomdoor1.cqm" />
+    <Resource Include="maps\roomdoor2.cqm" />
+    <Resource Include="maps\roomdoor3.cqm" />
+    <Resource Include="maps\roomopen0.cqm" />
+    <Resource Include="maps\roomopen1.cqm" />
+    <Resource Include="maps\roomopen2.cqm" />
+    <Resource Include="maps\roomopen3.cqm" />
+    <None Include="Properties\AppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\map\terrain\corners\inside\northeast.png" />
+    <Resource Include="images\map\terrain\corners\inside\northwest.png" />
+    <Resource Include="images\map\terrain\corners\inside\southeast.png" />
+    <Resource Include="images\map\terrain\corners\inside\southwest.png" />
+    <Resource Include="images\map\terrain\corners\outside\northeast.png" />
+    <Resource Include="images\map\terrain\corners\outside\northwest.png" />
+    <Resource Include="images\map\terrain\corners\outside\southeast.png" />
+    <Resource Include="images\map\terrain\corners\outside\southwest.png" />
+    <Resource Include="images\map\terrain\doorways\east.png" />
+    <Resource Include="images\map\terrain\doorways\north.png" />
+    <Resource Include="images\map\terrain\doorways\south.png" />
+    <Resource Include="images\map\terrain\doorways\west.png" />
+    <Resource Include="images\map\terrain\misc\floor.png" />
+    <Resource Include="images\map\terrain\misc\solid.png">
+    </Resource>
+    <Resource Include="images\map\terrain\walls\east.png" />
+    <Resource Include="images\map\terrain\walls\north.png" />
+    <Resource Include="images\map\terrain\walls\south.png" />
+    <Resource Include="images\map\terrain\walls\west.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="sounds\39026__wildweasel__KeyPickup.mp3" />
+    <Resource Include="sounds\85669__CGEffex__Lock_open.mp3" />
+    <Resource Include="images\minimap\passageway\base.png" />
+    <Resource Include="images\minimap\chamber\west.png" />
+    <Resource Include="images\minimap\markers\red.png" />
+    <Resource Include="images\minimap\doors\red\north.png" />
+    <Resource Include="images\minimap\doors\red\east.png" />
+    <Resource Include="images\minimap\doors\red\south.png" />
+    <Resource Include="images\minimap\doors\red\west.png" />
+    <Resource Include="images\minimap\markers\yellow.png" />
+    <Resource Include="images\minimap\doors\yellow\north.png" />
+    <Resource Include="images\minimap\doors\yellow\east.png" />
+    <Resource Include="images\minimap\doors\yellow\south.png" />
+    <Resource Include="images\minimap\passageway\north.png" />
+    <Resource Include="images\minimap\doors\yellow\west.png" />
+    <Resource Include="images\minimap\markers\green.png" />
+    <Resource Include="images\minimap\doors\green\north.png" />
+    <Resource Include="images\minimap\doors\green\east.png" />
+    <Resource Include="images\minimap\doors\green\south.png" />
+    <Resource Include="images\minimap\doors\green\west.png" />
+    <Resource Include="images\minimap\markers\cyan.png" />
+    <Resource Include="images\minimap\doors\cyan\north.png" />
+    <Resource Include="images\minimap\doors\cyan\east.png" />
+    <Resource Include="images\minimap\doors\cyan\south.png" />
+    <Resource Include="images\minimap\passageway\east.png" />
+    <Resource Include="images\minimap\doors\cyan\west.png" />
+    <Resource Include="images\minimap\markers\blue.png" />
+    <Resource Include="images\minimap\doors\blue\north.png" />
+    <Resource Include="images\minimap\doors\blue\east.png" />
+    <Resource Include="images\minimap\doors\blue\south.png" />
+    <Resource Include="images\minimap\doors\blue\west.png" />
+    <Resource Include="images\minimap\markers\magenta.png" />
+    <Resource Include="images\minimap\doors\magenta\north.png" />
+    <Resource Include="images\minimap\doors\magenta\east.png" />
+    <Resource Include="images\minimap\doors\magenta\south.png" />
+    <Resource Include="images\minimap\passageway\south.png" />
+    <Resource Include="images\minimap\doors\magenta\west.png" />
+    <Resource Include="images\minimap\misc\highlight.png" />
+    <Resource Include="images\minimap\markers\redblue.png" />
+    <Resource Include="images\minimap\markers\greenblue.png" />
+    <Resource Include="images\minimap\markers\yellowgreen.png" />
+    <Resource Include="images\minimap\markers\yellowblue.png" />
+    <Resource Include="images\minimap\markers\redgreen.png" />
+    <Resource Include="images\minimap\markers\redyellow.png" />
+    <Resource Include="images\minimap\passageway\west.png" />
+    <Resource Include="images\minimap\chamber\base.png" />
+    <Resource Include="images\minimap\chamber\north.png" />
+    <Resource Include="images\minimap\chamber\east.png" />
+    <Resource Include="images\minimap\chamber\south.png" />
+    <Resource Include="images\numbers\0.png" />
+    <Resource Include="images\numbers\9.png" />
+    <Resource Include="images\numbers\1.png" />
+    <Resource Include="images\numbers\2.png" />
+    <Resource Include="images\numbers\3.png" />
+    <Resource Include="images\numbers\4.png" />
+    <Resource Include="images\numbers\5.png" />
+    <Resource Include="images\numbers\6.png" />
+    <Resource Include="images\numbers\7.png" />
+    <Resource Include="images\numbers\8.png" />
+    <Resource Include="images\map\items\doors\red\north.png" />
+    <Resource Include="images\map\items\keys\yellow.png" />
+    <Resource Include="images\map\items\doors\green\north.png" />
+    <Resource Include="images\map\items\doors\green\east.png" />
+    <Resource Include="images\map\items\doors\green\south.png" />
+    <Resource Include="images\map\items\doors\green\west.png" />
+    <Resource Include="images\map\items\keys\green.png" />
+    <Resource Include="images\map\items\doors\cyan\north.png" />
+    <Resource Include="images\map\items\doors\cyan\east.png" />
+    <Resource Include="images\map\items\doors\cyan\south.png" />
+    <Resource Include="images\map\items\doors\cyan\west.png" />
+    <Resource Include="images\map\items\doors\red\east.png" />
+    <Resource Include="images\map\items\keys\cyan.png" />
+    <Resource Include="images\map\items\doors\blue\north.png" />
+    <Resource Include="images\map\items\doors\blue\east.png" />
+    <Resource Include="images\map\items\doors\blue\south.png" />
+    <Resource Include="images\map\items\doors\blue\west.png" />
+    <Resource Include="images\map\items\keys\blue.png" />
+    <Resource Include="images\map\items\doors\magenta\north.png" />
+    <Resource Include="images\map\items\doors\magenta\east.png" />
+    <Resource Include="images\map\items\doors\magenta\south.png" />
+    <Resource Include="images\map\items\doors\magenta\west.png" />
+    <Resource Include="images\map\items\doors\red\south.png" />
+    <Resource Include="images\map\items\keys\magenta.png" />
+    <Resource Include="images\map\items\weapons\dagger.png" />
+    <Resource Include="images\map\items\weapons\shortsword.png" />
+    <Resource Include="images\map\items\weapons\longsword.png" />
+    <Resource Include="images\map\items\weapons\twohandedsword.png" />
+    <Resource Include="images\map\items\treasures\gold.png" />
+    <Resource Include="images\map\items\armors\shield.png" />
+    <Resource Include="images\map\items\armors\helmet.png" />
+    <Resource Include="images\map\items\armors\chainmail.png" />
+    <Resource Include="images\map\items\armors\platemail.png" />
+    <Resource Include="images\map\items\doors\red\west.png" />
+    <Resource Include="images\map\items\misc\chest.png" />
+    <Content Include="config\themes.xml" />
+    <Content Include="images\map\items\consumables\ham.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="images\map\items\consumables\potion.png" />
+    <Resource Include="images\map\creatures\undead\skeleton.png" />
+    <Resource Include="images\map\creatures\undead\zombie.png" />
+    <Resource Include="images\map\creatures\undead\mummy.png" />
+    <Resource Include="images\map\creatures\goblinoids\goblin.png" />
+    <Resource Include="images\map\creatures\goblinoids\orc.png" />
+    <Resource Include="images\map\creatures\goblinoids\fimir.png" />
+    <Resource Include="images\map\creatures\chaos\warrior.png" />
+    <Resource Include="images\map\items\keys\red.png" />
+    <Resource Include="images\map\creatures\chaos\gargoyle.png" />
+    <Resource Include="images\map\creatures\player\player.png" />
+    <Resource Include="images\map\creatures\misc\splat.png" />
+    <Resource Include="images\map\items\misc\trap.png" />
+    <Resource Include="images\map\items\lights\torch.png" />
+    <Resource Include="images\map\items\lights\lantern.png" />
+    <Resource Include="images\map\items\lights\magiclantern.png" />
+    <Resource Include="images\map\ui\selection.png" />
+    <Resource Include="images\map\ui\attackmode.png" />
+    <Resource Include="images\map\ui\defendmode.png" />
+    <Resource Include="images\map\items\doors\yellow\north.png" />
+    <Resource Include="images\map\items\misc\exit.png" />
+    <Resource Include="images\map\items\misc\portal.png" />
+    <Resource Include="images\map\ui\yellowdurability.png" />
+    <Resource Include="images\map\ui\reddurability.png" />
+    <Resource Include="images\map\items\armors\boots.png" />
+    <Resource Include="images\map\items\shops\lights.png" />
+    <Resource Include="images\map\items\shops\armors.png" />
+    <Resource Include="images\map\items\shops\weapons.png" />
+    <Resource Include="images\map\items\shops\potions.png" />
+    <Resource Include="images\map\creatures\bosses\dragon.png" />
+    <Resource Include="images\map\items\doors\yellow\east.png" />
+    <Resource Include="images\map\misc\blank.png" />
+    <Resource Include="images\map\items\misc\tools.png" />
+    <Resource Include="images\map\items\treasures\copper.png" />
+    <Resource Include="images\map\items\treasures\silver.png" />
+    <Resource Include="images\map\items\treasures\electrum.png" />
+    <Resource Include="images\map\items\treasures\platinum.png" />
+    <Resource Include="images\map\items\treasures\gemstone.png" />
+    <Resource Include="images\map\items\treasures\amethyst.png" />
+    <Resource Include="images\map\items\treasures\sapphire.png" />
+    <Resource Include="images\map\items\treasures\ruby.png" />
+    <Resource Include="images\map\items\doors\yellow\south.png" />
+    <Resource Include="images\map\items\treasures\diamond.png" />
+    <Resource Include="images\map\items\treasures\emerald.png" />
+    <Resource Include="images\map\items\misc\amulet.png" />
+    <Resource Include="images\map\items\keys\rainbow.png" />
+    <Resource Include="images\map\items\misc\portablehole.png" />
+    <Resource Include="images\map\creatures\bosses\summoner.png" />
+    <Resource Include="images\map\creatures\bosses\necromancer.png" />
+    <Resource Include="images\map\creatures\chaos\thief.png" />
+    <Resource Include="images\map\creatures\undead\ghoul.png" />
+    <Resource Include="images\map\creatures\bosses\minotaur.png" />
+    <Resource Include="images\map\items\doors\yellow\west.png" />
+    <Resource Include="images\map\items\consumables\antidote.png" />
+    <Resource Include="images\statistics\attack.png" />
+    <Resource Include="images\statistics\defend.png" />
+    <Resource Include="images\statistics\health.png" />
+    <Resource Include="images\statistics\speed.png" />
+    <Resource Include="images\statistics\gold.png" />
+    <Resource Include="images\statistics\experience.png" />
+    <Resource Include="images\statistics\level.png" />
+    <Resource Include="images\statistics\ham.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PDGBoardGamesSL\PDGBoardGamesSL.csproj">
+      <Project>{16C6057E-3C28-4B31-BAE9-EDEAC47F91D7}</Project>
+      <Name>PDGBoardGamesSL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\creatures.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\bosses\dragon.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\bosses\minotaur.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\bosses\necromancer.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\bosses\summoner.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\chaos\gargoyle.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\chaos\thief.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\chaos\warrior.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\goblinoids\fimir.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\goblinoids\goblin.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\goblinoids\orc.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\misc\portal.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\player\player.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\undead\ghoul.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\undead\mummy.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\undead\skeleton.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\creatures\undead\zombie.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\armors\boots.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\armors\chainmail.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\armors\clothes.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\armors\helmet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\armors\platemail.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\armors\shield.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\consumables\antidote.xml" />
+    <Content Include="config\items\consumables\food.xml" />
+    <Content Include="config\items\consumables\potion.xml" />
+    <Content Include="config\items\doors\blue\east.xml" />
+    <Content Include="config\items\doors\blue\north.xml" />
+    <Content Include="config\items\doors\blue\south.xml" />
+    <Content Include="config\items\doors\blue\west.xml" />
+    <Content Include="config\items\doors\cyan\east.xml" />
+    <Content Include="config\items\doors\cyan\north.xml" />
+    <Content Include="config\items\doors\cyan\south.xml" />
+    <Content Include="config\items\doors\cyan\west.xml" />
+    <Content Include="config\items\doors\green\east.xml" />
+    <Content Include="config\items\doors\green\north.xml" />
+    <Content Include="config\items\doors\green\south.xml" />
+    <Content Include="config\items\doors\green\west.xml" />
+    <Content Include="config\items\doors\magenta\east.xml" />
+    <Content Include="config\items\doors\magenta\north.xml" />
+    <Content Include="config\items\doors\magenta\south.xml" />
+    <Content Include="config\items\doors\magenta\west.xml" />
+    <Content Include="config\items\doors\red\east.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\doors\red\north.xml" />
+    <Content Include="config\items\doors\red\south.xml" />
+    <Content Include="config\items\doors\red\west.xml" />
+    <Content Include="config\items\doors\templates\all.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\doors\templates\blue.xml" />
+    <Content Include="config\items\doors\templates\cyan.xml" />
+    <Content Include="config\items\doors\templates\east.xml" />
+    <Content Include="config\items\doors\templates\green.xml" />
+    <Content Include="config\items\doors\templates\magenta.xml" />
+    <Content Include="config\items\doors\templates\north.xml" />
+    <Content Include="config\items\doors\templates\red.xml" />
+    <Content Include="config\items\doors\templates\south.xml" />
+    <Content Include="config\items\doors\templates\west.xml" />
+    <Content Include="config\items\doors\templates\yellow.xml" />
+    <Content Include="config\items\doors\yellow\east.xml" />
+    <Content Include="config\items\doors\yellow\north.xml" />
+    <Content Include="config\items\doors\yellow\south.xml" />
+    <Content Include="config\items\doors\yellow\west.xml" />
+    <Content Include="config\items\keys\all.xml" />
+    <Content Include="config\items\keys\blue.xml" />
+    <Content Include="config\items\keys\cyan.xml" />
+    <Content Include="config\items\keys\green.xml" />
+    <Content Include="config\items\keys\magenta.xml" />
+    <Content Include="config\items\keys\rainbow.xml" />
+    <Content Include="config\items\keys\red.xml" />
+    <Content Include="config\items\keys\yellow.xml" />
+    <Content Include="config\items\lights\lantern.xml" />
+    <Content Include="config\items\lights\magiclantern.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\lights\match.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\lights\torch.xml" />
+    <Content Include="config\items\misc\amulet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\misc\arrowtrap.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\misc\bladetrap.xml" />
+    <Content Include="config\items\misc\chest.xml" />
+    <Content Include="config\items\misc\darttrap.xml" />
+    <Content Include="config\items\misc\exit.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\misc\hiddenarrowtrap.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\misc\hiddenbladetrap.xml" />
+    <Content Include="config\items\misc\hiddendarttrap.xml" />
+    <Content Include="config\items\misc\poisonham.xml" />
+    <Content Include="config\items\misc\portal.xml" />
+    <Content Include="config\items\misc\quest.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\misc\compass.xml" />
+    <Content Include="config\items\misc\tools.xml" />
+    <Content Include="config\items\shops\armors.xml" />
+    <Content Include="config\items\shops\lights.xml" />
+    <Content Include="config\items\shops\potions.xml" />
+    <Content Include="config\items\shops\weapons.xml" />
+    <Content Include="config\items\treasures\amethyst.xml" />
+    <Content Include="config\items\treasures\copper.xml" />
+    <Content Include="config\items\treasures\diamond.xml" />
+    <Content Include="config\items\treasures\electrum.xml" />
+    <Content Include="config\items\treasures\emerald.xml" />
+    <Content Include="config\items\treasures\gemstone.xml" />
+    <Content Include="config\items\treasures\gold.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\items\treasures\platinum.xml" />
+    <Content Include="config\items\treasures\ruby.xml" />
+    <Content Include="config\items\treasures\sapphire.xml" />
+    <Content Include="config\items\treasures\silver.xml" />
+    <Content Include="config\items\weapons\battleaxe.xml" />
+    <Content Include="config\items\weapons\dagger.xml" />
+    <Content Include="config\items\weapons\longsword.xml" />
+    <Content Include="config\items\weapons\shortsword.xml" />
+    <Content Include="config\items\weapons\twohandedsword.xml" />
+    <Content Include="config\messages.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\propertyGroups.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\terrains.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="images\map\items\misc\quest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="images\map\items\misc\ring.png" />
+    <Resource Include="images\minimap\quest\base.png" />
+    <Resource Include="images\minimap\quest\east.png" />
+    <Resource Include="images\minimap\quest\north.png" />
+    <Resource Include="images\minimap\quest\south.png" />
+    <Resource Include="images\minimap\quest\west.png" />
+    <Page Include="MapPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <None Include="Properties\OutOfBrowserSettings.xml" />
+    <Resource Include="images\map\items\weapons\battleaxe.png" />
+    <Resource Include="images\lights\lantern.png" />
+    <Resource Include="images\lights\magiclantern.png" />
+    <Resource Include="images\lights\match.png" />
+    <Resource Include="images\lights\torch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SoundEffects.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SoundEffects.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>HamQuestSLClient.Constants</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

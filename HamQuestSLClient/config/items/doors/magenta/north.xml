@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<item>
+  <tags type="TagSet">
+    <tag>door</tag>
+  </tags>
+  <spawn-as type="StringGenerator">
+    <entry>
+      <value>MagentaDoorNorth</value>
+      <weight>1</weight>
+    </entry>
+  </spawn-as>
+  <image-path>images/map/items/doors/magenta/north.png</image-path>
+  <identifier>MagentaDoorNorth</identifier>
+  <name>amethyst door</name>
+</item>

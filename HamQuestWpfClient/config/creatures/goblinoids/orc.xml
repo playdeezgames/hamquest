@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<creature>
+  <mover type="CreatureMoveHandler"/>
+  <tags type="TagSet">
+    <tag>creature</tag>
+  </tags>
+  <image-path>images/map/creatures/goblinoids/orc.png</image-path>
+  <identifier>orc</identifier>
+  <name>ork</name>
+  <morale-roll type="BoolGenerator">
+    <entry>
+      <value>true</value>
+      <weight>5</weight>
+    </entry>
+    <entry>
+      <value>false</value>
+      <weight>1</weight>
+    </entry>
+  </morale-roll>
+  <item-drops type="StringGenerator">
+    <entry>
+      <value>Torch</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Shield</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Silver</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Copper</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>Dagger</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Food</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value></value>
+      <weight>8</weight>
+    </entry>
+  </item-drops>
+  <attack type="StatisticHolder">3</attack>
+  <attack-roll type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>1</value>
+      <weight>3</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>3</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>1</weight>
+    </entry>
+  </attack-roll>
+  <health type="StatisticHolder">1</health>
+  <speed type="StatisticHolder">8</speed>
+  <creature-count>24</creature-count>
+  <attack-die>3</attack-die>
+  
+  <spawn-weight>3</spawn-weight>
+  <placement>NonDeadEnd</placement>
+  <number-of-attacks>1</number-of-attacks>
+  <special-attack>None</special-attack>
+  <necromancer-weight>0</necromancer-weight>
+  <summoner-weight>20</summoner-weight>
+  <hit-message>HitOrk</hit-message>
+  <miss-message>MissedOrk</miss-message>
+  <kill-message>KilledOrk</kill-message>
+  <hit-by-message>HitByOrk</hit-by-message>
+  <missed-by-message>MissedByOrk</missed-by-message>
+  <killed-by-message>KilledByOrk</killed-by-message>
+  <experience-points>1</experience-points>
+  <defend-roller type="CreatureDefendRoller"/>
+  <defend-generator>white-die-2</defend-generator>
+</creature>

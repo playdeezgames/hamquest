@@ -1,0 +1,7 @@
+C:\lint\projects\hq\HamQuestEngine\bin\Debug\HamQuestEngine.dll
+C:\lint\projects\hq\HamQuestEngine\bin\Debug\HamQuestEngine.pdb
+C:\lint\projects\hq\HamQuestEngine\bin\Debug\PDGBoardGames.dll
+C:\lint\projects\hq\HamQuestEngine\bin\Debug\PDGBoardGames.pdb
+C:\lint\projects\hq\HamQuestEngine\obj\Debug\HamQuestEngine.csprojResolveAssemblyReference.cache
+C:\lint\projects\hq\HamQuestEngine\obj\Debug\HamQuestEngine.dll
+C:\lint\projects\hq\HamQuestEngine\obj\Debug\HamQuestEngine.pdb

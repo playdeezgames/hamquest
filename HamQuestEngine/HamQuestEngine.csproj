@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EFD12FB3-9153-4A13-8289-DA944CDBE50A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HamQuestEngine</RootNamespace>
+    <AssemblyName>HamQuestEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Creatures\PlayerDescriptor.cs" />
+    <Compile Include="DescriptorProperties\BumpHandlers\IBumpHandler.cs" />
+    <Compile Include="DescriptorProperties\Counters\StringCounter.cs" />
+    <Compile Include="DescriptorProperties\Generators\BoolGenerator.cs" />
+    <Compile Include="DescriptorProperties\Generators\IntGenerator.cs" />
+    <Compile Include="DescriptorProperties\Generators\StringGenerator.cs" />
+    <Compile Include="DescriptorProperties\KeyHandlers\AmuletOfYendorKeyHandler.cs" />
+    <Compile Include="DescriptorProperties\KeyHandlers\IPlayerKeyHandler.cs" />
+    <Compile Include="DescriptorProperties\KeyHandlers\PlayerRestKeyHandler.cs" />
+    <Compile Include="DescriptorProperties\Misc\DefaultRandomNumberGenerator.cs" />
+    <Compile Include="DescriptorProperties\Misc\ShopInventoryEntry.cs" />
+    <Compile Include="DescriptorProperties\Misc\StatisticsHolder.cs" />
+    <Compile Include="DescriptorProperties\Misc\TagSet.cs" />
+    <Compile Include="DescriptorProperties\Misc\TextColor.cs" />
+    <Compile Include="DescriptorProperties\Movers\CreatureMoveHandler.cs" />
+    <Compile Include="DescriptorProperties\Movers\IMover.cs" />
+    <Compile Include="DescriptorProperties\Movers\PlayerMoveHandler.cs" />
+    <Compile Include="DescriptorProperties\PlayerSpecific\PlayerConfiguration.cs" />
+    <Compile Include="DescriptorProperties\PlayerSpecific\PlayerMessageStatistics.cs" />
+    <Compile Include="DescriptorProperties\PlayerSpecific\PlayerStatisticHolder.cs" />
+    <Compile Include="DescriptorProperties\PlayerSpecific\PlayerStepTracker.cs" />
+    <Compile Include="DescriptorProperties\Rollers\CreatureDefendRoller.cs" />
+    <Compile Include="DescriptorProperties\Rollers\IRoller.cs" />
+    <Compile Include="DescriptorProperties\Rollers\PlayerDefendRoller.cs" />
+    <Compile Include="DescriptorProperties\Rollers\SimpleRoller.cs" />
+    <Compile Include="Directions\Directions.cs" />
+    <Compile Include="ExtensionMethods\DescriptorExtenders.cs" />
+    <Compile Include="GameConstants\ArmorTypes.cs" />
+    <Compile Include="GameConstants\Attributes.cs" />
+    <Compile Include="GameConstants\CellTypes.cs" />
+    <Compile Include="GameConstants\Colors.cs" />
+    <Compile Include="GameConstants\ShopBehaviors.cs" />
+    <Compile Include="GameConstants\CreatureSpecialAttacks.cs" />
+    <Compile Include="GameConstants\FileNames.cs" />
+    <Compile Include="GameConstants\HealingTypes.cs" />
+    <Compile Include="GameConstants\ItemTypes.cs" />
+    <Compile Include="GameConstants\Messages.cs" />
+    <Compile Include="GameConstants\Methods.cs" />
+    <Compile Include="GameConstants\Placements.cs" />
+    <Compile Include="GameConstants\PlayerConfigurationValues.cs" />
+    <Compile Include="GameConstants\PlayerStates.cs" />
+    <Compile Include="GameConstants\Properties.cs" />
+    <Compile Include="GameConstants\PropertyGroups.cs" />
+    <Compile Include="GameConstants\Tags.cs" />
+    <Compile Include="GameCore\Game.cs" />
+    <Compile Include="GameCore\GameClient.cs" />
+    <Compile Include="GameCore\MessageQueue.cs" />
+    <Compile Include="Item\Descriptor.cs" />
+    <Compile Include="Item\Shop.cs" />
+    <Compile Include="Maps\Creature.cs" />
+    <Compile Include="Maps\Map.cs" />
+    <Compile Include="Maps\MapCell.cs" />
+    <Compile Include="Maze\CellInfo.cs" />
+    <Compile Include="Maze\Maze.cs" />
+    <Compile Include="Maze\Portal.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tables\CreatureTable.cs" />
+    <Compile Include="Tables\ItemTable.cs" />
+    <Compile Include="Tables\MessageTable.cs" />
+    <Compile Include="Tables\PropertyGroupTable.cs" />
+    <Compile Include="Tables\TableSet.cs" />
+    <Compile Include="Tables\TerrainTable.cs" />
+    <Compile Include="Tables\ThemeTable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PDGBoardGames\PDGBoardGames.csproj">
+      <Project>{da621552-b331-4be8-a561-f4ea80add238}</Project>
+      <Name>PDGBoardGames</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

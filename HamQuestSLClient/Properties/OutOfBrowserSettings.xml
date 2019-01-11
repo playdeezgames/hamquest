@@ -1,0 +1,12 @@
+<OutOfBrowserSettings ShortName="HamQuest (SL)" EnableGPUAcceleration="False" ShowInstallMenuItem="True">
+  <OutOfBrowserSettings.Blurb>An Evil Wizard has stolen the MegaHam, an essential part of the Royal Wedding of Price Porkloin to Pricess Hamhock. Without it, the wedding will be ruined! You are an intrepid sous chef on a quest through a magical maze in order to retrieve the 16 pieces of the MegaHam and save the wedding. Fail, and you will be the main course.</OutOfBrowserSettings.Blurb>
+  <OutOfBrowserSettings.WindowSettings>
+    <WindowSettings Title="HamQuest (SL)" Height="560" Width="640" />
+  </OutOfBrowserSettings.WindowSettings>
+  <OutOfBrowserSettings.Icons>
+    <Icon Size="16,16">images/map/items/consumables/ham.png</Icon>
+    <Icon Size="32,32">images/map/items/consumables/ham.png</Icon>
+    <Icon Size="48,48">images/map/items/consumables/ham.png</Icon>
+    <Icon Size="128,128">images/map/items/consumables/ham.png</Icon>
+  </OutOfBrowserSettings.Icons>
+</OutOfBrowserSettings>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<creature>
+  <mover type="CreatureMoveHandler"/>
+  <tags type="TagSet">
+    <tag>creature</tag>
+  </tags>
+  <image-path>images/map/creatures/bosses/summoner.png</image-path>
+  <identifier>summoner</identifier>
+  <name>summoner</name>
+  <morale-roll type="BoolGenerator">
+    <entry>
+      <value>true</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>false</value>
+      <weight>1</weight>
+    </entry>
+  </morale-roll>
+  <item-drops type="StringGenerator">
+    <entry>
+      <value>RainbowKey</value>
+      <weight>1</weight>
+    </entry>
+  </item-drops>
+  <attack type="StatisticHolder">1</attack>
+  <health type="StatisticHolder">10</health>
+  <speed type="StatisticHolder">6</speed>
+  <creature-count>1</creature-count>
+  <attack-die>3</attack-die>
+  
+  <spawn-weight>0</spawn-weight>
+  <placement>DeadEnd</placement>
+  <number-of-attacks>1</number-of-attacks>
+  <special-attack>Generator</special-attack>
+  <generatorTable>summoner-weight</generatorTable>
+  <necromancer-weight>0</necromancer-weight>
+  <summoner-weight>0</summoner-weight>
+  <hit-message>HitSummoner</hit-message>
+  <miss-message>MissedSummoner</miss-message>
+  <kill-message>KilledSummoner</kill-message>
+  <hit-by-message>HitBySummoner</hit-by-message>
+  <missed-by-message>MissedBySummoner</missed-by-message>
+  <killed-by-message>KilledBySummoner</killed-by-message>
+  <experience-points>10</experience-points>
+  <defend-roller type="CreatureDefendRoller"/>
+  <defend-generator>white-die-2</defend-generator>
+</creature>

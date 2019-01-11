@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<creature>
+  <mover type="CreatureMoveHandler"/>
+  <tags type="TagSet">
+    <tag>creature</tag>
+  </tags>
+  <image-path>images/map/creatures/chaos/warrior.png</image-path>
+  <identifier>warrior</identifier>
+  <name>chaos warrior</name>
+  <morale-roll type="BoolGenerator">
+    <entry>
+      <value>true</value>
+      <weight>1</weight>
+    </entry>
+  </morale-roll>
+  <item-drops type="StringGenerator">
+    <entry>
+      <value>MagicLantern</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Platemail</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>Longsword</value>
+      <weight>2</weight>
+    </entry>
+    <entry>
+      <value>Potion</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value></value>
+      <weight>5</weight>
+    </entry>
+  </item-drops>
+  <attack type="StatisticHolder">4</attack>
+  <attack-roll type="IntGenerator">
+    <entry>
+      <value>0</value>
+      <weight>1</weight>
+    </entry>
+    <entry>
+      <value>1</value>
+      <weight>4</weight>
+    </entry>
+    <entry>
+      <value>2</value>
+      <weight>6</weight>
+    </entry>
+    <entry>
+      <value>3</value>
+      <weight>4</weight>
+    </entry>
+    <entry>
+      <value>4</value>
+      <weight>1</weight>
+    </entry>
+  </attack-roll>
+  <health type="StatisticHolder">3</health>
+  <speed type="StatisticHolder">7</speed>
+  <creature-count>6</creature-count>
+  <attack-die>3</attack-die>
+  
+  <spawn-weight>2</spawn-weight>
+  <placement>DeadEnd</placement>
+  <number-of-attacks>1</number-of-attacks>
+  <special-attack>None</special-attack>
+  <necromancer-weight>0</necromancer-weight>
+  <summoner-weight>0</summoner-weight>
+  <hit-message>HitChaosWarrior</hit-message>
+  <miss-message>MissedChaosWarrior</miss-message>
+  <kill-message>KilledChaosWarrior</kill-message>
+  <hit-by-message>HitByChaosWarrior</hit-by-message>
+  <missed-by-message>MissedByChaosWarrior</missed-by-message>
+  <killed-by-message>KilledByChaosWarrior</killed-by-message>
+  <experience-points>3</experience-points>
+  <defend-roller type="CreatureDefendRoller"/>
+  <defend-generator>white-die-4</defend-generator>
+</creature>
