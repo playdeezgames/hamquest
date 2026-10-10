@@ -114,6 +114,14 @@ Death: when wounds >= health, a carried `Save` healing item is consumed (wounds 
 
 `MessageQueue` keeps the last 5 messages with colours from the message's `text-color`; each message may carry `sound-effect`, `tutorial-tag`, `tutorial-*` fields that trigger a pop-up the first time (unless `always-tutorial`). Messages are keyed by id and translated by `MessageTable` (179 messages).
 
+## 10b. Facts confirmed while porting (M4)
+
+- Boss drops: the **Rainbow Key** drops only from the Summoner, the **Amulet** only from the Necromancer, both DeadEnd-placed with count 1. Winning therefore needs killing the Summoner.
+- Shops define no `shop-behavior` in the data, so the engine's switch matched nothing and the shop tile was cleared after one visit. Each shop is single-use.
+- The thief's "quest piece stolen" branch reused the XP message in the original (bug); the port uses the thief message.
+- Creature actions per player move = creature `speed` / the player's rolled `step_total` (2..12 times the product of worn armour multipliers). Heavy armour lowers the denominator, so monsters act more often per move.
+- The player is level + 5 health (`initial-health` 5, +1 per level), starts with a dagger, 5 food, 3 potions, clothes, a match and a torch (and chainmail one time in three).
+
 ## 11. Known hazards in the original (see also `CLAUDE.md`)
 
 - `SpawnMonsters` loops until it finds a **visited cell with a trap** and then a tile carrying an item tagged `spawns`; with no such cell it spins forever. Reachable when all traps are already used.

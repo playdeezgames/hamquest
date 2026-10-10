@@ -76,7 +76,7 @@ Creature :: struct {
 	steps:     f32,
 	alive:     bool,
 	summoned:  bool,
-	been_hit:  bool,
+	fresh:     bool, // arrived this turn: does not act until the next one
 }
 
 Player :: struct {
@@ -99,6 +99,60 @@ Gen_Stats :: struct {
 	fallback_scans:   int, // times the deterministic scan had to take over
 }
 
+Play_State :: enum u8 {
+	Play,
+	Win,
+	Lose,
+}
+
+Command :: enum u8 {
+	None,
+	Move_North,
+	Move_East,
+	Move_South,
+	Move_West,
+	Rest, // Space
+	Use_Amulet, // Y
+	Toggle_Config, // Tab: Attack <-> Defend (decides what auto-equip fills first)
+	Shop_Close,
+	Shop_Buy_One, // arg: stock index
+	Shop_Buy_All, // arg: stock index
+}
+
+// What the UI should react to after a command (cleared at the start of each command).
+Event_Kind :: enum u8 {
+	Sound, // msg names the message that carries the sound
+	Tutorial, // msg carries the tutorial text; shown once unless always_tutorial
+	Hit_Player, // the player was struck this command
+}
+
+Event :: struct {
+	kind: Event_Kind,
+	msg:  content.Message_Id,
+}
+
+Msg :: struct {
+	id:  content.Message_Id,
+	arg: i32, // value for a {0} placeholder (experience gained)
+}
+
+MSG_LOG :: 5
+MAX_EVENTS :: 64
+SHOP_SLOTS :: 8
+PATH_UNREACHABLE :: max(i32)
+
+Shop_Slot :: struct {
+	item:  content.Item_Kind,
+	count: u32,
+}
+
+Shop_State :: struct {
+	active: bool,
+	shop:   content.Item_Kind,
+	slots:  [SHOP_SLOTS]Shop_Slot,
+	count:  int,
+}
+
 World :: struct {
 	seed:            u64,
 	rng:             Rng,
@@ -110,6 +164,31 @@ World :: struct {
 	player:          Player,
 	start_inventory: [content.Item_Kind]u32,
 	stats:           Gen_Stats,
+
+	// --- run state (M4)
+	state:           Play_State,
+	wounds:          i32,
+	been_hit:        bool, // set by damage, cleared by the UI when it has shown the flash
+	xp:              i32,
+	xp_goal:         i32,
+	level:           i32,
+	inventory:       [content.Item_Kind]u32,
+	durability:      [content.Item_Kind]u32,
+	weapon:          content.Item_Kind,
+	armor:           [content.Armor_Type]content.Item_Kind,
+	config:          content.Player_Config,
+	step_count:      i32,
+	step_total:      i32,
+	turn:            u32, // commands that took game time
+	msgs:            [MSG_LOG]Msg,
+	msg_count:       int,
+	msg_serial:      u32, // grows with every message so the UI can tell when something new arrived
+	events:          [MAX_EVENTS]Event,
+	event_count:     int,
+	tutorial_seen:   [content.Message_Id]bool,
+	tutorial_off:    bool,
+	shop:            Shop_State,
+	pathing:         [MAP_ROWS][MAP_COLS]i32, // steps from the player over tiles a creature can walk
 }
 
 cell_at :: proc(w: ^World, col, row: int) -> ^Maze_Cell {

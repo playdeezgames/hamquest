@@ -618,6 +618,7 @@ class Gen:
             p[f] = self.ref_msg(ent.str_(prop, required=True), what + '.' + prop)
         pc = ent.typed('player-configuration', ('PlayerConfiguration',), required=True)
         p['config'] = self.enum('Player_Config', (pc.element.text or '').strip()) if pc else None
+        self.enum('Player_Config', 'Defend')  # the Tab toggle's other value; not named in the data
         kh = ent.typed('key-handlers', ('TagSet',), required=True)
         handlers = parse_tags(kh) if kh else []
         p['key_handlers'] = handlers

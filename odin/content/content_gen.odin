@@ -553,6 +553,7 @@ Sound_Effect :: enum u8 {
 Player_Config :: enum u8 {
 	None,
 	Attack,
+	Defend,
 }
 
 Tag :: enum u8 {
