@@ -2,6 +2,17 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Commands (Odin port)
+
+```bash
+python3 tools/gen_content.py          # regenerate odin/content/content_gen.odin from the XML + .cqm
+python3 tools/gen_content.py --check  # fail if the generated file is stale
+tools/test.sh                         # stale check, odin check -vet (native + js_wasm32), odin test; must end ALL TESTS PASSED
+~/ODIN/odin test odin/tests -define:ODIN_TEST_THREADS=1 -define:ODIN_TEST_NAMES=tests.content_counts  # one test
+```
+
+Never hand-edit `odin/content/content_gen.odin`; change `tools/gen_content.py` (its `EXTRA_MESSAGES`, `DATA_FIXES`, `IGNORED` tables hold every deliberate departure from the XML). Odin is `~/ODIN/odin` (`dev-2026-07-nightly`).
+
 ## Status: legacy C# source, being ported to Odin + wasm (itch.io web build)
 
 HamQuest is a ~2010-era C# roguelike (Silverlight 4 / WPF, .NET 4.5, Visual Studio solution-less `.csproj` files). The goal is an **Odin `js_wasm32` port** shipped as an HTML5 build on itch.io (thegrumpygamedev). The C# is the **reference implementation**: keep it intact and read-only until the port is verified, then decide what to delete.

@@ -2,7 +2,7 @@
 build/
 odin/out/
 *.wasm
-/odin
+/odin/*/odin
 *.bin
 # legacy C# build output (still tracked until cleaned up)
 **/bin/
