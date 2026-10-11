@@ -120,6 +120,29 @@ draw_text :: proc(fb: ^Framebuffer, x, y: int, s: string, c: Color) {
 	}
 }
 
+// The same glyphs enlarged by a whole number (titles).
+draw_text_scaled :: proc(fb: ^Framebuffer, x, y: int, s: string, c: Color, scale: int) {
+	cx := x
+	for i in 0 ..< len(s) {
+		gi := glyph_index(s[i])
+		rows := FONT_ROWS[gi]
+		for ry in 0 ..< FONT_CELL_H {
+			bits := rows[ry]
+			if bits == 0 {continue}
+			for rx in 0 ..< 8 {
+				if bits & (0x80 >> uint(rx)) != 0 {
+					fill_rect(fb, cx + rx * scale, y + ry * scale, scale, scale, c)
+				}
+			}
+		}
+		cx += int(FONT_ADVANCE[gi]) * scale
+	}
+}
+
+text_width_scaled :: proc(s: string, scale: int) -> int {
+	return text_width(s) * scale
+}
+
 draw_text_centered :: proc(fb: ^Framebuffer, cx, y: int, s: string, c: Color) {
 	draw_text(fb, cx - text_width(s) / 2, y, s, c)
 }

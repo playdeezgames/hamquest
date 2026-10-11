@@ -1,7 +1,8 @@
 "use strict";
 // Page glue for HamQuest of SPLORR!! (see odin/platform/web/main.odin for the exports it calls).
 // Query options: ?seed=N (up to 15 digits) fixes the world and turns saving off; ?log=1 logs every key;
-// ?touch=1 shows the touch controls on any device.
+// ?touch=1 shows the touch controls on any device;
+// ?menu=1 opens the title menu even with a fixed seed.
 (function () {
 	const W = 640, H = 560;
 	const SAVE_KEY = "hq:save";             // itch.io games share one origin: keep the key namespaced
@@ -129,6 +130,8 @@
 				}
 			}
 		}
+		// a normal start opens at the title menu; a fixed ?seed= goes straight into that world
+		if (!fixedSeed || params.get("menu") === "1") ex.platform_open_title();
 		msg.style.display = "none";
 		canvas.focus();
 

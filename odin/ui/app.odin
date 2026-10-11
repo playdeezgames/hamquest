@@ -27,6 +27,14 @@ Key :: enum u8 {
 	C, // credits
 }
 
+Title_Item :: enum u8 {
+	Continue,
+	New_Game,
+	Tutorial, // not built yet: shown, never enabled
+	Credits,
+	Quit,
+}
+
 MAX_TIPS :: 8
 MAX_LOG :: 200_000
 IO_SIZE :: MAX_LOG + 1024
@@ -40,6 +48,10 @@ App :: struct {
 	tip_count:  int,
 	confirm_new: bool,
 	credits:    bool, // the credits screen is open
+	title:      bool, // the title menu is open (over a game that may be in progress)
+	title_sel:  Title_Item,
+	can_quit:   bool, // set by a shell that has a window to close: adds Quit to the title menu
+	quit:       bool, // Quit was chosen; the shell closes
 	error:      game.Gen_Error,
 	dirty:      bool, // something changed since the last app_draw
 
@@ -61,7 +73,75 @@ app_new_game :: proc(a: ^App, seed: u64) {
 	a.shop_sel = 0
 	a.tip_count = 0
 	a.confirm_new = false
+	a.title = false
+	a.credits = false
 	collect_events(a)
+}
+
+// ---------------------------------------------------------------- title menu
+
+// A game in progress: something has been done in it and it is not over.
+game_in_progress :: proc(a: ^App) -> bool {
+	return a.world.state == .Play && a.log_len > 0
+}
+
+title_enabled :: proc(a: ^App, item: Title_Item) -> bool {
+	switch item {
+	case .Continue: return game_in_progress(a)
+	case .New_Game, .Credits: return true
+	case .Tutorial: return false
+	case .Quit: return a.can_quit
+	}
+	return false
+}
+
+title_visible :: proc(a: ^App, item: Title_Item) -> bool {
+	return item != .Quit || a.can_quit
+}
+
+// Show the title menu. Continue is preselected when there is a game to continue.
+app_open_title :: proc(a: ^App) {
+	a.title = true
+	a.credits = false
+	a.confirm_new = false
+	a.title_sel = .Continue if game_in_progress(a) else .New_Game
+	a.dirty = true
+}
+
+title_move :: proc(a: ^App, step: int) {
+	n := len(Title_Item)
+	i := int(a.title_sel)
+	for _ in 0 ..< n {
+		i = (i + step + n) % n
+		item := Title_Item(i)
+		if title_visible(a, item) && title_enabled(a, item) {
+			a.title_sel = item
+			return
+		}
+	}
+}
+
+title_activate :: proc(a: ^App, item: Title_Item) {
+	if !title_enabled(a, item) {return}
+	a.title_sel = item
+	switch item {
+	case .Continue:
+		a.title = false
+	case .New_Game:
+		switch {
+		case game_in_progress(a):
+			a.confirm_new = true
+		case a.world.state == .Play:
+			a.title = false // nothing has happened yet: this world is already a new game
+		case:
+			app_new_game(a, a.seed + 1)
+		}
+	case .Credits:
+		a.credits = true
+	case .Quit:
+		a.quit = true
+	case .Tutorial:
+	}
 }
 
 collect_events :: proc(a: ^App) {
@@ -172,6 +252,22 @@ app_key :: proc(a: ^App, key: Key) -> bool {
 			return false
 		}
 		return true
+	case a.title:
+		#partial switch key {
+		case .Up, .W:
+			title_move(a, -1)
+		case .Down, .S:
+			title_move(a, 1)
+		case .Enter, .Space:
+			title_activate(a, a.title_sel)
+		case .Escape:
+			title_activate(a, .Continue)
+		case .C:
+			a.credits = true
+		case:
+			return false
+		}
+		return true
 	case w.shop.active:
 		#partial switch key {
 		case .Up:
@@ -193,6 +289,9 @@ app_key :: proc(a: ^App, key: Key) -> bool {
 		case .F2, .Enter:
 			app_new_game(a, a.seed + 1)
 			return true
+		case .Escape:
+			app_open_title(a)
+			return true
 		}
 		return false
 	}
@@ -213,6 +312,8 @@ app_key :: proc(a: ^App, key: Key) -> bool {
 		command(a, .Toggle_Config)
 	case .F2:
 		a.confirm_new = true
+	case .Escape:
+		app_open_title(a)
 	case:
 		return false
 	}
@@ -230,19 +331,85 @@ app_draw :: proc(a: ^App) {
 	a.dirty = false
 	fb := &a.fb
 	w := &a.world
-	draw_world(fb, w)
-	if w.state != .Play {
-		draw_game_over(fb, w)
-	} else if w.shop.active {
-		draw_shop(fb, w, a.shop_sel)
+	if a.title {
+		draw_title(fb, a)
+	} else {
+		draw_world(fb, w)
+		if w.state != .Play {
+			draw_game_over(fb, w)
+		} else if w.shop.active {
+			draw_shop(fb, w, a.shop_sel)
+		}
 	}
 	if a.confirm_new {
 		draw_box(fb, 140, 220, 360, 80, "New game?")
 		draw_text_centered(fb, 320, 260, "Start a new game and abandon this one?", BLACK)
 		draw_text_centered(fb, 320, 276, "Enter: yes     Esc: no", BLACK)
 	}
-	if a.tip_count > 0 {draw_tip(fb, a.tips[0], a.tip_count)}
+	if a.tip_count > 0 && !a.title {draw_tip(fb, a.tips[0], a.tip_count)}
 	if a.credits {draw_credits(fb)}
+}
+
+TITLE_ITEM_X :: 200
+TITLE_ITEM_W :: 240
+TITLE_ITEM_Y :: 290
+TITLE_ITEM_H :: 32
+TITLE_ITEM_STEP :: 40
+
+title_label :: proc(item: Title_Item) -> string {
+	switch item {
+	case .Continue: return "Continue"
+	case .New_Game: return "New Game"
+	case .Tutorial: return "Tutorial (coming soon)"
+	case .Credits: return "Credits"
+	case .Quit: return "Quit"
+	}
+	return ""
+}
+
+// Row (0 at the top) of a visible title item, or -1.
+title_row :: proc(a: ^App, item: Title_Item) -> int {
+	row := 0
+	for i in 0 ..< len(Title_Item) {
+		it := Title_Item(i)
+		if !title_visible(a, it) {continue}
+		if it == item {return row}
+		row += 1
+	}
+	return -1
+}
+
+draw_title :: proc(fb: ^Framebuffer, a: ^App) {
+	fill(fb, Color{16, 16, 56, 255})
+	rect_outline(fb, 8, 8, FRAME_W - 16, FRAME_H - 16, GRAY)
+	draw_text_centered_scaled(fb, 320, 60, "HamQuest", WHITE, 6)
+	draw_text_centered_scaled(fb, 320, 120, "of SPLORR!!", CYAN, 3)
+	// a row of the cast
+	art := [?]content.Image_Id {
+		.MapCreaturesPlayerPlayer, .MapItemsKeysRed, .MapItemsConsumablesHam, .MapItemsKeysRainbow,
+		.MapCreaturesUndeadSkeleton, .MapCreaturesBossesDragon,
+	}
+	x0 := 320 - (len(art) * 48) / 2
+	for i in 0 ..< len(art) {blit(fb, art[i], x0 + i * 48 + 8, 180, 1)}
+	draw_text_centered(fb, 320, 232, "Locks, keys, ham and monsters.", Color{200, 200, 255, 255})
+	for i in 0 ..< len(Title_Item) {
+		item := Title_Item(i)
+		if !title_visible(a, item) {continue}
+		y := TITLE_ITEM_Y + title_row(a, item) * TITLE_ITEM_STEP
+		enabled := title_enabled(a, item)
+		selected := a.title_sel == item
+		bg := Color{40, 40, 90, 255}
+		if selected {bg = BLUE}
+		fill_rect(fb, TITLE_ITEM_X, y, TITLE_ITEM_W, TITLE_ITEM_H, bg)
+		rect_outline(fb, TITLE_ITEM_X, y, TITLE_ITEM_W, TITLE_ITEM_H, NAVY if !selected else WHITE)
+		col := WHITE if enabled else GRAY
+		draw_text_centered(fb, TITLE_ITEM_X + TITLE_ITEM_W / 2, y + 12, title_label(item), col)
+	}
+	draw_text_centered(fb, 320, FRAME_H - 40, "Up/Down and Enter, or tap.   Esc in a game returns here.", Color{160, 160, 220, 255})
+}
+
+draw_text_centered_scaled :: proc(fb: ^Framebuffer, cx, y: int, s: string, c: Color, scale: int) {
+	draw_text_scaled(fb, cx - text_width_scaled(s, scale) / 2, y, s, c, scale)
 }
 
 CREDITS_LINES := [?]string {
@@ -385,6 +552,16 @@ app_tap :: proc(a: ^App, x, y: int) {
 			app_new_game(a, a.seed + 1)
 		} else {
 			a.confirm_new = false
+		}
+		return
+	case a.title:
+		for i in 0 ..< len(Title_Item) {
+			item := Title_Item(i)
+			if !title_visible(a, item) {continue}
+			ty := TITLE_ITEM_Y + title_row(a, item) * TITLE_ITEM_STEP
+			if x >= TITLE_ITEM_X && x < TITLE_ITEM_X + TITLE_ITEM_W && y >= ty && y < ty + TITLE_ITEM_H {
+				title_activate(a, item)
+			}
 		}
 		return
 	case w.shop.active:

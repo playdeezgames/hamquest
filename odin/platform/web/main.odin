@@ -27,6 +27,13 @@ platform_init :: proc "c" (seed_lo, seed_hi: u32) -> i32 {
 	return i32(app.error)
 }
 
+// Show the title menu (a normal start; a fixed ?seed= skips it).
+@(export)
+platform_open_title :: proc "c" () {
+	context = ctx
+	ui.app_open_title(&app)
+}
+
 // `key` is a ui.Key number (see page/platform.js).
 @(export)
 platform_key :: proc "c" (key: i32) -> i32 {

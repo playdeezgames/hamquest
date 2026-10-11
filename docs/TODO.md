@@ -37,7 +37,7 @@ stay decided unless an item below says it should be reopened.
    - Steam Input: action sets and glyphs, and the "controller support" flag requirements (not read yet; see the
      vault's "Things to verify", item 8).
    - On screen: button hints that follow the device in use.
-5. **A menu and settings shell** (M). The game boots straight into a run and has no title, options, pause or quit.
+5. **A menu and settings shell** (M). **Title menu done (D21)**; pause, options and settings remain. The game boots straight into a run and has no title, options, pause or quit.
    - Title screen (new game, continue, options, credits, quit), pause menu, an options screen: volume, mute, window
      mode, UI scale, tips on/off, key bindings, colourblind markers, reset.
    - Native quit handling, window state persistence, and a consistent "abandon run" confirmation.

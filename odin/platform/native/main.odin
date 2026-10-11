@@ -1,7 +1,7 @@
 package main
 
 // Native development client (D8): an SDL2 window over the same core and UI as the web build.
-//   hamquest [--seed N] [--scale N] [--frames N] [--dump file.ppm]
+//   hamquest [--seed N] [--scale N] [--frames N] [--dump file.ppm] [--menu]
 // --frames N runs N frames and exits (for smoke tests with SDL_VIDEODRIVER=dummy); --dump writes the last frame.
 
 import "core:fmt"
@@ -57,6 +57,7 @@ main :: proc() {
 	save_path := "hamquest.save"
 	use_save := true
 	seed_given := false
+	menu := false // open the title menu even with --seed or --keys (screenshots, tests)
 	keys := "" // comma separated ui.Key numbers: run them, print the frame hash, exit (parity with the wasm build)
 	args := os.args
 	for i := 1; i < len(args); i += 1 {
@@ -73,6 +74,8 @@ main :: proc() {
 			if i < len(args) {save_path = args[i]}
 		case "--no-save":
 			use_save = false
+		case "--menu":
+			menu = true
 		case "--scale":
 			i += 1
 			if i < len(args) {
@@ -138,6 +141,9 @@ main :: proc() {
 		fmt.eprintln("world generation failed:", app.error)
 		os.exit(1)
 	}
+	// a plain start (no fixed seed, no scripted keys) opens at the title menu
+	app.can_quit = true
+	if menu || (!seed_given && keys == "") {ui.app_open_title(app)}
 
 	if keys != "" {
 		// scripted run: no window needed beyond what is already open
@@ -169,12 +175,21 @@ main :: proc() {
 			case .KEYDOWN:
 				k := keymap(ev.key.keysym.scancode)
 				if k != .None {ui.app_key(app, k)}
+			case .MOUSEBUTTONDOWN:
+				// window pixels to the 640 by 560 picture (integer scale, centred)
+				ww, wh: i32
+				SDL.GetWindowSize(window, &ww, &wh)
+				k := max(1, min(int(ww) / ui.FRAME_W, int(wh) / ui.FRAME_H)) // integer scale is on
+				ox := (int(ww) - ui.FRAME_W * k) / 2
+				oy := (int(wh) - ui.FRAME_H * k) / 2
+				ui.app_tap(app, (int(ev.button.x) - ox) / k, (int(ev.button.y) - oy) / k)
 			}
 		}
 		if use_save && !seed_given && app.save_dirty && SDL.GetTicks() - last_save > 1000 {
 			write_save(app, save_path)
 			last_save = SDL.GetTicks()
 		}
+		if app.quit {running = false}
 		ui.app_draw(app)
 		SDL.UpdateTexture(texture, nil, raw_data(app.fb.pixels[:]), ui.FRAME_W * 4)
 		SDL.RenderClear(renderer)
