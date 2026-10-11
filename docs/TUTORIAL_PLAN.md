@@ -145,7 +145,7 @@ the user's eye.
 5. **Saves**: adding a field to a strict decoder is fine; forgetting to reset `mode` in `app_new_game` would
    leak tutorial rules into a normal game. A test covers it.
 
-## Questions for the user (1 decided: D18, fixed hand-authored level)
+## Questions for the user (1 and 2 decided: D18 fixed level, D19 mercy rule)
 
 1. Fixed hand-authored level (recommended) or a normal random run with hints?
 2. Failure policy: cannot die (mercy rule, recommended), real death with a quick retry, or real death?

@@ -24,6 +24,7 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **D16 Next: M5 renderer and HUD**, with the native SDL2 window (D8) so feel can be judged early; no text harness.
 - **D17 Fit to window:** the itch.io page launches full screen, so the web build scales the picture to the best fit of the window (whole-number nearest-neighbour enlargement, then a smooth resize to the exact fit), not whole-number steps only.
 - **D18 Tutorial form: a fixed, hand-authored training level** built from the real content and rules (user, 2026-10-11), not a random run with hints. Plan in `docs/TUTORIAL_PLAN.md`; its other questions are still open.
+- **D19 Tutorial failure: mercy rule** (user, 2026-10-11). In the tutorial the player cannot die: a lethal blow restores health, returns the player to the room entrance, resets that room's creatures and says the real game would have ended the run. Tutorial-only (`mode == .Tutorial`); normal rules untouched.
 
 ## Findings
 
