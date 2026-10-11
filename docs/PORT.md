@@ -104,7 +104,7 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **Not verified:** real phone touch (only the pane's emulation and synthetic presses), localStorage inside the itch.io iframe (browsers may block third-party storage in some privacy modes; the code survives it and just does not save), very long games (a 200,000-command log replays in well under a second natively but not measured in wasm).
 
 ### First upload (2026-10-11)
-- On the user's instruction ("commit and push. ship a test page to itch"): branch `odin-port` pushed to `origin` (github.com/playdeezgames/hamquest), then `tools/ship.sh --push` (all 59 tests and the parity check passed first). butler pushed 877.73 KiB, 4 files, to `thegrumpygamedev/hamquest-of-splorr:html`: upload #19690398, build #2105822, version 1 (status check: processed).
+- On the user's instruction ("commit and push. ship a test page to itch"): the port branch was pushed to `origin` (github.com/playdeezgames/hamquest; it was later merged into `master` and deleted), then `tools/ship.sh --push` (all 59 tests and the parity check passed first). butler pushed 877.73 KiB, 4 files, to `thegrumpygamedev/hamquest-of-splorr:html`: upload #19690398, build #2105822, version 1 (status check: processed).
 - **Not verified:** the live page. A logged-out request for https://thegrumpygamedev.itch.io/hamquest-of-splorr says "We couldn't find your page", so it is still a draft/unpublished (or restricted) from outside. Still the user's to do on the page: set the project kind to HTML, tick "played in the browser" on the upload, set the viewport to 640x560 (or fullscreen), description, cover, screenshots, credits (Gervais CC BY 3.0, m5x7), AI-use note, then check the game in the iframe: first-key focus, saving (localStorage in an iframe), full screen.
 
 ### M8 release pass, part 1 (2026-10-11)
@@ -113,4 +113,7 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **Not done:** the description, devlog and images are drafts in the user's voice for the user to edit and paste by hand; a new build with the credits screen has not been uploaded yet (the live build is #2105822, which has no credits screen).
 
 ### Second upload (2026-10-11)
-- On the user's instruction: branch `odin-port` pushed (d867237), then `tools/ship.sh --push` (61 tests and the wasm-versus-native parity check first). butler pushed 879.26 KiB (patch 58.75 KiB) to `thegrumpygamedev/hamquest-of-splorr:html`: build #2105878 on upload #19690398 (version 2). Contains the credits screen (`C`). Processing was still running at the first status check.
+- On the user's instruction: the port branch pushed (d867237; later merged into `master` and deleted), then `tools/ship.sh --push` (61 tests and the wasm-versus-native parity check first). butler pushed 879.26 KiB (patch 58.75 KiB) to `thegrumpygamedev/hamquest-of-splorr:html`: build #2105878 on upload #19690398 (version 2). Contains the credits screen (`C`). Processing was still running at the first status check.
+
+### Merged (2026-10-11)
+- The port branch was merged into `master` (merge commit 5ad3be9, 13 commits), pushed, and the branch deleted locally and on `origin`. Work continues on `master`.
