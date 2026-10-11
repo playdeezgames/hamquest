@@ -4,7 +4,7 @@
 #   tools/ship.sh --push    also runs butler push (needs butler logged in and the itch page to exist)
 set -euo pipefail
 cd "$(dirname "$0")/.."
-TARGET="${ITCH_TARGET:-thegrumpygamedev/hamquest-of-splorr:html}"   # slug is an assumption; set ITCH_TARGET to override
+TARGET="${ITCH_TARGET:-thegrumpygamedev/hamquest-of-splorr:html}"   # page: https://thegrumpygamedev.itch.io/hamquest-of-splorr
 tools/test.sh
 rm -f build/hamquest-html5.zip
 (cd build/web && zip -q -9 -r ../hamquest-html5.zip index.html platform.js odin.js hamquest.wasm)
