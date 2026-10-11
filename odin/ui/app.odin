@@ -18,9 +18,12 @@ Key :: enum u8 {
 	Escape,
 	F2, // new game
 	Y, // invoke the amulet
-	A, // buy all (shop)
-	S, // stop tips (tutorial)
+	A, // west while playing; buy all in a shop
+	S, // south
+	W, // north
+	D, // east
 	N, // no (confirm)
+	T, // stop showing tips (while a tip is open)
 }
 
 MAX_TIPS :: 8
@@ -34,9 +37,11 @@ App :: struct {
 	tip_count:  int,
 	confirm_new: bool,
 	error:      game.Gen_Error,
+	dirty:      bool, // something changed since the last app_draw
 }
 
 app_new_game :: proc(a: ^App, seed: u64) {
+	a.dirty = true
 	a.seed = seed
 	a.error = game.new_game(&a.world, seed)
 	a.shop_sel = 0
@@ -70,13 +75,14 @@ command :: proc(a: ^App, cmd: game.Command, arg: int = 0) {
 
 // Handle one key press. Returns true if the key was used.
 app_key :: proc(a: ^App, key: Key) -> bool {
+	a.dirty = true
 	w := &a.world
 	switch {
 	case a.tip_count > 0:
 		#partial switch key {
 		case .Enter, .Escape, .Space:
 			pop_tip(a)
-		case .S:
+		case .T:
 			w.tutorial_off = true
 			// drop tips that are not always-on
 			n := 0
@@ -127,13 +133,13 @@ app_key :: proc(a: ^App, key: Key) -> bool {
 		return false
 	}
 	#partial switch key {
-	case .Up:
+	case .Up, .W:
 		command(a, .Move_North)
-	case .Right:
+	case .Right, .D:
 		command(a, .Move_East)
-	case .Down:
+	case .Down, .S:
 		command(a, .Move_South)
-	case .Left:
+	case .Left, .A:
 		command(a, .Move_West)
 	case .Space:
 		command(a, .Rest)
@@ -157,6 +163,7 @@ SHOP_W :: 360
 SHOP_H :: 344
 
 app_draw :: proc(a: ^App) {
+	a.dirty = false
 	fb := &a.fb
 	w := &a.world
 	draw_world(fb, w)
@@ -252,7 +259,7 @@ draw_tip :: proc(fb: ^Framebuffer, id: content.Message_Id, remaining: int) {
 	for i in 0 ..< n {
 		draw_text(fb, x + 16 + 64 + 16, y + 48 + i * 14, lines[i], BLACK)
 	}
-	hint := "Enter: continue" if def.always_tutorial else "Enter: continue     S: stop showing tips"
+	hint := "Enter: continue" if def.always_tutorial else "Enter: continue     T: stop showing tips"
 	draw_text_centered(fb, x + wd / 2, y + ht - 24, hint, NAVY)
 	if remaining > 1 {
 		b: Text_Buf

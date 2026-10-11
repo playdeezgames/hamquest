@@ -166,7 +166,7 @@ ui_keys_drive_the_game :: proc(t: ^testing.T) {
 	// stop tips: turns them off and survives a new game
 	a.tips[0] = .PickUpGold
 	a.tip_count = 1
-	ui.app_key(a, .S)
+	ui.app_key(a, .T)
 	testing.expect(t, w.tutorial_off)
 	ui.app_key(a, .F2)
 	ui.app_key(a, .Enter)

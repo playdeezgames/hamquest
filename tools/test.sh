@@ -21,4 +21,7 @@ echo "== native client builds and runs a few frames headless"
 mkdir -p build
 "$ODIN" build odin/platform/native -vet -out:build/hamquest
 SDL_VIDEODRIVER=dummy build/hamquest --seed 1 --frames 3 > /dev/null
+echo "== web build and wasm-versus-native parity"
+tools/build_web.sh > /dev/null
+tools/parity.sh
 echo "ALL TESTS PASSED"

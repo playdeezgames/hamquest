@@ -196,3 +196,14 @@ tb_int :: proc(b: ^Text_Buf, v: i64) {
 tb_string :: proc(b: ^Text_Buf) -> string {
 	return string(b.data[:b.n])
 }
+
+// FNV-1a over the pixel bytes (R,G,B,A order): lets the native and wasm builds be compared frame for frame.
+frame_hash :: proc(fb: ^Framebuffer) -> u64 {
+	h: u64 = 0xcbf29ce484222325
+	for p in fb.pixels {
+		for shift in ([4]uint{0, 8, 16, 24}) {
+			h = (h ~ u64((p >> shift) & 0xFF)) * 0x100000001b3
+		}
+	}
+	return h
+}

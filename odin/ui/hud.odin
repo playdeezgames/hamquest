@@ -2,6 +2,7 @@ package ui
 
 import content "../content"
 import game "../game"
+import "core:math"
 
 // Draws the whole game screen (the layout of the original MainPage.xaml, 640 by 560):
 //   map 480x480 at (0,0) | minimap 160x160, inventory 160x224, statistics 160x96 at x=480 | messages 640x80 at y=480
@@ -65,9 +66,7 @@ apply_light :: proc(fb: ^Framebuffer, w: ^game.World) {
 		for x in 0 ..< MAP_PX {
 			dx := x - cx
 			d2 := dx * dx + dy * dy
-			// integer square root (distance in pixels)
-			r := 0
-			for (r + 1) * (r + 1) <= d2 {r += 1}
+			r := int(math.sqrt(f32(d2)))
 			if r >= content.LIGHT_PROFILE_LEN {r = content.LIGHT_PROFILE_LEN - 1}
 			a := u32(profile[r])
 			if a == 0 {continue}

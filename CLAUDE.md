@@ -10,6 +10,9 @@ python3 tools/gen_content.py --check  # fail if the generated file is stale
 python3 tools/pack_atlas.py           # repack odin/content/atlas.rgba + atlas_gen.odin (needs Pillow); --check for staleness
 python3 tools/gen_font.py             # odin/ui/font_gen.odin from assets/fonts/m5x7.png
 ~/ODIN/odin build odin/platform/native -vet -out:build/hamquest && build/hamquest --seed 1   # native SDL2 client
+tools/build_web.sh                    # build/web (wasm + page); serve with python3 -m http.server 8137 -d build/web
+tools/parity.sh                       # native vs wasm frame hashes (needs build/hamquest and build/web)
+tools/ship.sh [--push]                # tests, zip build/hamquest-html5.zip, butler push only with --push
 tools/test.sh                         # stale checks, odin check -vet (native + js_wasm32), odin test; must end ALL TESTS PASSED
 ~/ODIN/odin test odin/tests -define:ODIN_TEST_THREADS=1 -define:ODIN_TEST_NAMES=tests.content_counts  # one test
 ```
@@ -20,7 +23,7 @@ Never hand-edit `odin/content/content_gen.odin`; change `tools/gen_content.py` (
 
 HamQuest is a ~2010-era C# roguelike (Silverlight 4 / WPF, .NET 4.5, Visual Studio solution-less `.csproj` files). The goal is an **Odin `js_wasm32` port** shipped as an HTML5 build on itch.io (thegrumpygamedev). The C# is the **reference implementation**: keep it intact and read-only until the port is verified, then decide what to delete.
 
-Nothing here builds on this Linux machine (WPF, Silverlight, .NET Framework 4.x, `PresentationCore`/`WindowsBase`). There are no build, lint or test commands for the C#. `dotnet` is installed but cannot target these projects as-is. The Odin port lives in `odin/`: `content` (generated tables + atlas), `game` (pure rules), `ui` (framebuffer, HUD, input, dialogs) and `platform/native` (SDL2); `platform/web` is M6.
+Nothing here builds on this Linux machine (WPF, Silverlight, .NET Framework 4.x, `PresentationCore`/`WindowsBase`). There are no build, lint or test commands for the C#. `dotnet` is installed but cannot target these projects as-is. The Odin port lives in `odin/`: `content` (generated tables + atlas), `game` (pure rules), `ui` (framebuffer, HUD, input, dialogs) and `platform/native` (SDL2); `platform/web` (wasm export glue; page in `platform/web/page`).
 
 The user's notes vault (`/home/yermom/git/bok-of-splorr/splorr`, Obsidian markdown) is an additional working directory and holds what the port needs: `Tech/Odin wasm recipe.md` (build, frame loop, input, canvas/framebuffer variants), `Tech/Shipping to itch.io.md`, `Tech/Kordanor's Cabal Odin port.md` (closest prior art: a roguelike port with a pure core, tests and a shipping script) and `Gotchas.md` (read it before writing Odin; it has wasm, RNG, JSON and test pitfalls). HamQuest is **not yet listed** in that vault's `Home.md`; per its standing rules, add a `Games/` note with frontmatter and link it from `Home.md` once the port starts.
 

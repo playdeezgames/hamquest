@@ -13,17 +13,21 @@ import ui "../../ui"
 
 keymap :: proc(sc: SDL.Scancode) -> ui.Key {
 	#partial switch sc {
-	case .UP, .W, .KP_8: return .Up
-	case .DOWN, .S, .KP_2: return .Down
+	case .UP, .KP_8: return .Up
+	case .DOWN, .KP_2: return .Down
 	case .LEFT, .KP_4: return .Left
-	case .RIGHT, .D, .KP_6: return .Right
+	case .RIGHT, .KP_6: return .Right
+	case .W: return .W
+	case .A: return .A
+	case .S: return .S
+	case .D: return .D
+	case .T: return .T
 	case .SPACE, .KP_5: return .Space
 	case .TAB: return .Tab
 	case .RETURN, .KP_ENTER: return .Enter
 	case .ESCAPE: return .Escape
 	case .F2: return .F2
 	case .Y: return .Y
-	case .A: return .A
 	case .N: return .N
 	}
 	return .None
@@ -49,6 +53,7 @@ main :: proc() {
 	scale := 2
 	max_frames := -1
 	dump := ""
+	keys := "" // comma separated ui.Key numbers: run them, print the frame hash, exit (parity with the wasm build)
 	args := os.args
 	for i := 1; i < len(args); i += 1 {
 		switch args[i] {
@@ -70,6 +75,9 @@ main :: proc() {
 		case "--dump":
 			i += 1
 			if i < len(args) {dump = args[i]}
+		case "--keys":
+			i += 1
+			if i < len(args) {keys = args[i]}
 		}
 	}
 
@@ -110,6 +118,22 @@ main :: proc() {
 		os.exit(1)
 	}
 	fmt.printf("seed %d\n", seed)
+
+	if keys != "" {
+		// scripted run: no window needed beyond what is already open
+		rest := keys
+		for len(rest) > 0 {
+			end := 0
+			for end < len(rest) && rest[end] != ',' {end += 1}
+			v, _ := strconv.parse_int(rest[:end])
+			ui.app_key(app, ui.Key(v))
+			rest = rest[min(end + 1, len(rest)):]
+		}
+		ui.app_draw(app)
+		fmt.printf("hash %016x\n", ui.frame_hash(&app.fb))
+		if dump != "" {write_ppm(dump, &app.fb)}
+		return
+	}
 
 	frames := 0
 	running := true
