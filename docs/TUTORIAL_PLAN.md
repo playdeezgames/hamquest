@@ -83,9 +83,8 @@ instead restores health, puts the player back at the room entrance, resets that 
 
 ### 5. Entry, exit and persistence
 
-- Entry: no menu exists. Smallest honest option is a **first-launch prompt** over the new game: "New to
-  HamQuest? Enter: tutorial, Esc: play". Plus `H` (and a touch button) from the game-over screen and the
-  credits/pause. A real title menu stays TODO item 5.
+- Entry (D20): a **title menu is built first** (TODO item 5); "Tutorial" is one of its entries. No first-launch
+  prompt stopgap. Whether the menu offers it prominently to new players (no `hq:tutorial` flag yet) is a menu detail.
 - Exit: the final step's dialog: Enter starts a normal game with a fresh seed; the tutorial is marked done.
 - Persistence: `hq:tutorial = done` in localStorage (native: a small file), so the prompt shows once. A
   tutorial run is saved like any run (replay), with a new top-level `"mode":"tutorial"` field; absent means the
@@ -124,6 +123,7 @@ manual gets one paragraph ("or press H"); the itch description and a devlog entr
 ## Milestones (each ends with `tools/test.sh` green and a findings entry)
 
 - **T0 Decisions** (this document; questions below).
+- **T-menu Title menu** (prerequisite, D20): see the menu plan; the tutorial plugs in as an entry.
 - **T1 Engine**: `Game_Mode`, level data, `build_tutorial`, step table and `tutorial_advance`, mercy rule,
   walkthrough bot test. Headless; no UI.
 - **T2 Coach UI**: strip, highlight regions, first-launch prompt, `H`, touch; native screenshots for review.
@@ -145,7 +145,7 @@ the user's eye.
 5. **Saves**: adding a field to a strict decoder is fine; forgetting to reset `mode` in `app_new_game` would
    leak tutorial rules into a normal game. A test covers it.
 
-## Questions for the user (1 and 2 decided: D18 fixed level, D19 mercy rule)
+## Questions for the user (decided: D18 fixed level, D19 mercy rule, D20 title menu first)
 
 1. Fixed hand-authored level (recommended) or a normal random run with hints?
 2. Failure policy: cannot die (mercy rule, recommended), real death with a quick retry, or real death?
