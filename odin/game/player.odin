@@ -22,7 +22,7 @@ msg :: proc(w: ^World, id: content.Message_Id, arg: i32 = 0) {
 	w.msg_serial += 1
 	def := &content.MESSAGES[id]
 	if def.sound != .None {push_event(w, .Sound, id)}
-	if len(def.tutorial_title) > 0 && (def.always_tutorial || (!w.tutorial_off && !w.tutorial_seen[id])) {
+	if w.mode == .Normal && len(def.tutorial_title) > 0 && (def.always_tutorial || (!w.tutorial_off && !w.tutorial_seen[id])) {
 		w.tutorial_seen[id] = true
 		push_event(w, .Tutorial, id)
 	}
@@ -66,6 +66,12 @@ player_dead :: proc(w: ^World) -> bool {
 player_attack :: proc(w: ^World) -> i32 {
 	if w.weapon == .None {return 0}
 	return item_def(w.weapon).attack_value
+}
+
+// Pieces of megaham needed to leave: all of them in a real game, a handful in the training level.
+quest_required :: proc(w: ^World) -> u32 {
+	if w.mode == .Tutorial {return TUT_QUEST_PIECES}
+	return quest_item_total()
 }
 
 quest_item_total :: proc() -> u32 {
@@ -193,6 +199,7 @@ decrement_light :: proc(w: ^World) {
 	if w.durability[ls] % u32(d.duration) == 0 {
 		msg(w, d.go_out_msg)
 		remove_items(w, ls, 1)
+		if w.mode == .Tutorial {w.tut.outages += 1}
 	}
 }
 
@@ -241,9 +248,9 @@ add_item :: proc(w: ^World, kind: content.Item_Kind, report: bool) {
 		w.inventory[content.PLAYER.currency_item] += u32(rng_int(&w.rng, span) + int(d.min_value))
 	case .Quest:
 		if say {msg(w, d.pick_up_msg)}
-		total := quest_item_total()
+		total := quest_required(w)
 		held := w.inventory[content.PLAYER.quest_item]
-		if total > held {spawn_monsters(w, 1.0 / f32(total - held))}
+		if total > held && w.mode == .Normal {spawn_monsters(w, 1.0 / f32(total - held))}
 		w.inventory[content.PLAYER.quest_item] += 1
 		if w.inventory[content.PLAYER.quest_item] == total {msg(w, content.PLAYER.quest_completed_msg)}
 	case .Chest:
@@ -362,6 +369,10 @@ take_damage :: proc(w: ^World, damage, defend_roll: i32) {
 	for _ in 0 ..< MAX_CHAIN {
 		if !player_dead(w) {return}
 		k := first_healer(w, .Save)
+		if k == .None && w.mode == .Tutorial {
+			tutorial_mercy(w)
+			return
+		}
 		if k == .None {
 			w.state = .Lose
 			msg(w, content.PLAYER.killed_msg)

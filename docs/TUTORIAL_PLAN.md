@@ -55,24 +55,29 @@ A table of steps `{id, title, text, highlight, goal}`:
 The coach text is a strip, not a modal: the player can keep playing while it is shown (a modal for every line
 would be the pop-up problem again). Enter/Esc hides it; it returns on the next step. Touch: tap the strip.
 
-### 3. Lessons (draft order, one room each)
+### 3. Lessons (as built in T1; wording is draft)
 
-| # | Room | Teaches | Goal |
-|---|---|---|---|
-| 1 | Start cell, lit | The map pane; move with arrows/WASD; the message log; light radius shown by darkness | walk to the marked spot |
-| 2 | Corridor to a chest-free nook | The minimap: your room, open sides, how to read it | enter the next room |
-| 3 | A ham on the floor | Pick up by walking; inventory grid; stats and hit points; eating is automatic when hurt | pick up the ham |
-| 4 | A dagger | Weapons auto-equip; statistics icons for attack | pick up the dagger |
-| 5 | One skeleton, alone | Bump to attack; dice; Tab = attack/defend; being hit; XP and level | kill it |
-| 6 | Same room, you are hurt | Rest with Space (refused while monsters lurk); the speed/turn idea in one sentence | rest to full |
-| 7 | Locked red door; red key two rooms back | Keys and the six colours; minimap door colours | open the door |
-| 8 | A shoppe | Shop UI: Up/Down, Enter, A; prices are real (D11); single use | buy one thing |
-| 9 | A hidden trap room + thieves' tools | Traps are hidden until adjacent; tools disarm | pass the trap |
-| 10 | A torch burning low (short) | Light is a clock; swap light sources | pick up the second torch |
-| 11 | Megaham piece + Rainbow Key + exit | The win condition, the Rainbow Key, "cannot leave without the complete Megaham" | walk onto the exit |
+Lessons are keyed to rooms. The player's room decides which lesson is shown; goals are latched; a pointer
+leads back to the first unfinished lesson. Layout in `game/tutorial_level.odin` (A to N), lessons in
+`game/tutorial.odin`.
 
-Left out on purpose: the Amulet, portal monsters, thieves, ghouls, bosses. The training level ends with a
-screen that names them ("Beware...") and offers a real game. They are the manual's and the tips' job.
+| Room | Lesson | Goal |
+|---|---|---|
+| A start | Moving: map pane, arrows/WASD | enter B |
+| B passage | The minimap | enter C |
+| C hall | Your pack (the real starting kit), then Gold (six piles, 156 or more) | any gold; 150 gold |
+| D | Fighting a skeleton (bump, dice, Tab, mercy), then Resting (Space) | one kill; one rest |
+| K | Keys: the red key | have it |
+| F | Doors: the red door (torch is made nearly spent when it opens) | enter G |
+| G | The shoppe: Up/Down, Enter, A, Esc, real prices; fixed shelf of a torch and tools | one purchase |
+| anywhere | Darkness, shown only when only the match is left | a flame again |
+| H passage | Traps: a row of five hidden traps, tools disarm | one trap tile cleared |
+| I hub | A zombie | second kill |
+| L | The megaham: two pieces | both |
+| M | The rainbow key | have it |
+| N | The exit | win |
+
+Left out on purpose: the Amulet, portal monsters, thieves, ghouls, bosses.
 
 ### 4. Failure policy
 
@@ -124,8 +129,8 @@ manual gets one paragraph ("or press H"); the itch description and a devlog entr
 
 - **T0 Decisions** (this document; questions below).
 - **T-menu Title menu** (prerequisite, D20/D21): minimal title (Continue, New Game, Tutorial, Credits, Quit on native); the tutorial plugs in as an entry.
-- **T1 Engine**: `Game_Mode`, level data, `build_tutorial`, step table and `tutorial_advance`, mercy rule,
-  walkthrough bot test. Headless; no UI.
+- **T1 Engine (done 2026-10-11)**: `Game_Mode`, level data, `build_tutorial`, room-keyed lessons and
+  `tutorial_update`, mercy rule, walkthrough test. Headless; no UI.
 - **T2 Coach UI**: strip, highlight regions, first-launch prompt, `H`, touch; native screenshots for review.
 - **T3 Persistence and web**: save `mode`, `hq:tutorial`, wasm parity, browser check.
 - **T4 Playtest and ship**: the user plays it cold, text pass, manual/itch/devlog updates; ship only on the

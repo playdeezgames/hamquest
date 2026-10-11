@@ -18,6 +18,31 @@ new_game :: proc(w: ^World, seed: u64) -> Gen_Error {
 	w.tutorial_seen = seen
 	w.tutorial_off = off
 	if err != .None {return err}
+	begin_run(w)
+	msg(w, .Welcome1)
+	msg(w, .Welcome2)
+	msg(w, .Welcome3)
+	msg(w, .Welcome4)
+	msg(w, .Welcome5)
+	w.event_count = 0
+	return .None
+}
+
+// The training level (D18): a fixed layout and a fixed starting kit; `seed` only drives the dice.
+new_tutorial :: proc(w: ^World, seed: u64) -> Gen_Error {
+	w^ = {}
+	w.seed = seed
+	rng_seed(&w.rng, seed)
+	w.mode = .Tutorial
+	if err := build_tutorial(w); err != .None {return err}
+	tutorial_kit(w)
+	begin_run(w)
+	w.event_count = 0
+	return .None
+}
+
+// Everything after the world exists: the starting kit, equipment, speed and the first pathing.
+begin_run :: proc(w: ^World) {
 	w.state = .Play
 	w.level = content.PLAYER.initial_level
 	w.xp = content.PLAYER.initial_xp
@@ -33,13 +58,6 @@ new_game :: proc(w: ^World, seed: u64) -> Gen_Error {
 	roll_speed(w)
 	update_pathing(w)
 	reveal_traps(w)
-	msg(w, .Welcome1)
-	msg(w, .Welcome2)
-	msg(w, .Welcome3)
-	msg(w, .Welcome4)
-	msg(w, .Welcome5)
-	w.event_count = 0
-	return .None
 }
 
 // ---------------------------------------------------------------- geometry helpers
@@ -204,6 +222,11 @@ free_any_tile :: proc(w: ^World, mcol, mrow: int) -> (col, row: int, ok: bool) {
 // A visit to a cell can call a wandering monster (the more visits, the likelier).
 add_visit :: proc(w: ^World, mcol, mrow: int) {
 	cell := &w.cells[mrow][mcol]
+	if w.mode == .Tutorial {
+		// no wandering monsters in the training level; a visit only marks the room as seen
+		if cell.visit_count <= 0 {cell.visit_count = 1}
+		return
+	}
 	roll := rng_range(&w.rng, 1, 5) + rng_range(&w.rng, 1, 5)
 	if roll <= int(cell.visit_count) - 1 {
 		cell.visit_count -= i32(roll)
@@ -436,6 +459,7 @@ player_move :: proc(w: ^World, dir: Direction) {
 		p.col = u8((nc + MAP_COLS) % MAP_COLS)
 		p.row = u8((nr + MAP_ROWS) % MAP_ROWS)
 		add_visit(w, tc, tr)
+		if w.mode == .Tutorial {tutorial_note_entry(w)}
 		return
 	}
 	tile := &m.tiles[nr][nc]
@@ -495,15 +519,17 @@ player_move :: proc(w: ^World, dir: Direction) {
 			msg(w, d.bump_msg)
 		} else {
 			open_shop(w, kind)
-			// the original defined no shop behaviour in the data, so a shop vanished once visited
-			tile.item = .None
-			p.col = u8(nc)
-			p.row = u8(nr)
+			if w.mode == .Normal {
+				// the original defined no shop behaviour in the data, so a shop vanished once visited
+				tile.item = .None
+				p.col = u8(nc)
+				p.row = u8(nr)
+			}
 		}
 	case .Exit:
 		move = false
 		clear_item = false
-		total := quest_item_total()
+		total := quest_required(w)
 		quest := w.inventory[content.PLAYER.quest_item]
 		switch {
 		case has_item(w, content.PLAYER.amulet_item):
@@ -551,6 +577,7 @@ attack_creature :: proc(w: ^World, ci: int) {
 			drop := content.Item_Kind(pick_weighted(&w.rng, d.item_drops))
 			w.cells[c.maze_row][c.maze_col].map_.tiles[c.row][c.col].item = drop
 			msg(w, d.kill_msg)
+			if w.mode == .Tutorial {w.tut.kills += 1}
 			if !c.summoned {add_experience(w, d.experience_points)}
 		} else {
 			msg(w, d.hit_msg)
@@ -567,6 +594,12 @@ open_shop :: proc(w: ^World, kind: content.Item_Kind) {
 	w.shop = {}
 	w.shop.active = true
 	w.shop.shop = kind
+	if w.mode == .Tutorial {
+		// a fixed shelf, and no ageing of the rooms
+		w.tut.shops += 1
+		tutorial_stock_shop(w)
+		return
+	}
 	for i in d.shop_inventory.start ..< d.shop_inventory.start + d.shop_inventory.count {
 		e := content.SHOP_POOL[i]
 		for _ in 0 ..< e.in_stock {
@@ -604,6 +637,7 @@ shop_buy :: proc(w: ^World, slot: int, all: bool) -> bool {
 	w.inventory[content.PLAYER.currency_item] -= cost
 	s.count -= n
 	for _ in 0 ..< n {add_item(w, s.item, true)}
+	if w.mode == .Tutorial {w.tut.purchases += 1}
 	return true
 }
 
@@ -611,6 +645,12 @@ shop_buy :: proc(w: ^World, slot: int, all: bool) -> bool {
 
 // Run one command. Does nothing once the game is won or lost.
 step_command :: proc(w: ^World, cmd: Command, arg: int = 0) {
+	w.tut.mercy = false
+	run_command(w, cmd, arg)
+	if w.mode == .Tutorial {tutorial_update(w)}
+}
+
+run_command :: proc(w: ^World, cmd: Command, arg: int = 0) {
 	w.event_count = 0
 	w.been_hit = false
 	for i in 0 ..< w.creature_count {w.creatures[i].been_hit = false}
@@ -663,6 +703,7 @@ rest :: proc(w: ^World) -> bool {
 		return true // the original still spent the step
 	}
 	msg(w, content.PLAYER.rest_msg)
+	if w.mode == .Tutorial {w.tut.rests += 1}
 	if w.wounds > 0 {w.wounds -= 1}
 	remaining := w.step_total - w.step_count
 	for remaining > 0 {

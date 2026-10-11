@@ -100,6 +100,29 @@ Gen_Stats :: struct {
 	fallback_scans:   int, // times the deterministic scan had to take over
 }
 
+Game_Mode :: enum u8 {
+	Normal,
+	Tutorial, // the hand-built training level (docs/TUTORIAL_PLAN.md, D18 to D20)
+}
+
+// Tutorial bookkeeping. Only touched in Tutorial mode, so a Normal world never changes because of it.
+Tutorial_State :: struct {
+	done:       [MAX_LESSONS]bool, // latched: a lesson whose goal has been met stays done
+	kills:      u32,
+	rests:      u32,
+	shops:      u32, // times a shoppe was opened
+	purchases:  u32,
+	outages:    u32, // times the light went out
+	mercies:    u32, // times the mercy rule saved the player
+	mercy:      bool, // the last command ended in mercy (the UI explains it once)
+	entry_mc:   u8, // where the player last came into a room: the mercy respawn
+	entry_mr:   u8,
+	entry_col:  u8,
+	entry_row:  u8,
+}
+
+MAX_LESSONS :: 24
+
 Play_State :: enum u8 {
 	Play,
 	Win,
@@ -165,6 +188,9 @@ World :: struct {
 	player:          Player,
 	start_inventory: [content.Item_Kind]u32,
 	stats:           Gen_Stats,
+
+	mode:            Game_Mode,
+	tut:             Tutorial_State,
 
 	// --- run state (M4)
 	state:           Play_State,
