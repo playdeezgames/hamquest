@@ -4,7 +4,7 @@
 
 HamQuest is a turn-based dungeon crawl on an eight by eight maze of rooms and passages. Every dead end is locked, every key is lying in the open somewhere else, and almost everything between you and the exit would like to eat you. Your character has five hit points, a dagger, some ham and a torch. Good luck.
 
-This is a **rebuild**: the original was a C# game for Silverlight and WPF that no browser can run any more. It has been brought back to life in Odin and WebAssembly, so it plays right here on the page.
+This is a **rebuild**: the original was a C# game written between 2007 and 2011 (WinForms first, then Silverlight) that no browser can run any more. It has been brought back to life in Odin and WebAssembly, so it plays right here on the page.
 
 ## What you do
 

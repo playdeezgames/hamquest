@@ -260,7 +260,7 @@ CREDITS_LINES := [?]string {
 	"The 2026 Odin and WebAssembly port was written",
 	"with Claude Code (Anthropic).",
 	"",
-	"Original game: C#, Silverlight and WPF.",
+	"Original game: C#, 2007 to 2011 (WinForms, then Silverlight).",
 }
 
 draw_credits :: proc(fb: ^Framebuffer) {

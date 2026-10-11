@@ -21,7 +21,7 @@ Never hand-edit `odin/content/content_gen.odin`; change `tools/gen_content.py` (
 
 ## Status: legacy C# source, being ported to Odin + wasm (itch.io web build)
 
-HamQuest is a ~2010-era C# roguelike (Silverlight 4 / WPF, .NET 4.5, Visual Studio solution-less `.csproj` files). The goal is an **Odin `js_wasm32` port** shipped as an HTML5 build on itch.io (thegrumpygamedev). The C# is the **reference implementation**: keep it intact and read-only until the port is verified, then decide what to delete.
+HamQuest is a C# roguelike the user wrote between 2007 and 2011: first a WinForms app, then a Silverlight port (the client that carries the canonical data), then an attempted WPF port that was abandoned (.NET 4.5, solution-less `.csproj` files). The goal is an **Odin `js_wasm32` port** shipped as an HTML5 build on itch.io (thegrumpygamedev). The C# is the **reference implementation**: keep it intact and read-only until the port is verified, then decide what to delete.
 
 Nothing here builds on this Linux machine (WPF, Silverlight, .NET Framework 4.x, `PresentationCore`/`WindowsBase`). There are no build, lint or test commands for the C#. `dotnet` is installed but cannot target these projects as-is. The Odin port lives in `odin/`: `content` (generated tables + atlas), `game` (pure rules), `ui` (framebuffer, HUD, input, dialogs) and `platform/native` (SDL2); `platform/web` (wasm export glue; page in `platform/web/page`).
 
@@ -37,7 +37,7 @@ Eight project directories, no solution file. Most are duplicated, so **do not as
 | `HamQuestEngineSL/` | Silverlight copy of the engine. Same classes, different usings/regions, and **drifted** (lacks `ShopBehaviors.cs`; most files differ textually even ignoring line endings). Treat `HamQuestEngine/` as canonical unless a diff shows otherwise. |
 | `PDGBoardGames/`, `PDGBoardGamesSL/` | Generic board/maze library the engine builds on (`Board<T>`, `MazeBase`, `CQMFile`, `WeightedGenerator<T>`, `CountedCollection<T>`, `IRandomNumberGenerator`). SL copy is flattened into one directory. |
 | `PDBBoardGames.Tests/` | The only tests: `CountedCollection` and `RandomNumberGenerator` (note the `PDB` typo). Nothing tests the game. |
-| `HamQuestWpfClient/` | WPF UI client. `MainPage.xaml.cs` (845 lines) is the entire UI/game loop. |
+| `HamQuestWpfClient/` | The attempted WPF port, abandoned. A copy of the Silverlight client; `MainPage.xaml.cs` (845 lines) is the entire UI/game loop. |
 | `HamQuestSLClient/` | Silverlight UI client, near-identical to the WPF one. Holds the **canonical data**: `config/*.xml`, `maps/*.cqm`, `images/`, `sounds/`. The WPF client has its own copy of the same assets. |
 
 `bin/`, `obj/`, `*.deploy`, `.pfx`, `.csproj.user` are committed build output (about 1,000 of the 1,650 tracked files). Ignore them; never treat `bin/Debug/...` copies as source.

@@ -1,5 +1,7 @@
 # HamQuest port record
 
+The original was written by the user between 2007 and 2011 (a WinForms app, then a Silverlight port, then an attempted WPF port that was abandoned); this port is from October 2026.
+
 Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: `PORT_PLAN.md`. Rules: `game-reference.md`.
 
 ## Decisions

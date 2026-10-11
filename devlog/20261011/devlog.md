@@ -2,7 +2,7 @@
 
 *October 11, 2026*
 
-HamQuest was a C# game, written for Silverlight and WPF. Silverlight is gone and the WPF build only ever ran on a Windows machine, so for years the game has just sat in a repository where nobody could play it. This week I rebuilt it in Odin, compiled to WebAssembly, and it now runs on this page.
+HamQuest was a C# game I wrote between 2007 and 2011: a WinForms app first, then a Silverlight version, then a WPF port that I abandoned. Silverlight is gone and the rest only ever ran on a Windows machine, so for years the game has just sat in a repository where nobody could play it. This week I rebuilt it in Odin, compiled to WebAssembly, and it now runs on this page.
 
 ![A monster fight in the dark](02-fight.png)
 
