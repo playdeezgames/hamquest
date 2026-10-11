@@ -123,7 +123,7 @@ manual gets one paragraph ("or press H"); the itch description and a devlog entr
 ## Milestones (each ends with `tools/test.sh` green and a findings entry)
 
 - **T0 Decisions** (this document; questions below).
-- **T-menu Title menu** (prerequisite, D20): see the menu plan; the tutorial plugs in as an entry.
+- **T-menu Title menu** (prerequisite, D20/D21): minimal title (Continue, New Game, Tutorial, Credits, Quit on native); the tutorial plugs in as an entry.
 - **T1 Engine**: `Game_Mode`, level data, `build_tutorial`, step table and `tutorial_advance`, mercy rule,
   walkthrough bot test. Headless; no UI.
 - **T2 Coach UI**: strip, highlight regions, first-launch prompt, `H`, touch; native screenshots for review.

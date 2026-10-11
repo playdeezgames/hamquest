@@ -26,6 +26,7 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **D18 Tutorial form: a fixed, hand-authored training level** built from the real content and rules (user, 2026-10-11), not a random run with hints. Plan in `docs/TUTORIAL_PLAN.md`; its other questions are still open.
 - **D19 Tutorial failure: mercy rule** (user, 2026-10-11). In the tutorial the player cannot die: a lethal blow restores health, returns the player to the room entrance, resets that room's creatures and says the real game would have ended the run. Tutorial-only (`mode == .Tutorial`); normal rules untouched.
 - **D20 Title menu comes first** (user, 2026-10-11): the tutorial is entered from a title menu, so the menu (TODO item 5) is built before the tutorial. No first-launch prompt stopgap. Scope of the menu is open.
+- **D21 Menu scope: minimal** (user, 2026-10-11). Title screen with Continue (only when a valid save exists), New Game, Tutorial (disabled until built), Credits, and Quit on native. Keyboard, touch and mouse. No pause menu, options or rebinding yet (TODO item 5 stays open for those). Boot goes to the title instead of straight into the saved game; Continue loads it.
 
 ## Findings
 
