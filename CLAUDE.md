@@ -94,6 +94,8 @@ Follow the shape that worked for Kordanor's Cabal (see vault note):
 
 - **D11-D13 (see `docs/PORT.md`):** shops charge the displayed price (original bug: free); blocked moves still cost a step; first-time tutorial pop-ups kept with a persistent "stop tutorial".
 
+- **D14-D16 (see `docs/PORT.md`):** the original's lethality is confirmed, so M4 rules stand and difficulty stays as the original for v1; next is M5 (renderer/HUD, native SDL2 window first).
+
 ## Still open
 
 - Tile art author/licence; sample provenance (needed before sound returns).

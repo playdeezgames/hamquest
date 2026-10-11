@@ -17,6 +17,9 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **D11 Shop prices: charge the displayed price.** Fixes the `uint`-from-`int` bug (original charged 0). Prices in the data run 25 to 1,000; treasure and stock may be retuned under D7.
 - **D12 Blocked moves cost a step: keep.** Any arrow key counts as a step, as in the original; Space remains the deliberate pass.
 - **D13 Tutorials: keep first-time pop-ups with a persistent "stop tutorial"** (remembered in localStorage and the save). `always-tutorial` messages still show. No separate help screen in v1.
+- **D14 Lethality confirmed from the user's play memory:** a new character in the original was this brutal. The port's M4 rules are therefore right as they are; the bot's early deaths are not a porting bug.
+- **D15 Difficulty: keep the original** (no Easy option, no softened opening) for v1. Revisit only if playtesting shows it is unplayable cold; tutorial pop-ups carry the guidance.
+- **D16 Next: M5 renderer and HUD**, with the native SDL2 window (D8) so feel can be judged early; no text harness.
 
 ## Findings
 
