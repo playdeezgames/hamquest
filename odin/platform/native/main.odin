@@ -53,6 +53,9 @@ main :: proc() {
 	scale := 2
 	max_frames := -1
 	dump := ""
+	save_path := "hamquest.save"
+	use_save := true
+	seed_given := false
 	keys := "" // comma separated ui.Key numbers: run them, print the frame hash, exit (parity with the wasm build)
 	args := os.args
 	for i := 1; i < len(args); i += 1 {
@@ -62,7 +65,13 @@ main :: proc() {
 			if i < len(args) {
 				v, _ := strconv.parse_u64(args[i])
 				seed = v
+				seed_given = true
 			}
+		case "--save-file":
+			i += 1
+			if i < len(args) {save_path = args[i]}
+		case "--no-save":
+			use_save = false
 		case "--scale":
 			i += 1
 			if i < len(args) {
@@ -113,11 +122,21 @@ main :: proc() {
 
 	app := new(ui.App)
 	ui.app_new_game(app, seed)
+	// resume the saved game unless a seed was asked for (a seed means "this exact world", and scripted runs)
+	if use_save && !seed_given && keys == "" {
+		if data, err := os.read_entire_file_from_path(save_path, context.allocator); err == nil {
+			if len(data) > 0 && len(data) <= ui.IO_SIZE {
+				copy(app.io[:], data)
+				res := ui.save_decode(app, string(app.io[:len(data)]))
+				fmt.printf("save file: %v\n", res)
+			}
+			delete(data)
+		}
+	}
 	if app.error != .None {
 		fmt.eprintln("world generation failed:", app.error)
 		os.exit(1)
 	}
-	fmt.printf("seed %d\n", seed)
 
 	if keys != "" {
 		// scripted run: no window needed beyond what is already open
@@ -135,7 +154,10 @@ main :: proc() {
 		return
 	}
 
+	fmt.printf("seed %d\n", app.seed)
+
 	frames := 0
+	last_save: u32
 	running := true
 	for running {
 		ev: SDL.Event
@@ -148,6 +170,10 @@ main :: proc() {
 				if k != .None {ui.app_key(app, k)}
 			}
 		}
+		if use_save && !seed_given && app.save_dirty && SDL.GetTicks() - last_save > 1000 {
+			write_save(app, save_path)
+			last_save = SDL.GetTicks()
+		}
 		ui.app_draw(app)
 		SDL.UpdateTexture(texture, nil, raw_data(app.fb.pixels[:]), ui.FRAME_W * 4)
 		SDL.RenderClear(renderer)
@@ -157,5 +183,14 @@ main :: proc() {
 		if max_frames >= 0 && frames >= max_frames {running = false}
 		if max_frames < 0 {SDL.Delay(16)}
 	}
+	if use_save && !seed_given && keys == "" {write_save(app, save_path)}
 	if dump != "" {write_ppm(dump, &app.fb)}
+}
+
+// Write the replay save (or the empty marker for a finished game) next to the executable's working directory.
+write_save :: proc(app: ^ui.App, path: string) {
+	text := ui.save_encode(app)
+	if os.write_entire_file(path, transmute([]u8)text) == nil {
+		app.save_dirty = false
+	}
 }

@@ -13,3 +13,4 @@ odin/out/
 .vs/
 __pycache__/
 *.pfx
+*.save

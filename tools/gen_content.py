@@ -13,6 +13,7 @@ import os
 import re
 import sys
 import json
+import hashlib
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -1023,7 +1024,10 @@ def emit(gen, items, creatures, player, messages, terrains, groups):
                 w('\t\t{%s},' % ', '.join(str(v) for v in r))
             w('\t},')
         w('}')
-    return '\n'.join(L) + '\n'
+    body = '\n'.join(L) + '\n'
+    digest = hashlib.sha256(body.encode('utf-8')).hexdigest()[:16]
+    # CONTENT_HASH identifies the rules data (saves are only valid for the data they were made with)
+    return body.replace('package content\n', 'package content\n\nCONTENT_HASH :: u64(0x%s)\n' % digest, 1)
 
 
 def main():

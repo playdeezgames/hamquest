@@ -42,10 +42,13 @@ rng_u64 :: proc(r: ^Rng) -> u64 {
 rng_below :: proc(r: ^Rng, n: u64) -> u64 {
 	if n == 0 {return 0}
 	threshold := (0 - n) % n
-	for {
-		x := rng_u64(r)
+	x: u64
+	// rejection sampling; bounded so a broken (all-zero) generator state cannot hang the game
+	for _ in 0 ..< 64 {
+		x = rng_u64(r)
 		if x >= threshold {return x % n}
 	}
+	return x % n
 }
 
 // Uniform integer in [0, n).

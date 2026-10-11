@@ -27,6 +27,8 @@ Key :: enum u8 {
 }
 
 MAX_TIPS :: 8
+MAX_LOG :: 200_000
+IO_SIZE :: MAX_LOG + 1024
 
 App :: struct {
 	world:      game.World,
@@ -38,10 +40,20 @@ App :: struct {
 	confirm_new: bool,
 	error:      game.Gen_Error,
 	dirty:      bool, // something changed since the last app_draw
+
+	// Saving replays the game from its seed (see save.odin): every command that took effect is logged.
+	log:         [MAX_LOG]u8,
+	log_len:     int,
+	log_full:    bool, // the log overflowed: the game can no longer be saved
+	save_dirty:  bool, // the save text is out of date
+	io:          [IO_SIZE]u8, // save text out / load text in (shared with the page)
 }
 
 app_new_game :: proc(a: ^App, seed: u64) {
 	a.dirty = true
+	a.save_dirty = true
+	a.log_len = 0
+	a.log_full = false
 	a.seed = seed
 	a.error = game.new_game(&a.world, seed)
 	a.shop_sel = 0
@@ -68,9 +80,48 @@ pop_tip :: proc(a: ^App) {
 }
 
 command :: proc(a: ^App, cmd: game.Command, arg: int = 0) {
+	if a.world.state == .Play {record(a, cmd, arg)}
 	game.step_command(&a.world, cmd, arg)
 	collect_events(a)
 	if !a.world.shop.active {a.shop_sel = 0}
+}
+
+// Append the command to the replay log as one character (shop commands: letter + slot digit).
+record :: proc(a: ^App, cmd: game.Command, arg: int) {
+	ch: u8
+	two := false
+	#partial switch cmd {
+	case .Move_North: ch = 'n'
+	case .Move_East: ch = 'e'
+	case .Move_South: ch = 's'
+	case .Move_West: ch = 'w'
+	case .Rest: ch = 'r'
+	case .Use_Amulet: ch = 'y'
+	case .Toggle_Config: ch = 't'
+	case .Shop_Close: ch = 'x'
+	case .Shop_Buy_One:
+		ch = 'b'
+		two = true
+	case .Shop_Buy_All:
+		ch = 'B'
+		two = true
+	case:
+		return
+	}
+	need := 2 if two else 1
+	if a.log_full || a.log_len + need > MAX_LOG {
+		a.log_full = true
+		return
+	}
+	a.log[a.log_len] = ch
+	a.log_len += 1
+	if two {
+		slot := arg
+		if slot < 0 || slot > 7 {slot = 0}
+		a.log[a.log_len] = u8('0' + slot)
+		a.log_len += 1
+	}
+	a.save_dirty = true
 }
 
 // Handle one key press. Returns true if the key was used.
@@ -266,5 +317,68 @@ draw_tip :: proc(fb: ^Framebuffer, id: content.Message_Id, remaining: int) {
 		tb_int(&b, i64(remaining - 1))
 		tb_str(&b, " more")
 		draw_text(fb, x + wd - 8 - text_width(tb_string(&b)), y + 11, tb_string(&b), WHITE)
+	}
+}
+
+// ---------------------------------------------------------------- touch and mouse
+
+// A tap at a point of the 640 by 560 picture. Mirrors what the keys do.
+app_tap :: proc(a: ^App, x, y: int) {
+	a.dirty = true
+	w := &a.world
+	switch {
+	case a.tip_count > 0:
+		pop_tip(a)
+		return
+	case a.confirm_new:
+		if x >= 140 && x < 500 && y >= 220 && y < 300 {
+			app_new_game(a, a.seed + 1)
+		} else {
+			a.confirm_new = false
+		}
+		return
+	case w.shop.active:
+		lx, ly := SHOP_X + 8, SHOP_Y + 40
+		switch {
+		case x >= lx && x < lx + 344 && y >= ly && y < ly + 160:
+			row := (y - ly - 2) / 16
+			if row >= 0 && row < w.shop.count {
+				if row == a.shop_sel {
+					command(a, .Shop_Buy_One, row)
+				} else {
+					a.shop_sel = row
+				}
+			}
+		case x >= lx && x < lx + 344 && y >= SHOP_Y + 240 && y < SHOP_Y + 264:
+			command(a, .Shop_Buy_One, a.shop_sel)
+		case x >= lx && x < lx + 344 && y >= SHOP_Y + 272 && y < SHOP_Y + 296:
+			command(a, .Shop_Buy_All, a.shop_sel)
+		case x >= lx && x < lx + 344 && y >= SHOP_Y + 304 && y < SHOP_Y + 328:
+			command(a, .Shop_Close)
+		}
+		return
+	case w.state != .Play:
+		app_new_game(a, a.seed + 1)
+		return
+	}
+	if x < MAP_PX && y < MAP_PX {
+		// toward the tap, one step; on the player's own tile: rest
+		px := int(w.player.col) * TILE + TILE / 2
+		py := int(w.player.row) * TILE + TILE / 2
+		dx, dy := x - px, y - py
+		switch {
+		case abs(dx) < TILE / 2 && abs(dy) < TILE / 2:
+			command(a, .Rest)
+		case abs(dx) >= abs(dy):
+			command(a, .Move_East if dx > 0 else .Move_West)
+		case:
+			command(a, .Move_South if dy > 0 else .Move_North)
+		}
+		return
+	}
+	// the attack and defend icons under the statistics
+	if y >= STAT_Y + 64 && y < STAT_Y + 96 {
+		if x >= PANEL_X && x < PANEL_X + 32 && w.config != .Attack {command(a, .Toggle_Config)}
+		if x >= PANEL_X + 32 && x < PANEL_X + 64 && w.config != .Defend {command(a, .Toggle_Config)}
 	}
 }

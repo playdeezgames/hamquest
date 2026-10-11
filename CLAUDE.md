@@ -75,7 +75,7 @@ Each of these is a decision to take with the user before "fixing" it; the Odin p
 11. **Random numbers**: `System.Random` via `IRandomNumberGenerator` (`Next(max)`, `Next(min,max)`). Not reproducible across platforms, so exact seed parity with the C# build is impossible; plan on an Odin-side seedable generator (the vault's xoshiro256**) and statistical/rule-level equivalence tests instead.
 12. **No save/load, no persistence** in the original: a game is a single session. Adding saves is new scope (use a namespaced `localStorage` key; itch.io games share one origin).
 13. **No automated game tests exist.** The only way to check behaviour is to play the WPF build on Windows. Any equivalence testing must be written fresh.
-14. **Assets**: 32x32 PNG tiles in per-folder files (555 PNGs, duplicated between clients), 3 sound samples (`.wav`/`.mp3`) of unknown licence (filenames carry freesound-style IDs and author names: `j1987`, `wildweasel`, `CGEffex`), and an unknown tile-art author. **Check provenance/licensing before shipping** (LICENSE in repo covers code only).
+14. **Assets**: 32x32 PNG tiles in per-folder files (555 PNGs, duplicated between clients), 3 sound samples (`.wav`/`.mp3`) of unknown licence (filenames carry freesound-style IDs and author names: `j1987`, `wildweasel`, `CGEffex`; unused in v1). **Tile art provenance is settled (user, 2026-10-11):** David Gervais's 32x32 Angband tiles (CC BY 3.0, needs credit and a licence link) plus the user's own doors and walls; see `assets/CREDITS.md`. The samples still need provenance before sound returns.
 
 Port documents (read these before touching port code): `docs/PORT_PLAN.md` (plan and milestones), `docs/game-reference.md` (rules extracted from the C#, with **[CHECK]**/**[BUG?]** markers), `docs/PORT.md` (decision and findings log; add an entry per milestone). Extra quirks found while writing the reference: the maze is a spanning tree (locks only on leaves, keys only on non-leaves, so key order is solvable by construction); shop purchases are free because the price is read as `uint` from an `int` and the exception is swallowed; a blocked move still advances the step tracker; `SpawnMonsters` can spin forever.
 
@@ -98,11 +98,12 @@ Follow the shape that worked for Kordanor's Cabal (see vault note):
 - **D5-D10 (see `docs/PORT.md`):** framebuffer + packed atlas rendering; fixed 8x8 maze; tune balance while implementing; native SDL2 client in addition to wasm; title "HamQuest of SPLORR!!"; vault note now; 640x560 landscape.
 - **D4 Release scope beyond a straight port:** save and resume (namespaced `localStorage` key, validated JSON), touch/phone controls, and `?seed=N` for reproducible runs.
 
+- **D17 (see `docs/PORT.md`):** the web build fits the window (itch.io launches it full screen).
 - **D11-D13 (see `docs/PORT.md`):** shops charge the displayed price (original bug: free); blocked moves still cost a step; first-time tutorial pop-ups kept with a persistent "stop tutorial".
 
 - **D14-D16 (see `docs/PORT.md`):** the original's lethality is confirmed, so M4 rules stand and difficulty stays as the original for v1; next is M5 (renderer/HUD, native SDL2 window first).
 
 ## Still open
 
-- Tile art author/licence; sample provenance (needed before sound returns).
+- Sound sample provenance (needed before sound returns). Tile art is settled: Gervais CC BY 3.0 + the user's own, credited in `assets/CREDITS.md` and to be shown in the game's About/itch page.
 - Remaining **[CHECK]** items in `docs/game-reference.md` (rainbow/"all" key behaviour).

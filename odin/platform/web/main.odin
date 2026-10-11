@@ -59,6 +59,50 @@ platform_height :: proc "c" () -> i32 {
 	return ui.FRAME_H
 }
 
+// The shared text buffer (save text out, load text in), IO_SIZE bytes.
+@(export)
+platform_io_ptr :: proc "c" () -> rawptr {
+	return &app.io[0]
+}
+
+@(export)
+platform_io_size :: proc "c" () -> i32 {
+	return i32(ui.IO_SIZE)
+}
+
+// Has the game changed since the page last stored it?
+@(export)
+platform_save_dirty :: proc "c" () -> i32 {
+	return 1 if app.save_dirty else 0
+}
+
+// Write the save text into the shared buffer; returns its length.
+@(export)
+platform_save_encode :: proc "c" () -> i32 {
+	context = ctx
+	return i32(len(ui.save_encode(&app)))
+}
+
+@(export)
+platform_save_ack :: proc "c" () {
+	app.save_dirty = false
+}
+
+// Restore from `n` bytes the page put in the shared buffer: 0 restored, 1 empty save, 2 invalid, 3 other rules.
+@(export)
+platform_load :: proc "c" (n: i32) -> i32 {
+	context = ctx
+	if n <= 0 || int(n) > ui.IO_SIZE {return 2}
+	return i32(ui.save_decode(&app, string(app.io[:n])))
+}
+
+// A tap or click at a point of the 640 by 560 picture.
+@(export)
+platform_tap :: proc "c" (x, y: i32) {
+	context = ctx
+	ui.app_tap(&app, int(x), int(y))
+}
+
 // The game state: 0 playing, 1 won, 2 lost.
 @(export)
 platform_state :: proc "c" () -> i32 {
