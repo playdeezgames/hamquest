@@ -17,6 +17,7 @@ import json
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import hqxml  # noqa: E402
+import atlas_layout  # noqa: E402
 
 ROOT = os.path.dirname(HERE)
 SRC = os.path.join(ROOT, 'HamQuestSLClient')       # canonical data (see CLAUDE.md)
@@ -342,7 +343,9 @@ def load_cqm():
 class Gen:
     def __init__(self):
         self.pools = Pools()
-        self.images = {}          # path -> True (ordered)
+        self.images = {}          # path -> True (ordered): images the config refers to
+        self.lights = {}          # light radius masks (not atlas sprites)
+        self.all_images = set(atlas_layout.list_images())
         self.items, self.creatures = load_all()
         self.messages = load_messages()
         for mid, text in EXTRA_MESSAGES.items():
@@ -382,6 +385,10 @@ class Gen:
         full = os.path.join(SRC, path)
         if not os.path.isfile(full):
             err('image not found: %s' % path)
+        if path.startswith('images/lights/'):
+            self.lights.setdefault(path, True)
+        elif path not in self.all_images:
+            err('image not in the atlas list: %s' % path)
         self.images.setdefault(path, True)
         return path
 
@@ -717,12 +724,14 @@ def emit(gen, items, creatures, player, messages, terrains, groups):
         return '.None' if v is None else '.' + msg_enum[v]
 
     img_names = {}
-    for path in gen.images:
+    all_paths = atlas_layout.list_images()
+    for path in all_paths + list(gen.lights):
         stem = re.sub(r'^images/', '', path)
         stem = re.sub(r'\.png$', '', stem)
         img_names[path] = pascal(stem)
     if len(set(img_names.values())) != len(img_names):
         err('image enum names collide')
+    light_paths = sorted(gen.lights)
 
     # weight pools: resolve to ints
     def weights_int(entries):
@@ -777,7 +786,8 @@ def emit(gen, items, creatures, player, messages, terrains, groups):
     enum_block('Creature_Kind', [creature_enum[i] for i in gen.creature_ids], 'u8')
     enum_block('Message_Id', [msg_enum[i] for i in gen.message_ids], 'u8')
     enum_block('Generator_Id', [gen_names[n] for n in gen.gen_ids], 'u8')
-    enum_block('Image_Id', [img_names[p] for p in gen.images], 'u16')
+    enum_block('Image_Id', [img_names[p] for p in all_paths], 'u16')
+    enum_block('Light_Radius', [img_names[p] for p in light_paths], 'u8')
     for name in ('Item_Type', 'Placement', 'Armor_Type', 'Healing_Type', 'Special_Attack', 'Mover',
                  'Bump_Handler', 'Text_Color', 'Sound_Effect', 'Player_Config'):
         enum_block(name, [pascal(v) for v in gen.enums.get(name, [])])
@@ -796,7 +806,7 @@ def emit(gen, items, creatures, player, messages, terrains, groups):
     # ---- tables
     w('IMAGE_PATHS := [Image_Id]string{')
     w('\t.None = "",')
-    for p in gen.images:
+    for p in all_paths:
         w('\t.%s = %s,' % (img_names[p], odin_str(p)))
     w('}')
     w('')
@@ -841,7 +851,7 @@ def emit(gen, items, creatures, player, messages, terrains, groups):
             msg_ref(d['pick_up_msg']), msg_ref(d['bump_msg']), msg_ref(d['use_msg']), msg_ref(d['broken_msg'])))
         w('\t\tgo_out_msg = %s, disarm_msg = %s, killed_by_msg = %s, item_block_msg = %s,' % (
             msg_ref(d['go_out_msg']), msg_ref(d['disarm_msg']), msg_ref(d['killed_by_msg']), msg_ref(d['item_block_msg'])))
-        w('\t\tattack_value = %d, durability = %d, duration = %d, light_level = %d, light_radius_image = %s,' % (
+        w('\t\tattack_value = %d, durability = %d, duration = %d, light_level = %d, light_radius = %s,' % (
             d['attack_value'], d['durability'], d['duration'], d['light_level'],
             '.None' if not d['light_radius_image'] else '.' + img_names[d['light_radius_image']]))
         w('\t\ttwo_handed = %s, armor_type = %s, defend_gen = %s, speed_multiplier = %s,' % (
@@ -1051,7 +1061,7 @@ def main():
         f.write(text)
     print('wrote %s: %d items, %d creatures, %d messages, %d terrains, %d generators, %d images, %d tags, %d weights' % (
         os.path.relpath(path, ROOT), len(items), len(creatures), len(messages), len(terrains), len(gen.gen_ids),
-        len(gen.images), len(gen.tags), len(gen.pools.weights)))
+        len(gen.images) + len(gen.lights), len(gen.tags), len(gen.pools.weights)))
     for k, (old, new, why) in DATA_FIXES.items():
         print('data fix %s: %r -> %r (%s)' % ('/'.join(k), old, new, why))
     return 0

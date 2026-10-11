@@ -27,6 +27,10 @@ Shop_Entry :: struct {
 	die:      i32,
 }
 
+Rect :: struct {
+	x, y, w, h: u16,
+}
+
 Map_Layer :: [MAP_ROWS][MAP_COLS]u8 // [row][column]; 255 is transparent in overlay layers
 
 Item_Def :: struct {
@@ -54,7 +58,7 @@ Item_Def :: struct {
 	durability:         i32,
 	duration:           i32,
 	light_level:        i32,
-	light_radius_image: Image_Id,
+	light_radius:       Light_Radius,
 	two_handed:         bool,
 	armor_type:         Armor_Type,
 	defend_gen:         Generator_Id,

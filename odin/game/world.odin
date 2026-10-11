@@ -77,6 +77,7 @@ Creature :: struct {
 	alive:     bool,
 	summoned:  bool,
 	fresh:     bool, // arrived this turn: does not act until the next one
+	been_hit:  bool, // struck by the player this command (the UI shows a splat until the next one)
 }
 
 Player :: struct {

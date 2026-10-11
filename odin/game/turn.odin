@@ -11,7 +11,12 @@ CREATURE_STEPS_PER_TURN_CAP :: 64
 // ---------------------------------------------------------------- new game
 
 new_game :: proc(w: ^World, seed: u64) -> Gen_Error {
+	// tips already seen, and whether the player turned them off, survive a new game (as in the original)
+	seen := w.tutorial_seen
+	off := w.tutorial_off
 	err := generate(w, seed)
+	w.tutorial_seen = seen
+	w.tutorial_off = off
 	if err != .None {return err}
 	w.state = .Play
 	w.level = content.PLAYER.initial_level
@@ -540,6 +545,7 @@ attack_creature :: proc(w: ^World, ci: int) {
 	damage := roll_attack(w, player_attack(w), content.CREATURES[.Player].attack_die) - roll_creature_defend(w, c.kind)
 	if damage > 0 {
 		c.wounds += damage
+		c.been_hit = true
 		check_weapon_breakage(w, damage)
 		if creature_dead(c) {
 			drop := content.Item_Kind(pick_weighted(&w.rng, d.item_drops))
@@ -606,6 +612,8 @@ shop_buy :: proc(w: ^World, slot: int, all: bool) -> bool {
 // Run one command. Does nothing once the game is won or lost.
 step_command :: proc(w: ^World, cmd: Command, arg: int = 0) {
 	w.event_count = 0
+	w.been_hit = false
+	for i in 0 ..< w.creature_count {w.creatures[i].been_hit = false}
 	if w.state != .Play {return}
 	if w.shop.active {
 		#partial switch cmd {
