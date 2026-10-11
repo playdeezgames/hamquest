@@ -216,18 +216,18 @@ tutorial_lessons_follow_the_player :: proc(t: ^testing.T) {
 	w := new_tut(t, 3)
 	defer free(w)
 	cur := game.tutorial_current(w)
-	testing.expect_value(t, game.TUT_LESSONS[cur.lesson].title, "Moving")
+	testing.expect_value(t, cur.lesson, 0)
 	// walk into B by hand: eight steps east from (3,7) reaches the doorway and beyond
 	for _ in 0 ..< 14 {game.step_command(w, .Move_East)}
 	testing.expect_value(t, int(w.player.maze_col), 1)
 	cur = game.tutorial_current(w)
-	testing.expect_value(t, game.TUT_LESSONS[cur.lesson].title, "The minimap")
+	testing.expect_value(t, cur.lesson, 1)
 	testing.expect(t, cur.here)
 	// go back: the first lesson is done, so the pointer is the next unfinished one, here or not
 	for _ in 0 ..< 15 {game.step_command(w, .Move_West)}
 	testing.expect_value(t, int(w.player.maze_col), 0)
 	cur = game.tutorial_current(w)
-	testing.expect_value(t, game.TUT_LESSONS[cur.lesson].title, "The minimap")
+	testing.expect_value(t, cur.lesson, 1)
 	testing.expect(t, !cur.here)
 	dir, ok := game.tutorial_direction(w, int(game.TUT_LESSONS[cur.lesson].col), int(game.TUT_LESSONS[cur.lesson].row))
 	testing.expect(t, ok)
