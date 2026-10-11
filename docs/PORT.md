@@ -119,3 +119,6 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 
 ### Merged (2026-10-11)
 - The port branch was merged into `master` (merge commit 5ad3be9, 13 commits), pushed, and the branch deleted locally and on `origin`. Work continues on `master`.
+
+### Third upload (2026-10-11)
+- On the user's instruction ("push and ship the build"): `master` pushed (c0db022), then `tools/ship.sh --push` (all tests and the parity check first). butler pushed 879.29 KiB (patch 54.25 KiB) to `thegrumpygamedev/hamquest-of-splorr:html`: build #2105958 on upload #19690398 (version 3). The only change since #2105878 is the original-game dates in the credits screen.
