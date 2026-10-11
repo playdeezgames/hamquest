@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>HamQuest of SPLORR!!</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #101010; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; -webkit-user-select: none; user-select: none; }
+  /* the canvas holds a whole-number enlargement of the picture; the browser resizes that smoothly to the exact fit */
+  canvas { outline: none; touch-action: none; background: #fff; }
+  #msg { position: fixed; left: 0; right: 0; top: 40%; text-align: center; color: #ddd; font: 16px monospace; }
+  .touch { position: fixed; top: 0; bottom: 0; display: none; flex-direction: column; justify-content: center; gap: 2vmin; padding: 0 1vmin; }
+  .touch.on { display: flex; }
+  #pad { left: 0; } #acts { right: 0; }
+  .touch button { font: bold 3.2vmin monospace; width: 13vmin; min-width: 56px; height: 11vmin; min-height: 48px; border-radius: 10px;
+    border: 2px solid #666; background: #2a2a2a; color: #eee; touch-action: none; }
+  .touch button:active { background: #555; }
+  .row { display: flex; gap: 2vmin; justify-content: center; }
+</style>
+</head>
+<body>
+<canvas id="screen" width="640" height="560" tabindex="0"></canvas>
+<div id="msg">loading...</div>
+<div id="pad" class="touch">
+  <div class="row"><button data-key="Up">&#9650;</button></div>
+  <div class="row"><button data-key="Left">&#9664;</button><button data-key="Right">&#9654;</button></div>
+  <div class="row"><button data-key="Down">&#9660;</button></div>
+  <div class="row"><button data-key="Space">Rest</button></div>
+</div>
+<div id="acts" class="touch">
+  <div class="row"><button data-key="Enter">OK</button></div>
+  <div class="row"><button data-key="Escape">Esc</button></div>
+  <div class="row"><button data-key="Tab">Mode</button></div>
+  <div class="row"><button data-key="Y">Amulet</button></div>
+  <div class="row"><button data-key="F2">New</button></div>
+  <div class="row"><button data-key="C">Credits</button></div>
+</div>
+<script src="odin.js"></script>
+<script src="platform.js"></script>
+</body>
+</html>

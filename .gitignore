@@ -1,0 +1,16 @@
+# build output
+build/
+odin/out/
+*.wasm
+/odin/*/odin
+*.bin
+# legacy C# build output (still tracked until cleaned up)
+**/bin/
+**/obj/
+**/Bin/
+*.user
+*.suo
+.vs/
+__pycache__/
+*.pfx
+*.save
