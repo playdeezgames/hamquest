@@ -24,6 +24,7 @@ Key :: enum u8 {
 	D, // east
 	N, // no (confirm)
 	T, // stop showing tips (while a tip is open)
+	C, // credits
 }
 
 MAX_TIPS :: 8
@@ -38,6 +39,7 @@ App :: struct {
 	tips:       [MAX_TIPS]content.Message_Id, // tutorial pop-ups waiting to be shown
 	tip_count:  int,
 	confirm_new: bool,
+	credits:    bool, // the credits screen is open
 	error:      game.Gen_Error,
 	dirty:      bool, // something changed since the last app_draw
 
@@ -129,6 +131,17 @@ app_key :: proc(a: ^App, key: Key) -> bool {
 	a.dirty = true
 	w := &a.world
 	switch {
+	case a.credits:
+		#partial switch key {
+		case .Enter, .Escape, .C, .Space:
+			a.credits = false
+		case:
+			return false
+		}
+		return true
+	case key == .C && a.tip_count == 0 && !w.shop.active:
+		a.credits = true
+		return true
 	case a.tip_count > 0:
 		#partial switch key {
 		case .Enter, .Escape, .Space:
@@ -229,6 +242,39 @@ app_draw :: proc(a: ^App) {
 		draw_text_centered(fb, 320, 276, "Enter: yes     Esc: no", BLACK)
 	}
 	if a.tip_count > 0 {draw_tip(fb, a.tips[0], a.tip_count)}
+	if a.credits {draw_credits(fb)}
+}
+
+CREDITS_LINES := [?]string {
+	"HamQuest of SPLORR!!",
+	"",
+	"Game, doors and walls:",
+	"TheGrumpyGameDev",
+	"",
+	"Tiles: David Gervais, Angband 32x32 tileset,",
+	"Creative Commons Attribution 3.0",
+	"creativecommons.org/licenses/by/3.0",
+	"",
+	"Font: m5x7 by Daniel Linssen (managore), CC0",
+	"",
+	"The 2026 Odin and WebAssembly port was written",
+	"with Claude Code (Anthropic).",
+	"",
+	"Original game: C#, Silverlight and WPF.",
+}
+
+draw_credits :: proc(fb: ^Framebuffer) {
+	x, y, wd, ht := 90, 90, 460, 330
+	draw_box(fb, x, y, wd, ht, "Credits")
+	for i in 0 ..< len(CREDITS_LINES) {
+		line := CREDITS_LINES[i]
+		if i == 0 {
+			draw_text_centered(fb, x + wd / 2, y + 44, line, NAVY)
+		} else {
+			draw_text_centered(fb, x + wd / 2, y + 48 + i * 15, line, BLACK)
+		}
+	}
+	draw_text_centered(fb, x + wd / 2, y + ht - 24, "Enter or C: close", NAVY)
 }
 
 draw_box :: proc(fb: ^Framebuffer, x, y, w, h: int, title: string) {
@@ -244,6 +290,7 @@ draw_game_over :: proc(fb: ^Framebuffer, w: ^game.World) {
 	draw_box(fb, 140, 200, 360, 120, title)
 	draw_text_centered(fb, 320, 252, "The adventure is over.", BLACK)
 	draw_text_centered(fb, 320, 272, "Press F2 or Enter to start a new game.", BLACK)
+	draw_text_centered(fb, 320, 292, "C: credits", NAVY)
 }
 
 draw_shop :: proc(fb: ^Framebuffer, w: ^game.World, sel: int) {
@@ -327,6 +374,9 @@ app_tap :: proc(a: ^App, x, y: int) {
 	a.dirty = true
 	w := &a.world
 	switch {
+	case a.credits:
+		a.credits = false
+		return
 	case a.tip_count > 0:
 		pop_tip(a)
 		return

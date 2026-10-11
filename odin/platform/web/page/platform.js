@@ -18,7 +18,7 @@
 	const touch = params.get("touch") === "1" || (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
 
 	// ui.Key numbers (odin/ui/app.odin) in declaration order.
-	const KEY = { Up: 1, Down: 2, Left: 3, Right: 4, Space: 5, Tab: 6, Enter: 7, Escape: 8, F2: 9, Y: 10, A: 11, S: 12, W: 13, D: 14, N: 15, T: 16 };
+	const KEY = { Up: 1, Down: 2, Left: 3, Right: 4, Space: 5, Tab: 6, Enter: 7, Escape: 8, F2: 9, Y: 10, A: 11, S: 12, W: 13, D: 14, N: 15, T: 16, C: 17 };
 
 	// Read the logical `e.key` first (remote desktops send odd `e.code` values), then fall back to `e.code`
 	// for the numpad.
@@ -40,6 +40,7 @@
 			case "d": case "D": return KEY.D;
 			case "n": case "N": return KEY.N;
 			case "t": case "T": return KEY.T;
+			case "c": case "C": return KEY.C;
 		}
 		switch (e.code) {
 			case "Numpad8": return KEY.Up;

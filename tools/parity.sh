@@ -9,7 +9,7 @@ for seed in 1 7 42 31337; do
 import random, sys
 random.seed(int(sys.argv[1]))
 # moves, rest, tab, enter, y, wasd, a, s, d (number = ui.Key; see odin/ui/app.odin)
-pool = [1,2,3,4]*4 + [5,6,7,10,13,11,12,14,16]
+pool = [1,2,3,4]*4 + [5,6,7,10,13,11,12,14,16,17]
 print(','.join(str(random.choice(pool)) for _ in range(600)))
 PY
 )

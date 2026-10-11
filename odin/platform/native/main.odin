@@ -22,6 +22,7 @@ keymap :: proc(sc: SDL.Scancode) -> ui.Key {
 	case .S: return .S
 	case .D: return .D
 	case .T: return .T
+	case .C: return .C
 	case .SPACE, .KP_5: return .Space
 	case .TAB: return .Tab
 	case .RETURN, .KP_ENTER: return .Enter

@@ -172,3 +172,25 @@ ui_keys_drive_the_game :: proc(t: ^testing.T) {
 	ui.app_key(a, .Enter)
 	testing.expect(t, w.tutorial_off)
 }
+
+@(test)
+ui_credits_open_and_close :: proc(t: ^testing.T) {
+	a := new_app(2)
+	defer free(a)
+	for a.tip_count > 0 {ui.app_key(a, .Enter)}
+	log_before := a.log_len
+	ui.app_key(a, .C)
+	testing.expect(t, a.credits)
+	// keys do not reach the game while the screen is open
+	ui.app_key(a, .Right)
+	testing.expect_value(t, a.log_len, log_before)
+	ui.app_draw(a)
+	testing.expect(t, count_colors(&a.fb, 90, 90, 550, 420) > 3)
+	_ = os.make_directory("build/frames")
+	write_ppm("build/frames/credits.ppm", &a.fb)
+	ui.app_key(a, .Enter)
+	testing.expect(t, !a.credits)
+	ui.app_key(a, .C)
+	ui.app_tap(a, 10, 10)
+	testing.expect(t, !a.credits)
+}
