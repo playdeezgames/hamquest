@@ -122,3 +122,8 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 
 ### Third upload (2026-10-11)
 - On the user's instruction ("push and ship the build"): `master` pushed (c0db022), then `tools/ship.sh --push` (all tests and the parity check first). butler pushed 879.29 KiB (patch 54.25 KiB) to `thegrumpygamedev/hamquest-of-splorr:html`: build #2105958 on upload #19690398 (version 3). The only change since #2105878 is the original-game dates in the credits screen.
+
+### Player's manual (2026-10-11)
+- `tools/make_manual.py` builds `manual/HamQuest-of-SPLORR-Manual.pdf` (11 pages, A4, about 500 KB): the goal, the screen with numbered callouts on a real frame, how to read the minimap (shapes, open sides, six door colours, the eleven markers), the inventory grid with every slot named, the statistics icons, the rules in plain words (moves and turns, fighting, healing, light, gear), weapons/armour/lights/shops tables, a monster table, controls and tips, credits. All numbers come from the game's own data through the content generator, so it cannot drift from the rules; figures are drawn from the game's art. It needs Pillow and `google-chrome` (HTML printed to PDF); `tools/ship_manual.sh` rebuilds it and pushes to the `manual` channel only with `--push`.
+- Facts checked against the code while writing: markers are computed live for every visited room; armour wears by the points it absorbs (not by the damage taken); a shop disappears as soon as it is entered; a poison ham uses the same icon as a lovely ham; the Rainbow Key drops only from the Summoner.
+- **Not verified:** how it reads to a first-time player (it is a reference, not a tutorial); that itch shows a non-web channel as a plain download (expected).
