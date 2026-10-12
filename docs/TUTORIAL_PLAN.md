@@ -158,3 +158,9 @@ the user's eye.
 4. Length and scope: the eleven rooms above (about ten minutes), or shorter (movement, fight, key, exit only)?
 5. Voice: plain and brisk, or in the game's own tone (the original's pop-ups are jokey: "I'd be embarrassed.")?
 6. Should finishing it give anything (a flag, a credits line, a starting-kit bonus in the real game), or nothing?
+
+## Layout note (2026-10-12)
+
+The user asked for the screen layout to be rethought: it is far too tight and needs borders (TODO item 22).
+The coach strip in T2 has to be built knowing that: either as a deliberately temporary overlay on the
+message strip, or after the layout is reworked. Decide before T2.

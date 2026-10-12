@@ -100,6 +100,16 @@ stay decided unless an item below says it should be reopened.
 18. **Localisation** (M, optional). Text is English only and lives in generated tables and a few UI strings; a
     string table and a font with more glyphs would be needed. Defer unless the store wants it.
 
+22. **Rethink the screen layout** (M, [user], noted 2026-10-12). The 640 by 560 picture is far too tight:
+    the 480 by 480 map, the 160-pixel panel (minimap, pack, statistics) and the 80-pixel message strip
+    are packed edge to edge with no borders, no breathing room, and nowhere to put the tutorial coach, the
+    shop or a larger font without covering something.
+    - Give every area a border and some padding; decide what each area is for before moving anything.
+    - Reconsider the logical size (a wider frame would give the panel and a message/coach area real room;
+      the web build already fits any window, D17) and whether the 32 by 32 map stays at 15 by 15 tiles.
+    - Touch buttons and tap targets, the coach strip (tutorial T2), shop and tip dialogs, accessibility text
+      size (item 15) and the future options screen all depend on this, so settle it before more UI is built.
+
 ## D. Legal and release hygiene
 
 19. **Third-party credits and licences** (S, [user]). In-game credits already name David Gervais (CC BY 3.0),
