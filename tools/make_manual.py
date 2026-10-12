@@ -73,7 +73,7 @@ def annotated_screen():
     im = Image.open(src).convert('RGBA')
     im = im.resize((im.width * 2, im.height * 2), Image.NEAREST)
     d = ImageDraw.Draw(im)
-    marks = {1: (30, 30), 2: (610, 30), 3: (610, 190), 4: (610, 404), 5: (586, 464), 6: (624, 508)}
+    marks = {1: (32, 32), 2: (772, 30), 3: (772, 352), 4: (772, 218), 5: (610, 296), 6: (470, 578)}
     for n, (x, y) in marks.items():
         cx, cy, r = x * 2, y * 2, 20
         d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(200, 0, 0, 255), outline=(255, 255, 255, 255), width=3)
@@ -347,7 +347,7 @@ def page_html(figs):
 <tr><td><span class="n">3</span></td><td><b>Inventory.</b> What you carry. Every kind of item has a fixed slot; the number is how many you have.</td></tr>
 <tr><td><span class="n">4</span></td><td><b>Statistics</b>: attack, defence, health, speed, experience and level.</td></tr>
 <tr><td><span class="n">5</span></td><td><b>Fight mode</b>: the sword (attack) or shield (defend) is outlined. It decides which gear the game picks first. <kbd>Tab</kbd> switches.</td></tr>
-<tr><td><span class="n">6</span></td><td><b>Messages.</b> The last five things that happened, one line each. The colour hints at the kind: blue is ordinary, red is experience.</td></tr>
+<tr><td><span class="n">6</span></td><td><b>Messages.</b> The latest things that happened; a long one wraps onto a second line. The colour hints at the kind: blue is ordinary, red is experience.</td></tr>
 </table>
 </div>
 

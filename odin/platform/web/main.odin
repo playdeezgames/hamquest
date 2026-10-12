@@ -103,7 +103,7 @@ platform_load :: proc "c" (n: i32) -> i32 {
 	return i32(ui.save_decode(&app, string(app.io[:n])))
 }
 
-// A tap or click at a point of the 640 by 560 picture.
+// A tap or click at a point of the 800 by 600 picture.
 @(export)
 platform_tap :: proc "c" (x, y: i32) {
 	context = ctx

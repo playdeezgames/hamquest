@@ -182,7 +182,7 @@ tap_moves_toward_the_tap_and_rests_on_the_player :: proc(t: ^testing.T) {
 	// clear a cross of floor around the player so the steps are not blocked
 	cell := &w.cells[w.player.maze_row][w.player.maze_col]
 	pc, pr := int(w.player.col), int(w.player.row)
-	px, py := pc * 32 + 16, pr * 32 + 16
+	px, py := ui.MAP_X + pc * 32 + 16, ui.MAP_Y + pr * 32 + 16
 	ui.app_tap(a, px, py)
 	testing.expect_value(t, string(a.log[:a.log_len]), "r")
 	ui.app_tap(a, px + 90, py + 5)
@@ -230,9 +230,9 @@ tap_toggles_fight_mode_and_restarts_after_death :: proc(t: ^testing.T) {
 	for a.tip_count > 0 {ui.app_key(a, .Enter)}
 	w := &a.world
 	testing.expect_value(t, w.config, content.Player_Config.Attack)
-	ui.app_tap(a, ui.PANEL_X + 40, ui.STAT_Y + 70) // the shield icon
+	ui.app_tap(a, ui.STAT_X + 40, ui.STAT_Y + ui.MODE_DY + 6) // the shield icon
 	testing.expect_value(t, w.config, content.Player_Config.Defend)
-	ui.app_tap(a, ui.PANEL_X + 10, ui.STAT_Y + 70) // the sword icon
+	ui.app_tap(a, ui.STAT_X + 10, ui.STAT_Y + ui.MODE_DY + 6) // the sword icon
 	testing.expect_value(t, w.config, content.Player_Config.Attack)
 	w.state = .Lose
 	seed := a.seed

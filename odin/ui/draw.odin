@@ -2,11 +2,11 @@ package ui
 
 import content "../content"
 
-// A software framebuffer: 640 by 560 RGBA, one u32 per pixel with the bytes in R,G,B,A order in memory
+// A software framebuffer: 800 by 600 RGBA, one u32 per pixel with the bytes in R,G,B,A order in memory
 // (little-endian u32 = A<<24 | B<<16 | G<<8 | R). The page or SDL window only has to show it.
 
-FRAME_W :: 640
-FRAME_H :: 560
+FRAME_W :: 800
+FRAME_H :: 600
 
 Framebuffer :: struct {
 	pixels: [FRAME_W * FRAME_H]u32,

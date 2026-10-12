@@ -35,7 +35,7 @@ keymap :: proc(sc: SDL.Scancode) -> ui.Key {
 }
 
 write_ppm :: proc(path: string, fb: ^ui.Framebuffer) {
-	hdr := "P6\n640 560\n255\n"
+	hdr := "P6\n800 600\n255\n"
 	data := make([]u8, len(hdr) + ui.FRAME_W * ui.FRAME_H * 3)
 	defer delete(data)
 	copy(data, hdr)
@@ -176,7 +176,7 @@ main :: proc() {
 				k := keymap(ev.key.keysym.scancode)
 				if k != .None {ui.app_key(app, k)}
 			case .MOUSEBUTTONDOWN:
-				// window pixels to the 640 by 560 picture (integer scale, centred)
+				// window pixels to the 800 by 600 picture (integer scale, centred)
 				ww, wh: i32
 				SDL.GetWindowSize(window, &ww, &wh)
 				k := max(1, min(int(ww) / ui.FRAME_W, int(wh) / ui.FRAME_H)) // integer scale is on

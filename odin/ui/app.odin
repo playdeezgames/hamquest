@@ -322,10 +322,15 @@ app_key :: proc(a: ^App, key: Key) -> bool {
 
 // ---------------------------------------------------------------- drawing
 
-SHOP_X :: 60
-SHOP_Y :: 60
 SHOP_W :: 360
 SHOP_H :: 344
+SHOP_X :: MAP_X + (MAP_PX - SHOP_W) / 2 // dialogs sit over the map
+SHOP_Y :: MAP_Y + (MAP_PX - SHOP_H) / 2
+
+MAP_CX :: MAP_X + MAP_PX / 2 // centre of the map pane
+MAP_CY :: MAP_Y + MAP_PX / 2
+CX :: FRAME_W / 2 // centre of the whole frame
+CY :: FRAME_H / 2
 
 app_draw :: proc(a: ^App) {
 	a.dirty = false
@@ -342,17 +347,20 @@ app_draw :: proc(a: ^App) {
 		}
 	}
 	if a.confirm_new {
-		draw_box(fb, 140, 220, 360, 80, "New game?")
-		draw_text_centered(fb, 320, 260, "Start a new game and abandon this one?", BLACK)
-		draw_text_centered(fb, 320, 276, "Enter: yes     Esc: no", BLACK)
+		draw_box(fb, CONFIRM_X, CONFIRM_Y, 360, 80, "New game?")
+		draw_text_centered(fb, CX, CONFIRM_Y + 40, "Start a new game and abandon this one?", BLACK)
+		draw_text_centered(fb, CX, CONFIRM_Y + 56, "Enter: yes     Esc: no", BLACK)
 	}
 	if a.tip_count > 0 && !a.title {draw_tip(fb, a.tips[0], a.tip_count)}
 	if a.credits {draw_credits(fb)}
 }
 
-TITLE_ITEM_X :: 200
+CONFIRM_X :: CX - 180
+CONFIRM_Y :: CY - 40
+
 TITLE_ITEM_W :: 240
-TITLE_ITEM_Y :: 290
+TITLE_ITEM_X :: CX - TITLE_ITEM_W / 2
+TITLE_ITEM_Y :: 300
 TITLE_ITEM_H :: 32
 TITLE_ITEM_STEP :: 40
 
@@ -381,17 +389,17 @@ title_row :: proc(a: ^App, item: Title_Item) -> int {
 
 draw_title :: proc(fb: ^Framebuffer, a: ^App) {
 	fill(fb, Color{16, 16, 56, 255})
-	rect_outline(fb, 8, 8, FRAME_W - 16, FRAME_H - 16, GRAY)
-	draw_text_centered_scaled(fb, 320, 60, "HamQuest", WHITE, 6)
-	draw_text_centered_scaled(fb, 320, 120, "of SPLORR!!", CYAN, 3)
+	rect_outline(fb, 12, 12, FRAME_W - 24, FRAME_H - 24, BOX_BORDER)
+	draw_text_centered_scaled(fb, CX, 70, "HamQuest", WHITE, 6)
+	draw_text_centered_scaled(fb, CX, 130, "of SPLORR!!", CYAN, 3)
 	// a row of the cast
 	art := [?]content.Image_Id {
 		.MapCreaturesPlayerPlayer, .MapItemsKeysRed, .MapItemsConsumablesHam, .MapItemsKeysRainbow,
 		.MapCreaturesUndeadSkeleton, .MapCreaturesBossesDragon,
 	}
-	x0 := 320 - (len(art) * 48) / 2
-	for i in 0 ..< len(art) {blit(fb, art[i], x0 + i * 48 + 8, 180, 1)}
-	draw_text_centered(fb, 320, 232, "Locks, keys, ham and monsters.", Color{200, 200, 255, 255})
+	x0 := CX - (len(art) * 48) / 2
+	for i in 0 ..< len(art) {blit(fb, art[i], x0 + i * 48 + 8, 190, 1)}
+	draw_text_centered(fb, CX, 242, "Locks, keys, ham and monsters.", Color{200, 200, 255, 255})
 	for i in 0 ..< len(Title_Item) {
 		item := Title_Item(i)
 		if !title_visible(a, item) {continue}
@@ -405,7 +413,7 @@ draw_title :: proc(fb: ^Framebuffer, a: ^App) {
 		col := WHITE if enabled else GRAY
 		draw_text_centered(fb, TITLE_ITEM_X + TITLE_ITEM_W / 2, y + 12, title_label(item), col)
 	}
-	draw_text_centered(fb, 320, FRAME_H - 40, "Up/Down and Enter, or tap.   Esc in a game returns here.", Color{160, 160, 220, 255})
+	draw_text_centered(fb, CX, FRAME_H - 40, "Up/Down and Enter, or tap.   Esc in a game returns here.", Color{160, 160, 220, 255})
 }
 
 draw_text_centered_scaled :: proc(fb: ^Framebuffer, cx, y: int, s: string, c: Color, scale: int) {
@@ -431,7 +439,8 @@ CREDITS_LINES := [?]string {
 }
 
 draw_credits :: proc(fb: ^Framebuffer) {
-	x, y, wd, ht := 90, 90, 460, 330
+	wd, ht := 460, 330
+	x, y := CX - wd / 2, CY - ht / 2
 	draw_box(fb, x, y, wd, ht, "Credits")
 	for i in 0 ..< len(CREDITS_LINES) {
 		line := CREDITS_LINES[i]
@@ -454,10 +463,10 @@ draw_box :: proc(fb: ^Framebuffer, x, y, w, h: int, title: string) {
 
 draw_game_over :: proc(fb: ^Framebuffer, w: ^game.World) {
 	title := "You have won!" if w.state == .Win else "You have died."
-	draw_box(fb, 140, 200, 360, 120, title)
-	draw_text_centered(fb, 320, 252, "The adventure is over.", BLACK)
-	draw_text_centered(fb, 320, 272, "Press F2 or Enter to start a new game.", BLACK)
-	draw_text_centered(fb, 320, 292, "C: credits", NAVY)
+	draw_box(fb, MAP_CX - 180, MAP_CY - 60, 360, 120, title)
+	draw_text_centered(fb, MAP_CX, MAP_CY - 8, "The adventure is over.", BLACK)
+	draw_text_centered(fb, MAP_CX, MAP_CY + 12, "Press F2 or Enter to start a new game.", BLACK)
+	draw_text_centered(fb, MAP_CX, MAP_CY + 32, "C: credits, Esc: menu", NAVY)
 }
 
 draw_shop :: proc(fb: ^Framebuffer, w: ^game.World, sel: int) {
@@ -515,7 +524,8 @@ draw_button :: proc(fb: ^Framebuffer, x, y, w: int, label: string, enabled: bool
 
 draw_tip :: proc(fb: ^Framebuffer, id: content.Message_Id, remaining: int) {
 	def := &content.MESSAGES[id]
-	x, y, wd, ht := 100, 130, 440, 240
+	wd, ht := 440, 240
+	x, y := MAP_CX - wd / 2, MAP_CY - ht / 2
 	draw_box(fb, x, y, wd, ht, def.tutorial_title)
 	// picture at 2x on the left
 	blit(fb, def.tutorial_image, x + 16, y + 48, 2)
@@ -536,7 +546,7 @@ draw_tip :: proc(fb: ^Framebuffer, id: content.Message_Id, remaining: int) {
 
 // ---------------------------------------------------------------- touch and mouse
 
-// A tap at a point of the 640 by 560 picture. Mirrors what the keys do.
+// A tap at a point of the 800 by 600 picture. Mirrors what the keys do.
 app_tap :: proc(a: ^App, x, y: int) {
 	a.dirty = true
 	w := &a.world
@@ -548,7 +558,7 @@ app_tap :: proc(a: ^App, x, y: int) {
 		pop_tip(a)
 		return
 	case a.confirm_new:
-		if x >= 140 && x < 500 && y >= 220 && y < 300 {
+		if x >= CONFIRM_X && x < CONFIRM_X + 360 && y >= CONFIRM_Y && y < CONFIRM_Y + 80 {
 			app_new_game(a, a.seed + 1)
 		} else {
 			a.confirm_new = false
@@ -588,10 +598,10 @@ app_tap :: proc(a: ^App, x, y: int) {
 		app_new_game(a, a.seed + 1)
 		return
 	}
-	if x < MAP_PX && y < MAP_PX {
+	if x >= MAP_X && y >= MAP_Y && x < MAP_X + MAP_PX && y < MAP_Y + MAP_PX {
 		// toward the tap, one step; on the player's own tile: rest
-		px := int(w.player.col) * TILE + TILE / 2
-		py := int(w.player.row) * TILE + TILE / 2
+		px := MAP_X + int(w.player.col) * TILE + TILE / 2
+		py := MAP_Y + int(w.player.row) * TILE + TILE / 2
 		dx, dy := x - px, y - py
 		switch {
 		case abs(dx) < TILE / 2 && abs(dy) < TILE / 2:
@@ -604,8 +614,8 @@ app_tap :: proc(a: ^App, x, y: int) {
 		return
 	}
 	// the attack and defend icons under the statistics
-	if y >= STAT_Y + 64 && y < STAT_Y + 96 {
-		if x >= PANEL_X && x < PANEL_X + 32 && w.config != .Attack {command(a, .Toggle_Config)}
-		if x >= PANEL_X + 32 && x < PANEL_X + 64 && w.config != .Defend {command(a, .Toggle_Config)}
+	if y >= STAT_Y + MODE_DY && y < STAT_Y + MODE_DY + 32 {
+		if x >= STAT_X && x < STAT_X + 32 && w.config != .Attack {command(a, .Toggle_Config)}
+		if x >= STAT_X + 32 && x < STAT_X + 64 && w.config != .Defend {command(a, .Toggle_Config)}
 	}
 }

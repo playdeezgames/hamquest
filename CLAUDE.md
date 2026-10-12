@@ -95,7 +95,7 @@ Follow the shape that worked for Kordanor's Cabal (see vault note):
 - **D1 Fidelity: modernise freely.** The C# is a design reference, not a spec to match. Fix bugs and rebalance where it helps; still log each notable change in the port record so it is a choice, not an accident.
 - **D2 Content: generate Odin tables** from `config/**/*.xml` and `maps/*.cqm` at build time; no runtime XML parsing or file IO in wasm. Generated files must be checked for staleness by the test script.
 - **D3 Audio: ship without sound at first.** Port visuals only; the three samples are excluded until their provenance and licences are confirmed. The 32x32 tile art is kept for now, but its author is also unrecorded: confirm before release.
-- **D5-D10 (see `docs/PORT.md`):** framebuffer + packed atlas rendering; fixed 8x8 maze; tune balance while implementing; native SDL2 client in addition to wasm; title "HamQuest of SPLORR!!"; vault note now; 640x560 landscape.
+- **D5-D10 (see `docs/PORT.md`):** framebuffer + packed atlas rendering; fixed 8x8 maze; tune balance while implementing; native SDL2 client in addition to wasm; title "HamQuest of SPLORR!!"; vault note now; 640x560 landscape (reworked to 800x600 by D25/D26: map 480x480 with bordered boxes, panel right, messages below).
 - **D4 Release scope beyond a straight port:** save and resume (namespaced `localStorage` key, validated JSON), touch/phone controls, and `?seed=N` for reproducible runs.
 
 - **D17 (see `docs/PORT.md`):** the web build fits the window (itch.io launches it full screen).

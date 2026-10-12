@@ -8,7 +8,7 @@ import game "../game"
 import ui "../ui"
 
 write_ppm :: proc(path: string, fb: ^ui.Framebuffer) {
-	hdr := "P6\n640 560\n255\n"
+	hdr := "P6\n800 600\n255\n"
 	data := make([]u8, len(hdr) + ui.FRAME_W * ui.FRAME_H * 3)
 	defer delete(data)
 	copy(data, hdr)
@@ -88,11 +88,11 @@ ui_first_frame_looks_like_the_game :: proc(t: ^testing.T) {
 	for a.tip_count > 0 {ui.app_key(a, .Enter)}
 	ui.app_draw(a)
 	fb := &a.fb
-	testing.expect(t, count_colors(fb, 0, 0, 480, 480) > 20, "map pane is almost blank")
-	testing.expect(t, count_colors(fb, 480, 160, 640, 384) >= 2, "inventory is empty")
-	testing.expect(t, count_colors(fb, 0, 480, 640, 560) >= 2, "message pane is empty")
+	testing.expect(t, count_colors(fb, ui.MAP_X, ui.MAP_Y, ui.MAP_X + ui.MAP_PX, ui.MAP_Y + ui.MAP_PX) > 20, "map pane is almost blank")
+	testing.expect(t, count_colors(fb, ui.PANEL_X, ui.INV_Y, ui.PANEL_X + 160, ui.INV_Y + 224) >= 2, "inventory is empty")
+	testing.expect(t, count_colors(fb, ui.LOG_X, ui.LOG_Y, ui.LOG_X + ui.LOG_W, ui.LOG_Y + ui.LOG_H) >= 2, "message pane is empty")
 	// the minimap panel starts gray with the first cell lit
-	testing.expect_value(t, fb.pixels[5 * ui.FRAME_W + 485], ui.pack(ui.GRAY))
+	testing.expect_value(t, fb.pixels[(ui.MINI_Y + 5) * ui.FRAME_W + ui.PANEL_X + 5], ui.pack(ui.GRAY))
 	_ = os.make_directory("build/frames")
 	write_ppm("build/frames/start.ppm", fb)
 }

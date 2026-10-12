@@ -4,22 +4,75 @@ import content "../content"
 import game "../game"
 import "core:math"
 
-// Draws the whole game screen (the layout of the original MainPage.xaml, 640 by 560):
-//   map 480x480 at (0,0) | minimap 160x160, inventory 160x224, statistics 160x96 at x=480 | messages 640x80 at y=480
+// Draws the whole game screen in an 800 by 600 frame (D25, D26). Every area is a bordered box with
+// room around it; the map keeps its 480 by 480 (15 by 15 tiles of 32 px).
+//
+//   +-----------------------------+  +---------------+
+//   | map (12,12) 484 x 484       |  | minimap  180  |
+//   |                             |  +---------------+
+//   |                             |  | statistics 128|
+//   +-----------------------------+  +---------------+
+//   | messages / coach  84        |  | pack      252 |
+//   +-----------------------------+  +---------------+
+//
+// Boxes include their 2 px border; the content origin constants below are inside the border.
 
-MAP_PX :: 480
+MARGIN :: 12
+GAP :: 8
+BORDER :: 2
+
 TILE :: 32
-PANEL_X :: 480
-INV_Y :: 160
-STAT_Y :: 384
-MSG_Y :: 480
+MAP_PX :: 480
+MAP_BOX_X :: MARGIN
+MAP_BOX_Y :: MARGIN
+MAP_BOX_W :: MAP_PX + 2 * BORDER
+MAP_X :: MAP_BOX_X + BORDER // content origin of the 480 by 480 map
+MAP_Y :: MAP_BOX_Y + BORDER
 
+LOG_BOX_X :: MARGIN
+LOG_BOX_Y :: MAP_BOX_Y + MAP_PX + 2 * BORDER + GAP
+LOG_BOX_W :: MAP_BOX_W
+LOG_BOX_H :: FRAME_H - MARGIN - LOG_BOX_Y
+LOG_X :: LOG_BOX_X + BORDER
+LOG_Y :: LOG_BOX_Y + BORDER
+LOG_W :: LOG_BOX_W - 2 * BORDER
+LOG_H :: LOG_BOX_H - 2 * BORDER
+
+PANEL_BOX_X :: MAP_BOX_X + MAP_BOX_W + GAP
+PANEL_BOX_W :: FRAME_W - MARGIN - PANEL_BOX_X
+
+MINI_BOX_Y :: MARGIN
+MINI_BOX_H :: 180
+STAT_BOX_Y :: MINI_BOX_Y + MINI_BOX_H + GAP
+STAT_BOX_H :: 128
+PACK_BOX_Y :: STAT_BOX_Y + STAT_BOX_H + GAP
+PACK_BOX_H :: FRAME_H - MARGIN - PACK_BOX_Y
+
+// Origins of the 160 px wide minimap and pack, centred in the panel; statistics from the left edge.
+PANEL_X :: PANEL_BOX_X + (PANEL_BOX_W - 160) / 2
+MINI_Y :: MINI_BOX_Y + (MINI_BOX_H - 160) / 2
+INV_Y :: PACK_BOX_Y + (PACK_BOX_H - 224) / 2
+STAT_X :: PANEL_BOX_X + BORDER + 14
+STAT_Y :: STAT_BOX_Y + BORDER + 10
+
+FRAME_BG :: Color{28, 28, 44, 255}
+BOX_BORDER :: Color{120, 120, 160, 255}
 BACKGROUND :: WHITE
 MINIMAP_BG :: GRAY
 
+// A bordered box: the border colour fills it, the content colour fills the inside.
+draw_frame_box :: proc(fb: ^Framebuffer, x, y, w, h: int, inner: Color) {
+	fill_rect(fb, x, y, w, h, BOX_BORDER)
+	fill_rect(fb, x + BORDER, y + BORDER, w - 2 * BORDER, h - 2 * BORDER, inner)
+}
 
 draw_world :: proc(fb: ^Framebuffer, w: ^game.World) {
-	fill(fb, BACKGROUND)
+	fill(fb, FRAME_BG)
+	draw_frame_box(fb, MAP_BOX_X, MAP_BOX_Y, MAP_BOX_W, MAP_BOX_W, BACKGROUND)
+	draw_frame_box(fb, LOG_BOX_X, LOG_BOX_Y, LOG_BOX_W, LOG_BOX_H, BACKGROUND)
+	draw_frame_box(fb, PANEL_BOX_X, MINI_BOX_Y, PANEL_BOX_W, MINI_BOX_H, BACKGROUND)
+	draw_frame_box(fb, PANEL_BOX_X, STAT_BOX_Y, PANEL_BOX_W, STAT_BOX_H, BACKGROUND)
+	draw_frame_box(fb, PANEL_BOX_X, PACK_BOX_Y, PANEL_BOX_W, PACK_BOX_H, BACKGROUND)
 	draw_map(fb, w)
 	draw_minimap(fb, w)
 	draw_inventory(fb, w)
@@ -35,8 +88,8 @@ draw_map :: proc(fb: ^Framebuffer, w: ^game.World) {
 	for row in 0 ..< game.MAP_ROWS {
 		for col in 0 ..< game.MAP_COLS {
 			t := m.tiles[row][col]
-			x := col * TILE
-			y := row * TILE
+			x := MAP_X + col * TILE
+			y := MAP_Y + row * TILE
 			blit(fb, content.TERRAINS[t.terrain].image, x, y)
 			is_player := int(p.col) == col && int(p.row) == row
 			if is_player {
@@ -70,7 +123,7 @@ apply_light :: proc(fb: ^Framebuffer, w: ^game.World) {
 			if r >= content.LIGHT_PROFILE_LEN {r = content.LIGHT_PROFILE_LEN - 1}
 			a := u32(profile[r])
 			if a == 0 {continue}
-			idx := y * FRAME_W + x
+			idx := (MAP_Y + y) * FRAME_W + MAP_X + x
 			px := fb.pixels[idx]
 			k := 255 - a
 			nr := (px & 0xFF) * k / 255
@@ -158,14 +211,14 @@ minimap_door :: proc(lock: int, d: game.Direction) -> content.Image_Id {
 }
 
 draw_minimap :: proc(fb: ^Framebuffer, w: ^game.World) {
-	fill_rect(fb, PANEL_X, 0, 160, 160, MINIMAP_BG)
+	fill_rect(fb, PANEL_X, MINI_Y, 160, 160, MINIMAP_BG)
 	has_compass := w.inventory[.Compass] > 0
 	for row in 0 ..< game.MAZE_ROWS {
 		for col in 0 ..< game.MAZE_COLS {
 			c := &w.cells[row][col]
 			if c.visit_count <= 0 {continue}
 			x := PANEL_X + col * 20
-			y := row * 20
+			y := MINI_Y + row * 20
 			if col == int(w.player.maze_col) && row == int(w.player.maze_row) {
 				blit(fb, .MinimapMiscHighlight, x, y)
 			}
@@ -264,6 +317,8 @@ draw_inventory :: proc(fb: ^Framebuffer, w: ^game.World) {
 
 // ---------------------------------------------------------------- statistics
 
+MODE_DY :: 68 // the attack and defend icons, below the six statistics
+
 defend_maximum :: proc(w: ^game.World) -> i32 {
 	total: i32
 	for at in content.Armor_Type {
@@ -286,23 +341,23 @@ stat_line :: proc(fb: ^Framebuffer, icon: content.Image_Id, x, y: int, a: i64, b
 }
 
 draw_statistics :: proc(fb: ^Framebuffer, w: ^game.World) {
-	x0 := PANEL_X
+	x0 := STAT_X
 	y0 := STAT_Y
 	health := i64(game.player_health(w))
 	stat_line(fb, .StatisticsAttack, x0, y0, i64(game.player_attack(w)))
-	stat_line(fb, .StatisticsDefend, x0, y0 + 16, i64(defend_maximum(w)))
-	stat_line(fb, .StatisticsHealth, x0, y0 + 32, max(health - i64(w.wounds), 0), health)
-	stat_line(fb, .StatisticsSpeed, x0 + 80, y0, i64(w.step_total))
-	stat_line(fb, .StatisticsExperience, x0 + 80, y0 + 16, i64(w.xp), i64(w.xp_goal))
-	stat_line(fb, .StatisticsLevel, x0 + 80, y0 + 32, i64(w.level))
+	stat_line(fb, .StatisticsDefend, x0, y0 + 20, i64(defend_maximum(w)))
+	stat_line(fb, .StatisticsHealth, x0, y0 + 40, max(health - i64(w.wounds), 0), health)
+	stat_line(fb, .StatisticsSpeed, x0 + 124, y0, i64(w.step_total))
+	stat_line(fb, .StatisticsExperience, x0 + 124, y0 + 20, i64(w.xp), i64(w.xp_goal))
+	stat_line(fb, .StatisticsLevel, x0 + 124, y0 + 40, i64(w.level))
 	// fight mode: the chosen one is outlined
 	if w.config == .Defend {
-		blit(fb, .MapUiSelection, x0 + 32, y0 + 64)
+		blit(fb, .MapUiSelection, x0 + 32, y0 + MODE_DY)
 	} else {
-		blit(fb, .MapUiSelection, x0, y0 + 64)
+		blit(fb, .MapUiSelection, x0, y0 + MODE_DY)
 	}
-	blit(fb, .MapUiAttackmode, x0, y0 + 64)
-	blit(fb, .MapUiDefendmode, x0 + 32, y0 + 64)
+	blit(fb, .MapUiAttackmode, x0, y0 + MODE_DY)
+	blit(fb, .MapUiDefendmode, x0 + 32, y0 + MODE_DY)
 }
 
 // ---------------------------------------------------------------- messages
@@ -325,12 +380,34 @@ message_text :: proc(b: ^Text_Buf, m: game.Msg) {
 	}
 }
 
+LOG_LINES :: LOG_H / 16
+
+// The newest messages, wrapped to the box; when they do not all fit the oldest lines drop off the top.
 draw_messages :: proc(fb: ^Framebuffer, w: ^game.World) {
+	Log_Line :: struct {
+		text:  string,
+		color: Color,
+	}
+	all: [MAX_LOG_LINES]Log_Line
+	n := 0
+	bufs: [game.MSG_LOG]Text_Buf // the wrapped lines point into these
 	for i in 0 ..< w.msg_count {
 		m := w.msgs[i]
-		b: Text_Buf
-		message_text(&b, m)
+		message_text(&bufs[i], m)
 		col := content.COLORS[content.MESSAGES[m.id].color]
-		draw_text(fb, 4, MSG_Y + i * 16 + 4, tb_string(&b), Color{col.r, col.g, col.b, 255})
+		lines: [16]string
+		k := wrap_text(tb_string(&bufs[i]), LOG_W - 12, &lines)
+		for j in 0 ..< k {
+			if n < len(all) {
+				all[n] = Log_Line{lines[j], Color{col.r, col.g, col.b, 255}}
+				n += 1
+			}
+		}
+	}
+	first := max(0, n - LOG_LINES)
+	for i in first ..< n {
+		draw_text(fb, LOG_X + 6, LOG_Y + (i - first) * 16 + 4, all[i].text, all[i].color)
 	}
 }
+
+MAX_LOG_LINES :: game.MSG_LOG * 16

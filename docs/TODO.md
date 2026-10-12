@@ -100,7 +100,7 @@ stay decided unless an item below says it should be reopened.
 18. **Localisation** (M, optional). Text is English only and lives in generated tables and a few UI strings; a
     string table and a font with more glyphs would be needed. Defer unless the store wants it.
 
-22. **Rethink the screen layout** (M, [user], noted 2026-10-12). The 640 by 560 picture is far too tight:
+22. **Rethink the screen layout** (M, [user], noted 2026-10-12; **done 2026-10-12**, D24 to D26: 800 by 600, bordered boxes; touch buttons, text size and the coach area still to use it). The old 640 by 560 picture was far too tight:
     the 480 by 480 map, the 160-pixel panel (minimap, pack, statistics) and the 80-pixel message strip
     are packed edge to edge with no borders, no breathing room, and nowhere to put the tutorial coach, the
     shop or a larger font without covering something.

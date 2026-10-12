@@ -4,13 +4,13 @@
 // ?touch=1 shows the touch controls on any device;
 // ?menu=1 opens the title menu even with a fixed seed.
 (function () {
-	const W = 640, H = 560;
+	const W = 800, H = 600;
 	const SAVE_KEY = "hq:save";             // itch.io games share one origin: keep the key namespaced
 	const params = new URLSearchParams(location.search);
 	const canvas = document.getElementById("screen");
 	const msg = document.getElementById("msg");
 	const ctx2d = canvas.getContext("2d", { alpha: false });
-	const picture = document.createElement("canvas");   // the 640x560 frame as the game drew it
+	const picture = document.createElement("canvas");   // the 800x600 frame as the game drew it
 	picture.width = W; picture.height = H;
 	const pctx = picture.getContext("2d", { alpha: false });
 	const image = pctx.createImageData(W, H);
