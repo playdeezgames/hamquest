@@ -647,7 +647,10 @@ shop_buy :: proc(w: ^World, slot: int, all: bool) -> bool {
 step_command :: proc(w: ^World, cmd: Command, arg: int = 0) {
 	w.tut.mercy = false
 	run_command(w, cmd, arg)
-	if w.mode == .Tutorial {tutorial_update(w)}
+	if w.mode == .Tutorial {
+		if cmd != .None {w.tut.commands += 1}
+		tutorial_update(w)
+	}
 }
 
 run_command :: proc(w: ^World, cmd: Command, arg: int = 0) {

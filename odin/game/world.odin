@@ -108,6 +108,7 @@ Game_Mode :: enum u8 {
 // Tutorial bookkeeping. Only touched in Tutorial mode, so a Normal world never changes because of it.
 Tutorial_State :: struct {
 	done:       [MAX_LESSONS]bool, // latched: a lesson whose goal has been met stays done
+	commands:   u32, // commands given (so "something has happened" can be told)
 	kills:      u32,
 	rests:      u32,
 	shops:      u32, // times a shoppe was opened

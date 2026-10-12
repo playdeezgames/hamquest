@@ -23,6 +23,7 @@ keymap :: proc(sc: SDL.Scancode) -> ui.Key {
 	case .D: return .D
 	case .T: return .T
 	case .C: return .C
+	case .H: return .H
 	case .SPACE, .KP_5: return .Space
 	case .TAB: return .Tab
 	case .RETURN, .KP_ENTER: return .Enter
@@ -57,6 +58,7 @@ main :: proc() {
 	save_path := "hamquest.save"
 	use_save := true
 	seed_given := false
+	tutorial := false // start straight in the tutorial (screenshots, tests)
 	menu := false // open the title menu even with --seed or --keys (screenshots, tests)
 	keys := "" // comma separated ui.Key numbers: run them, print the frame hash, exit (parity with the wasm build)
 	args := os.args
@@ -76,6 +78,8 @@ main :: proc() {
 			use_save = false
 		case "--menu":
 			menu = true
+		case "--tutorial":
+			tutorial = true
 		case "--scale":
 			i += 1
 			if i < len(args) {
@@ -141,9 +145,10 @@ main :: proc() {
 		fmt.eprintln("world generation failed:", app.error)
 		os.exit(1)
 	}
+	if tutorial {ui.app_new_tutorial(app, seed)}
 	// a plain start (no fixed seed, no scripted keys) opens at the title menu
 	app.can_quit = true
-	if menu || (!seed_given && keys == "") {ui.app_open_title(app)}
+	if menu || (!seed_given && keys == "" && !tutorial) {ui.app_open_title(app)}
 
 	if keys != "" {
 		// scripted run: no window needed beyond what is already open

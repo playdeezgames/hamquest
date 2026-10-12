@@ -27,7 +27,8 @@ menu_fresh_game_has_no_continue_and_new_game_keeps_the_world :: proc(t: ^testing
 	testing.expect(t, a.title)
 	testing.expect_value(t, a.title_sel, ui.Title_Item.New_Game)
 	testing.expect(t, !ui.title_enabled(a, .Continue))
-	testing.expect(t, !ui.title_enabled(a, .Tutorial))
+	testing.expect(t, ui.title_enabled(a, .Tutorial))
+	testing.expect(t, !ui.title_visible(a, .Real_Game)) // only while a tutorial pushes a game aside
 	ui.app_key(a, .Enter)
 	testing.expect(t, !a.title)
 	testing.expect_value(t, a.seed, seed) // untouched world is the new game
@@ -79,10 +80,12 @@ menu_selection_skips_disabled_and_quit_needs_a_window :: proc(t: ^testing.T) {
 	a := menu_app(8)
 	defer free(a)
 	ui.app_open_title(a)
-	ui.app_key(a, .Down) // New Game -> Credits (Tutorial is disabled, Quit hidden)
+	ui.app_key(a, .Down) // New Game -> Tutorial
+	testing.expect_value(t, a.title_sel, ui.Title_Item.Tutorial)
+	ui.app_key(a, .Down)
 	testing.expect_value(t, a.title_sel, ui.Title_Item.Credits)
 	ui.app_key(a, .Down)
-	testing.expect_value(t, a.title_sel, ui.Title_Item.New_Game) // wraps
+	testing.expect_value(t, a.title_sel, ui.Title_Item.New_Game) // wraps (Quit is hidden, Continue is off)
 	testing.expect(t, !ui.title_visible(a, .Quit))
 	a.can_quit = true
 	ui.app_key(a, .Up)
@@ -102,7 +105,7 @@ menu_credits_return_to_the_title_and_taps_work :: proc(t: ^testing.T) {
 	testing.expect(t, a.credits && a.title)
 	ui.app_key(a, .Enter)
 	testing.expect(t, !a.credits && a.title)
-	// tap rows: Continue is row 0, Credits row 3, Quit row 4
+	// tap rows (Return to your game is hidden): Continue 0, New Game 1, Tutorial 2, Credits 3, Quit 4
 	ui.app_tap(a, ui.TITLE_ITEM_X + 10, ui.TITLE_ITEM_Y + 3 * ui.TITLE_ITEM_STEP + 5)
 	testing.expect(t, a.credits)
 	ui.app_tap(a, 10, 10)

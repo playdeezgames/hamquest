@@ -25,12 +25,14 @@ Key :: enum u8 {
 	N, // no (confirm)
 	T, // stop showing tips (while a tip is open)
 	C, // credits
+	H, // show the tutorial lesson again
 }
 
 Title_Item :: enum u8 {
 	Continue,
+	Real_Game, // back to the real game that the tutorial pushed aside (only then)
 	New_Game,
-	Tutorial, // not built yet: shown, never enabled
+	Tutorial,
 	Credits,
 	Quit,
 }
@@ -52,6 +54,10 @@ App :: struct {
 	title_sel:  Title_Item,
 	can_quit:   bool, // set by a shell that has a window to close: adds Quit to the title menu
 	quit:       bool, // Quit was chosen; the shell closes
+	real_over:  bool, // while the tutorial runs: the real game it pushed aside had ended
+	coach_hidden: bool, // the lesson was dismissed for this room (D29)
+	coach_room: int, // the room the player was in at the last command
+	pulse:      int, // frame counter for the highlight
 	error:      game.Gen_Error,
 	dirty:      bool, // something changed since the last app_draw
 
@@ -75,28 +81,71 @@ app_new_game :: proc(a: ^App, seed: u64) {
 	a.confirm_new = false
 	a.title = false
 	a.credits = false
+	a.real_over = false
+	a.coach_hidden = false
 	collect_events(a)
+}
+
+// The training level (D18). The real game's seed and log are left alone, so it is neither saved over nor lost.
+app_new_tutorial :: proc(a: ^App, seed: u64) {
+	if a.world.mode == .Normal {a.real_over = a.world.state != .Play}
+	seen := a.world.tutorial_seen
+	off := a.world.tutorial_off
+	a.error = game.new_tutorial(&a.world, seed)
+	a.world.tutorial_seen = seen
+	a.world.tutorial_off = off
+	a.shop_sel = 0
+	a.tip_count = 0
+	a.confirm_new = false
+	a.title = false
+	a.credits = false
+	a.coach_hidden = false
+	a.coach_room = room_id(&a.world)
+	a.pulse = 0
+	a.dirty = true
+}
+
+room_id :: proc(w: ^game.World) -> int {
+	return int(w.player.maze_row) * game.MAZE_COLS + int(w.player.maze_col)
+}
+
+// Back to the real game by replaying its save text.
+app_resume_real :: proc(a: ^App) {
+	text := save_encode(a)
+	if save_decode(a, text) != .Ok {app_new_game(a, a.seed + 1)}
+	a.title = false
 }
 
 // ---------------------------------------------------------------- title menu
 
 // A game in progress: something has been done in it and it is not over.
 game_in_progress :: proc(a: ^App) -> bool {
+	if a.world.mode == .Tutorial {return a.world.state == .Play && a.world.tut.commands > 0}
+	return a.world.state == .Play && a.log_len > 0
+}
+
+// The real game (not the tutorial) has something worth keeping.
+real_in_progress :: proc(a: ^App) -> bool {
+	if a.world.mode == .Tutorial {return !a.real_over && a.log_len > 0}
 	return a.world.state == .Play && a.log_len > 0
 }
 
 title_enabled :: proc(a: ^App, item: Title_Item) -> bool {
 	switch item {
 	case .Continue: return game_in_progress(a)
-	case .New_Game, .Credits: return true
-	case .Tutorial: return false
+	case .Real_Game: return a.world.mode == .Tutorial && real_in_progress(a)
+	case .New_Game, .Credits, .Tutorial: return true
 	case .Quit: return a.can_quit
 	}
 	return false
 }
 
 title_visible :: proc(a: ^App, item: Title_Item) -> bool {
-	return item != .Quit || a.can_quit
+	#partial switch item {
+	case .Quit: return a.can_quit
+	case .Real_Game: return a.world.mode == .Tutorial && real_in_progress(a)
+	}
+	return true
 }
 
 // Show the title menu. Continue is preselected when there is a game to continue.
@@ -127,11 +176,13 @@ title_activate :: proc(a: ^App, item: Title_Item) {
 	switch item {
 	case .Continue:
 		a.title = false
+	case .Real_Game:
+		app_resume_real(a)
 	case .New_Game:
 		switch {
-		case game_in_progress(a):
+		case real_in_progress(a):
 			a.confirm_new = true
-		case a.world.state == .Play:
+		case a.world.mode == .Normal && a.world.state == .Play:
 			a.title = false // nothing has happened yet: this world is already a new game
 		case:
 			app_new_game(a, a.seed + 1)
@@ -141,6 +192,7 @@ title_activate :: proc(a: ^App, item: Title_Item) {
 	case .Quit:
 		a.quit = true
 	case .Tutorial:
+		app_new_tutorial(a, a.seed + 7919)
 	}
 }
 
@@ -162,9 +214,13 @@ pop_tip :: proc(a: ^App) {
 }
 
 command :: proc(a: ^App, cmd: game.Command, arg: int = 0) {
-	if a.world.state == .Play {record(a, cmd, arg)}
+	if a.world.state == .Play && a.world.mode == .Normal {record(a, cmd, arg)}
 	game.step_command(&a.world, cmd, arg)
 	collect_events(a)
+	if room_id(&a.world) != a.coach_room {
+		a.coach_room = room_id(&a.world)
+		a.coach_hidden = false // the lesson of a new room is shown again (D29)
+	}
 	if !a.world.shop.active {a.shop_sel = 0}
 }
 
@@ -287,7 +343,11 @@ app_key :: proc(a: ^App, key: Key) -> bool {
 	case w.state != .Play:
 		#partial switch key {
 		case .F2, .Enter:
-			app_new_game(a, a.seed + 1)
+			if w.mode == .Tutorial {
+				tutorial_finished(a)
+			} else {
+				app_new_game(a, a.seed + 1)
+			}
 			return true
 		case .Escape:
 			app_open_title(a)
@@ -314,6 +374,12 @@ app_key :: proc(a: ^App, key: Key) -> bool {
 		a.confirm_new = true
 	case .Escape:
 		app_open_title(a)
+	case .Enter:
+		if w.mode != .Tutorial {return false}
+		a.coach_hidden = true
+	case .H:
+		if w.mode != .Tutorial {return false}
+		a.coach_hidden = false
 	case:
 		return false
 	}
@@ -340,8 +406,13 @@ app_draw :: proc(a: ^App) {
 		draw_title(fb, a)
 	} else {
 		draw_world(fb, w)
+		if w.mode == .Tutorial && w.state == .Play {draw_coach(a)}
 		if w.state != .Play {
-			draw_game_over(fb, w)
+			if w.mode == .Tutorial {
+				draw_tutorial_done(fb)
+			} else {
+				draw_game_over(fb, w)
+			}
 		} else if w.shop.active {
 			draw_shop(fb, w, a.shop_sel)
 		}
@@ -364,11 +435,12 @@ TITLE_ITEM_Y :: 300
 TITLE_ITEM_H :: 32
 TITLE_ITEM_STEP :: 40
 
-title_label :: proc(item: Title_Item) -> string {
+title_label :: proc(a: ^App, item: Title_Item) -> string {
 	switch item {
-	case .Continue: return "Continue"
+	case .Continue: return "Continue tutorial" if a.world.mode == .Tutorial else "Continue"
+	case .Real_Game: return "Return to your game"
 	case .New_Game: return "New Game"
-	case .Tutorial: return "Tutorial (coming soon)"
+	case .Tutorial: return "Restart tutorial" if a.world.mode == .Tutorial && game_in_progress(a) else "Tutorial"
 	case .Credits: return "Credits"
 	case .Quit: return "Quit"
 	}
@@ -411,7 +483,7 @@ draw_title :: proc(fb: ^Framebuffer, a: ^App) {
 		fill_rect(fb, TITLE_ITEM_X, y, TITLE_ITEM_W, TITLE_ITEM_H, bg)
 		rect_outline(fb, TITLE_ITEM_X, y, TITLE_ITEM_W, TITLE_ITEM_H, NAVY if !selected else WHITE)
 		col := WHITE if enabled else GRAY
-		draw_text_centered(fb, TITLE_ITEM_X + TITLE_ITEM_W / 2, y + 12, title_label(item), col)
+		draw_text_centered(fb, TITLE_ITEM_X + TITLE_ITEM_W / 2, y + 12, title_label(a, item), col)
 	}
 	draw_text_centered(fb, CX, FRAME_H - 40, "Up/Down and Enter, or tap.   Esc in a game returns here.", Color{160, 160, 220, 255})
 }
@@ -459,6 +531,111 @@ draw_box :: proc(fb: ^Framebuffer, x, y, w, h: int, title: string) {
 	fill_rect(fb, x, y, w, 32, BLUE)
 	rect_outline(fb, x, y, w, 32, NAVY)
 	draw_text_centered(fb, x + w / 2, y + 11, title, WHITE)
+}
+
+// ---------------------------------------------------------------- tutorial coach (D27 to D30)
+
+COACH_BG :: Color{255, 252, 226, 255}
+HIGHLIGHT :: Color{255, 214, 0, 255}
+
+// The box the coach points at, in frame pixels.
+highlight_box :: proc(h: game.Highlight) -> (x, y, w, ht: int, ok: bool) {
+	switch h {
+	case .None: return 0, 0, 0, 0, false
+	case .Map: return MAP_BOX_X, MAP_BOX_Y, MAP_BOX_W, MAP_BOX_W, true
+	case .Minimap: return PANEL_BOX_X, MINI_BOX_Y, PANEL_BOX_W, MINI_BOX_H, true
+	case .Stats: return PANEL_BOX_X, STAT_BOX_Y, PANEL_BOX_W, STAT_BOX_H, true
+	case .Pack: return PANEL_BOX_X, PACK_BOX_Y, PANEL_BOX_W, PACK_BOX_H, true
+	case .Log: return LOG_BOX_X, LOG_BOX_Y, LOG_BOX_W, LOG_BOX_H, true
+	}
+	return 0, 0, 0, 0, false
+}
+
+// What the coach box says now, or ok = false when it has nothing to say (or was dismissed for this room).
+Coach_Text :: struct {
+	title:     string,
+	text:      string,
+	highlight: game.Highlight,
+	ok:        bool,
+}
+
+coach_text :: proc(a: ^App, hint: ^Text_Buf) -> Coach_Text {
+	w := &a.world
+	if w.tut.mercy {
+		return {
+			"That would have been the end of you",
+			"In the real game that blow ends your run. Here we shall pretend it did not happen. Back to the door with you, and your hams are restocked.",
+			.None,
+			true,
+		}
+	}
+	if a.coach_hidden {return {}}
+	cur := game.tutorial_current(w)
+	if cur.lesson < 0 {return {}}
+	l := &game.TUT_LESSONS[cur.lesson]
+	if cur.here {return {l.title, l.text, l.highlight, true}}
+	dir, ok := game.tutorial_direction(w, int(l.col), int(l.row))
+	if !ok {return {}}
+	tb_str(hint, "Head ")
+	switch dir {
+	case .North: tb_str(hint, "north")
+	case .East: tb_str(hint, "east")
+	case .South: tb_str(hint, "south")
+	case .West: tb_str(hint, "west")
+	}
+	tb_str(hint, " to find ")
+	tb_str(hint, l.place)
+	tb_str(hint, ".")
+	return {"Where to?", tb_string(hint), .None, true}
+}
+
+draw_coach :: proc(a: ^App) {
+	hint: Text_Buf
+	c := coach_text(a, &hint)
+	if !c.ok {return}
+	fb := &a.fb
+	// the lesson takes the message box
+	fill_rect(fb, LOG_BOX_X, LOG_BOX_Y, LOG_BOX_W, LOG_BOX_H, BOX_BORDER)
+	fill_rect(fb, LOG_X, LOG_Y, LOG_W, LOG_H, COACH_BG)
+	draw_text(fb, LOG_X + 8, LOG_Y + 6, c.title, NAVY)
+	lines: [16]string
+	n := wrap_text(c.text, LOG_W - 16, &lines)
+	for i in 0 ..< min(n, 4) {
+		draw_text(fb, LOG_X + 8, LOG_Y + 22 + i * 14, lines[i], BLACK)
+	}
+	label := "H: show again" if a.coach_hidden else "Enter: hide"
+	if !a.coach_hidden {draw_text(fb, LOG_X + LOG_W - 8 - text_width(label), LOG_Y + 6, label, GRAY)}
+	// pulse the border of the box it is about: a triangle wave between its colour and yellow
+	if x, y, bw, bh, ok := highlight_box(c.highlight); ok {
+		phase := a.pulse % 60
+		k := phase if phase < 30 else 60 - phase // 0..30
+		col := Color {
+			u8((int(BOX_BORDER.r) * (30 - k) + int(HIGHLIGHT.r) * k) / 30),
+			u8((int(BOX_BORDER.g) * (30 - k) + int(HIGHLIGHT.g) * k) / 30),
+			u8((int(BOX_BORDER.b) * (30 - k) + int(HIGHLIGHT.b) * k) / 30),
+			255,
+		}
+		rect_outline(fb, x, y, bw, bh, col)
+		rect_outline(fb, x + 1, y + 1, bw - 2, bh - 2, col)
+	}
+	a.pulse += 1
+	a.dirty = true // keep animating
+}
+
+draw_tutorial_done :: proc(fb: ^Framebuffer) {
+	draw_box(fb, MAP_CX - 190, MAP_CY - 70, 380, 140, "Tutorial complete")
+	draw_text_centered(fb, MAP_CX, MAP_CY - 22, "You have escaped the training cellar.", BLACK)
+	draw_text_centered(fb, MAP_CX, MAP_CY - 6, "The real dungeon is less polite.", BLACK)
+	draw_text_centered(fb, MAP_CX, MAP_CY + 30, "Enter: a real game     Esc: the menu", NAVY)
+}
+
+// After the exit: back to the real game if there is one in progress, otherwise a new one (D30, D31).
+tutorial_finished :: proc(a: ^App) {
+	if real_in_progress(a) {
+		app_resume_real(a)
+	} else {
+		app_new_game(a, a.seed + 1)
+	}
 }
 
 draw_game_over :: proc(fb: ^Framebuffer, w: ^game.World) {
@@ -595,7 +772,15 @@ app_tap :: proc(a: ^App, x, y: int) {
 		}
 		return
 	case w.state != .Play:
-		app_new_game(a, a.seed + 1)
+		if w.mode == .Tutorial {
+			tutorial_finished(a)
+		} else {
+			app_new_game(a, a.seed + 1)
+		}
+		return
+	}
+	if w.mode == .Tutorial && x >= LOG_BOX_X && x < LOG_BOX_X + LOG_BOX_W && y >= LOG_BOX_Y && y < LOG_BOX_Y + LOG_BOX_H {
+		a.coach_hidden = !a.coach_hidden
 		return
 	}
 	if x >= MAP_X && y >= MAP_Y && x < MAP_X + MAP_PX && y < MAP_Y + MAP_PX {

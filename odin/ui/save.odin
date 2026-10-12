@@ -58,7 +58,10 @@ save_encode :: proc(a: ^App) -> string {
 	w_str(&w, SAVE_FORMAT)
 	w_str(&w, `","version":`)
 	w_hex_dec(&w, SAVE_VERSION)
-	if a.world.state != .Play || a.log_full {
+	// while the tutorial runs the real game is the one saved, from its own seed and log
+	over := a.world.state != .Play
+	if a.world.mode == .Tutorial {over = a.real_over}
+	if over || a.log_full {
 		w_str(&w, `,"empty":true}`)
 		return string(a.io[:w.n])
 	}

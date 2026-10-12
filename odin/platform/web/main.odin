@@ -34,6 +34,13 @@ platform_open_title :: proc "c" () {
 	ui.app_open_title(&app)
 }
 
+// Start the training level straight away (?tutorial=1, tests).
+@(export)
+platform_start_tutorial :: proc "c" (seed_lo, seed_hi: u32) {
+	context = ctx
+	ui.app_new_tutorial(&app, u64(seed_hi) << 32 | u64(seed_lo))
+}
+
 // `key` is a ui.Key number (see page/platform.js).
 @(export)
 platform_key :: proc "c" (key: i32) -> i32 {
