@@ -35,6 +35,7 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **D27 Coach area: it replaces the message log while a lesson is due** (user, 2026-10-12), in the 480x84 box under the map; the log returns when the lesson is dismissed or done. Nothing covers the map.
 - **D28 Coach highlight: a pulsing border** on the box a lesson names (user, 2026-10-12): the 2 px border pulses between its normal colour and bright yellow about once a second. The app therefore redraws every frame while a lesson is on screen (the page's draw-on-change optimisation is kept otherwise).
 - **D29 Coach dismissal: Enter (or a tap on the coach box) hides the lesson until the next room** (user, 2026-10-12); the message log returns meanwhile. A key (H) recalls it. The hidden state is UI-only, not saved.
+- **D30 Tutorial finish: a dialog** (user, 2026-10-12) saying the tutorial is done, with Enter: start a real game and Esc: back to the title. Nothing is saved or flagged (D23).
 
 ## Findings
 
