@@ -31,6 +31,7 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **D23 No reward for finishing the tutorial** (user, 2026-10-11): no flag, bonus or credits line; on completion it simply offers a real game.
 - **D24 Layout before the coach UI** (user, 2026-10-12): the screen layout is reworked first (TODO item 22: borders, padding, room for a coach area; frame size open), then tutorial T2 is built in the new layout. No temporary overlay.
 - **D25 Frame size 800x600** (user, 2026-10-12) for the reworked layout: the 480x480 map stays 15x15 tiles of 32 px; borders and padding around every area; a roomier right panel (minimap, pack, statistics); a message and coach area under the map. Exact placement still to be drawn and approved before it is built.
+- **D26 Placement: map left, panel right, message and coach area below** (user, 2026-10-12): the map top-left with a border; a right panel stacked minimap, statistics, pack; a message and coach area under the map. Closest to the current layout.
 
 ## Findings
 
