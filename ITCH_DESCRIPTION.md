@@ -6,6 +6,10 @@ HamQuest is a turn-based dungeon crawl on an eight by eight maze of rooms and pa
 
 This is a **rebuild**: the original was a C# game written between 2007 and 2011 (WinForms first, then Silverlight) that no browser can run any more. It has been brought back to life in Odin and WebAssembly, so it plays right here on the page.
 
+## New here? Play the tutorial
+
+Pick **Tutorial** on the title screen. It is a short training cellar of thirteen rooms that teaches the lot: moving, the minimap, yer pack, fighting, resting, keys and doors, shops, darkness, traps and the exit. It will not let you die in it, and it tells you so with some embarrassment. It does not touch yer saved game, and finishing it gives you nothing but knowing what you are doing.
+
 ## What you do
 
 - Explore the maze. Rooms are dark; yer light source decides how far you can see, and it burns down.
@@ -25,10 +29,12 @@ Easy? The original was not, and neither is this one. Monsters get more numerous 
 | Rest (heals 1, only when nothing is around) | Space | Tap yourself, or **Rest** |
 | Switch between attack and defend gear | Tab | Tap the sword or shield icon, or **Mode** |
 | Invoke the Amulet (drops it and teleports you) | Y | **Amulet** |
+| Menu (continue, new game, tutorial, credits) | Esc | **Esc** |
 | New game | F2 | **New** |
 | Credits | C | **Credits** |
 | Full screen | F | |
 | Close a pop-up | Enter / Esc | Tap |
+| Tutorial: hide a lesson, or show it again | Enter, H | Tap the message box |
 | In a shop: choose, buy one, buy all, leave | Up/Down, Enter, A, Esc | Tap a row (tap again to buy) or a button |
 
 The game **saves by itself** in yer browser and picks up where you left off when you come back. Starting a new game (F2) replaces it. If you die, that is that.
