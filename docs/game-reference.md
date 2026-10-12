@@ -1,6 +1,6 @@
 # HamQuest rules reference (extracted from the C# code)
 
-Status: **M1 draft**, written from `HamQuestEngine/` (canonical) and `HamQuestSLClient/config/`. Not yet checked against play. Items marked **[CHECK]** need the user, who has played the game, to confirm. Items marked **[BUG?]** look unintended; the port decides per D1 (see `PORT.md`).
+Status: **M1 draft**, written from `HamQuestEngine/` (canonical) and `HamQuestSLClient/config/` (both removed from the tree on 2026-10-12: `git show csharp-final:<path>`; the data now lives in `data/`). Not yet checked against play. Items marked **[CHECK]** need the user, who has played the game, to confirm. Items marked **[BUG?]** look unintended; the port decides per D1 (see `PORT.md`).
 
 Notation: `file:Class.method`. "Roll" values come from weighted tables in `config/propertyGroups.xml` (`generators` group). `Next(n)` is a uniform integer in `[0, n)`.
 

@@ -19,32 +19,27 @@ tools/test.sh                         # stale checks, odin check -vet (native + 
 
 Never hand-edit `odin/content/content_gen.odin`; change `tools/gen_content.py` (its `EXTRA_MESSAGES`, `DATA_FIXES`, `IGNORED` tables hold every deliberate departure from the XML). Odin is `~/ODIN/odin` (`dev-2026-07-nightly`).
 
-## Status: legacy C# source, being ported to Odin + wasm (itch.io web build)
+## Status: the Odin port is the game; the C# original is removed
 
-HamQuest is a C# roguelike the user wrote between 2007 and 2011: first a WinForms app, then a Silverlight port (the client that carries the canonical data), then an attempted WPF port that was abandoned (.NET 4.5, solution-less `.csproj` files). The goal is an **Odin `js_wasm32` port** shipped as an HTML5 build on itch.io (thegrumpygamedev). The C# is the **reference implementation**: keep it intact and read-only until the port is verified, then decide what to delete.
+HamQuest is a C# roguelike the user wrote between 2007 and 2011 (WinForms, then Silverlight, then an abandoned WPF port). It was ported to **Odin + WebAssembly** (itch.io web build, thegrumpygamedev) in October 2026. On October 12, 2026 the user had the old C# removed: the engine, the generic board library, both clients and the tests are gone from the tree, and **live in git history under the tag `csharp-final`** (`git show csharp-final:HamQuestEngine/Item/Descriptor.cs`, or `git checkout csharp-final -- <path>`). The C# never built on this Linux machine and nothing here needs it.
 
-Nothing here builds on this Linux machine (WPF, Silverlight, .NET Framework 4.x, `PresentationCore`/`WindowsBase`). There are no build, lint or test commands for the C#. `dotnet` is installed but cannot target these projects as-is. The Odin port lives in `odin/`: `content` (generated tables + atlas), `game` (pure rules), `ui` (framebuffer, HUD, input, dialogs) and `platform/native` (SDL2); `platform/web` (wasm export glue; page in `platform/web/page`).
+What stayed is the original's **data**, which the generator reads: `data/config/` (XML), `data/maps/` (`.cqm` room layers), `data/images/` (the 32x32 tiles and minimap art) and `data/sounds/` (three samples, unused, provenance unknown). The Odin port lives in `odin/`: `content` (generated tables + atlas), `game` (pure rules, the tutorial level and lessons), `ui` (framebuffer, HUD, title menu, coach, dialogs, input, replay save), `platform/native` (SDL2) and `platform/web` (wasm export glue; page in `platform/web/page`).
 
-The user's notes vault (`/home/yermom/git/bok-of-splorr/splorr`, Obsidian markdown) is an additional working directory and holds what the port needs: `Tech/Odin wasm recipe.md` (build, frame loop, input, canvas/framebuffer variants), `Tech/Shipping to itch.io.md`, `Tech/Kordanor's Cabal Odin port.md` (closest prior art: a roguelike port with a pure core, tests and a shipping script) and `Gotchas.md` (read it before writing Odin; it has wasm, RNG, JSON and test pitfalls). HamQuest is **not yet listed** in that vault's `Home.md`; per its standing rules, add a `Games/` note with frontmatter and link it from `Home.md` once the port starts.
+The user's notes vault (`/home/yermom/git/bok-of-splorr/splorr`, Obsidian markdown) is an additional working directory: `Tech/Odin wasm recipe.md`, `Tech/Shipping to itch.io.md`, `Tech/Kordanor's Cabal Odin port.md` and `Gotchas.md` (read it before writing Odin). Its HamQuest note is `Games/HamQuest of SPLORR!!.md`. **Player-facing text says "yer", never "your" or "you're"** (vault rule; the generator rewrites the original's messages and a test guards it).
 
 ## Repository layout
 
-Eight project directories, no solution file. Most are duplicated, so **do not assume edits to one propagate**:
-
-| Dir | What it is |
+| Path | What it is |
 |---|---|
-| `HamQuestEngine/` | Game engine library, desktop flavour (WPF `System.Windows.Media`, `System.Drawing`). Newer: has `ShopBehaviors.cs`. |
-| `HamQuestEngineSL/` | Silverlight copy of the engine. Same classes, different usings/regions, and **drifted** (lacks `ShopBehaviors.cs`; most files differ textually even ignoring line endings). Treat `HamQuestEngine/` as canonical unless a diff shows otherwise. |
-| `PDGBoardGames/`, `PDGBoardGamesSL/` | Generic board/maze library the engine builds on (`Board<T>`, `MazeBase`, `CQMFile`, `WeightedGenerator<T>`, `CountedCollection<T>`, `IRandomNumberGenerator`). SL copy is flattened into one directory. |
-| `PDBBoardGames.Tests/` | The only tests: `CountedCollection` and `RandomNumberGenerator` (note the `PDB` typo). Nothing tests the game. |
-| `HamQuestWpfClient/` | The attempted WPF port, abandoned. A copy of the Silverlight client; `MainPage.xaml.cs` (845 lines) is the entire UI/game loop. |
-| `HamQuestSLClient/` | Silverlight UI client, near-identical to the WPF one. Holds the **canonical data**: `config/*.xml`, `maps/*.cqm`, `images/`, `sounds/`. The WPF client has its own copy of the same assets. |
+| `odin/` | the game (see above) and its tests (`odin/tests`) |
+| `data/` | the original's XML config, `.cqm` maps, images, sounds: the generator's input |
+| `tools/` | generator, atlas packer, font baker, build/test/ship scripts, cover, screenshots and manual makers |
+| `docs/` | `PORT_PLAN.md`, `PORT.md` (decision log D1 to D32 and findings), `game-reference.md` (rules spec), `TODO.md` (Steam hit list), `TUTORIAL_PLAN.md` |
+| `assets/`, `manual/`, `devlog/`, `ITCH_DESCRIPTION.md` | release material for the itch.io page |
 
-`bin/`, `obj/`, `*.deploy`, `.pfx`, `.csproj.user` are committed build output (about 1,000 of the 1,650 tracked files). Ignore them; never treat `bin/Debug/...` copies as source.
+## The original's architecture (what `data/` and `docs/game-reference.md` describe; the source is at tag `csharp-final`)
 
-## Architecture (big picture)
-
-**Data-driven, stringly-typed engine.** Almost all game content is XML in `HamQuestSLClient/config/` (`creatures.xml`, `items.xml`, `messages.xml`, `terrains.xml`, `themes.xml`, `propertyGroups.xml`, plus per-entity files under `creatures/` and `items/`). Each top-level XML lists files; entities can inherit with a `template="a.xml,b.xml"` attribute (comma list, concatenated, later wins; identifiers are *appended*).
+**Data-driven, stringly-typed engine.** Almost all game content is XML in `data/config/` (originally `HamQuestSLClient/config/`) (`creatures.xml`, `items.xml`, `messages.xml`, `terrains.xml`, `themes.xml`, `propertyGroups.xml`, plus per-entity files under `creatures/` and `items/`). Each top-level XML lists files; entities can inherit with a `template="a.xml,b.xml"` attribute (comma list, concatenated, later wins; identifiers are *appended*).
 
 **`Descriptor`** (`Item/Descriptor.cs`) is the one universal object: a `Dictionary<string, object>` of properties. Property names are constants in `GameConstants/Properties.cs`. Everything (items, creatures, terrain, messages, property groups, the player) is a `Descriptor` read with `GetProperty<T>(name)`. XML values with a `type="Name"` attribute are instantiated **by reflection**: `PropertyValuePair.LoadPropertyValuesFromXmlNode` finds a class by `Type.Name`, calls its static `LoadFromNode(XElement)`. Untyped values are parsed as int, then float, then bool, then string. To port, that reflection registry becomes an explicit table of "property kinds" (see `DescriptorProperties/`: generators, rollers, bump handlers, key handlers, movers, step tracker, statistic holders, tag sets, counters).
 
@@ -58,9 +53,9 @@ Eight project directories, no solution file. Most are duplicated, so **do not as
 
 **Client** is a thin view: layered image grids (`ImageCellMap`, 4 map layers, 11 minimap layers), 32x32 map tiles, 20x20 minimap tiles, 7x9 digit sprites, tutorial pop-ups driven by message descriptors, sounds triggered from the `MessageQueue` callback by message id (3 samples: key pickup, lock open, carrot nom).
 
-## Quirks and traps for the port
+## Quirks of the original, and what the port did
 
-Each of these is a decision to take with the user before "fixing" it; the Odin port should be deliberate about whether to preserve or repair.
+These are the original's traps. Each was a decision taken with the user; the outcomes are in `docs/PORT.md` and `docs/game-reference.md`. Do not "fix" one silently: record it in `docs/PORT.md` and the generator's tables.
 
 1. **`Descriptor.GetProperty<T>` swallows every exception and returns `default(T)`.** A missing property, a wrong type, or a typo silently becomes 0/null/false. Much of the game's behaviour (including bugs) may depend on that. Port with an explicit "missing → zero" rule, and consider a debug mode that logs misses.
 2. **Iteration-order dependence.** `WeightedGenerator<T>.Generate` walks a `Dictionary`, so results for a given random roll depend on insertion order (which is XML order today). Reproducing the same weighted results needs the same order. `MinimalValue` is wrong (starts at `default`, so it is never above 0).
@@ -79,20 +74,9 @@ Each of these is a decision to take with the user before "fixing" it; the Odin p
 
 Port documents (read these before touching port code): `docs/PORT_PLAN.md` (plan and milestones), `docs/game-reference.md` (rules extracted from the C#, with **[CHECK]**/**[BUG?]** markers), `docs/PORT.md` (decision and findings log; add an entry per milestone). Extra quirks found while writing the reference: the maze is a spanning tree (locks only on leaves, keys only on non-leaves, so key order is solvable by construction); shop purchases are free because the price is read as `uint` from an `int` and the exception is swallowed; a blocked move still advances the step tracker; `SpawnMonsters` can spin forever.
 
-## Port plan (draft: not yet agreed with the user)
-
-Follow the shape that worked for Kordanor's Cabal (see vault note):
-
-1. **Freeze the reference.** Keep C# as-is; extract a written rules spec (`docs/game-reference.md`) from `PlayerMoveHandler`, `CreatureMoveHandler`, `PlayerDescriptor`, `Maze`, `Map` and the XML property groups. Record decisions as D1..Dn the way the vault's port notes do.
-2. **Data pipeline.** A small script (Python or Odin) that reads `config/**/*.xml` and `maps/*.cqm` and **generates Odin enums + read-only tables** (items, creatures, terrains, messages, generators, 29 maps). Resolve `template=` inheritance at generation time; fail the build if generated files are stale. This removes the runtime reflection and file IO.
-3. **Pure game core** (`game` package, no platform imports): world as plain structs, `core_step(input) -> state`, bounded message queue, own seeded RNG, capped retry loops. Rules as plain procedures; creature "special attacks" as one `switch`.
-4. **Platform shell** under `#+build js`: wasm page with 2D canvas or software framebuffer (WebGL does not work on the user's machine), keyboard (read `e.key` first, then `e.code`), optional touch, audio, `localStorage`. Native `odin test` runs the core; `#+build !js` on the test file; `-define:ODIN_TEST_THREADS=1`.
-5. **Tests**: rule-level unit tests, a maze-solvability test (every generated game must be winnable: keys reachable before their doors, quest items reachable), soak test with random inputs, and a wasm-build check (remember `int` is 32-bit on `js_wasm32`).
-6. **Ship**: script in the style of the vault's `tools/ship.sh` (tests, `-o:size` build, zip with `index.html` at the root, push **only** with `--push`). Never run butler or any publish step unless the user says so.
-
 ## Decisions (settled with the user)
 
-- **D1 Fidelity: modernise freely.** The C# is a design reference, not a spec to match. Fix bugs and rebalance where it helps; still log each notable change in the port record so it is a choice, not an accident.
+- **D1 Fidelity: modernise freely.** The original is a design reference, not a spec to match. Fix bugs and rebalance where it helps; still log each notable change in the port record so it is a choice, not an accident.
 - **D2 Content: generate Odin tables** from `config/**/*.xml` and `maps/*.cqm` at build time; no runtime XML parsing or file IO in wasm. Generated files must be checked for staleness by the test script.
 - **D3 Audio: ship without sound at first.** Port visuals only; the three samples are excluded until their provenance and licences are confirmed. The 32x32 tile art is kept for now, but its author is also unrecorded: confirm before release.
 - **D5-D10 (see `docs/PORT.md`):** framebuffer + packed atlas rendering; fixed 8x8 maze; tune balance while implementing; native SDL2 client in addition to wasm; title "HamQuest of SPLORR!!"; vault note now; 640x560 landscape (reworked to 800x600 by D25/D26: map 480x480 with bordered boxes, panel right, messages below).
@@ -102,6 +86,7 @@ Follow the shape that worked for Kordanor's Cabal (see vault note):
 - **D11-D13 (see `docs/PORT.md`):** shops charge the displayed price (original bug: free); blocked moves still cost a step; first-time tutorial pop-ups kept with a persistent "stop tutorial".
 
 - **D14-D16 (see `docs/PORT.md`):** the original's lethality is confirmed, so M4 rules stand and difficulty stays as the original for v1; next is M5 (renderer/HUD, native SDL2 window first).
+- **D18 to D32 (see `docs/PORT.md`):** the tutorial (a fixed hand-authored level, a mercy rule, no save, no reward, jokey wording, coach in the message box with a pulsing highlight; D18 to D23, D27 to D31); a title menu first (D20, D21); the 800x600 bordered layout (D24 to D26); and the **"yer" voice** (D32).
 
 ## Still open
 

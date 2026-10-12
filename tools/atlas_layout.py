@@ -1,6 +1,6 @@
 """Shared by gen_content.py and pack_atlas.py: which images go in the atlas and where.
 
-Every PNG under HamQuestSLClient/images except the light-radius masks (turned into radial
+Every PNG under data/images except the light-radius masks (turned into radial
 profiles) and the unused digit sprites. Deterministic shelf packing, 1024 px wide, no padding
 (the renderer samples nearest and never scales sprites).
 """
@@ -9,7 +9,7 @@ import struct
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-IMAGES = os.path.join(ROOT, 'HamQuestSLClient', 'images')
+IMAGES = os.path.join(ROOT, 'data', 'images')
 EXCLUDE_PREFIXES = ('images/lights/', 'images/numbers/')
 ATLAS_WIDTH = 1024
 

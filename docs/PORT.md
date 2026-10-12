@@ -179,3 +179,10 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 ### Upload 4 (2026-10-12)
 - `tools/ship.sh --push` (user said "push to master, ship to itch"): tests green (80), `build/hamquest-html5.zip` 100 KB, butler pushed 902 KiB (67 KiB patch) to `thegrumpygamedev/hamquest-of-splorr:html`, **build #2112169 v4** (from #2105958), processed. Contains: title menu, tutorial, 800x600 layout, yer voice. master pushed first (3ecb499 to 7b7a454).
 - Manual shipped the same day (user said "ship the manual"): `tools/ship_manual.sh --push`, 503 KiB (288 KiB patch) to `:manual`, **build #2112176 v2** (from #2106005), processed; it shows the 800x600 layout and the yer voice. The itch page's screenshots, viewport size (set 800x600 or fullscreen), description and devlog text are the user's to update; regenerated copies are in the repo.
+
+### The C# is removed (2026-10-12)
+- Done (user: "time to remove the old C# version"): `HamQuestEngine`, `HamQuestEngineSL`, `PDGBoardGames`, `PDGBoardGamesSL`, `PDBBoardGames.Tests`, `HamQuestWpfClient` and the code of `HamQuestSLClient` are deleted from the tree (about 540 files). The tag **`csharp-final`** (the commit just before) keeps all of it: `git show csharp-final:HamQuestEngine/Item/Descriptor.cs`.
+- Kept and moved: the original's data, `HamQuestSLClient/{config,maps,images,sounds}` to `data/{config,maps,images,sounds}` (`git mv`, history follows). The generator, atlas packer, cover and manual tools read `data/`. The sounds are still unused and unlicensed.
+- The generated file's header comment changed (it names `data/`); `CONTENT_HASH` deliberately hashes the old header text, so the hash is unchanged (`0x8bca3dc5e26abd18`) and saves from build #2112169 stay valid.
+- `CLAUDE.md` and `README.md` rewritten for the new layout; the draft port plan section is gone from `CLAUDE.md` (the plan is in `docs/PORT_PLAN.md`). `docs/game-reference.md` still cites C# file names; they resolve through the tag.
+- Verified: `tools/test.sh` green (80 tests, parity hashes unchanged), cover and manual rebuild from `data/`. Not pushed.

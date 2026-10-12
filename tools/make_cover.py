@@ -5,7 +5,7 @@ import os
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-IMG = os.path.join(ROOT, 'HamQuestSLClient', 'images', 'map')
+IMG = os.path.join(ROOT, 'data', 'images', 'map')
 FONT = os.path.join(ROOT, 'assets', 'fonts', 'm5x7.png')
 OUT = os.path.join(ROOT, 'assets', 'cover.png')
 W, H = 630, 500

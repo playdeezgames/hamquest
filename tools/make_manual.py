@@ -16,7 +16,7 @@ import gen_content as g  # noqa: E402
 from PIL import Image, ImageDraw  # noqa: E402
 
 ROOT = os.path.dirname(HERE)
-IMG = os.path.join(ROOT, 'HamQuestSLClient')
+IMG = os.path.join(ROOT, 'data')
 BUILD = os.path.join(ROOT, 'build', 'manual')
 OUT_DIR = os.path.join(ROOT, 'manual')
 PDF = os.path.join(OUT_DIR, 'HamQuest-of-SPLORR-Manual.pdf')
@@ -50,15 +50,15 @@ def ensure(name):
 
 def item_img(ident, px=40):
     d = ITEM[ident]
-    return '<img class="sp" style="width:%dpx" src="../../%s">' % (px, 'HamQuestSLClient/' + d['image'])
+    return '<img class="sp" style="width:%dpx" src="../../%s">' % (px, 'data/' + d['image'])
 
 
 def creature_img(ident, px=40):
-    return '<img class="sp" style="width:%dpx" src="../../%s">' % (px, 'HamQuestSLClient/' + CREATURE[ident]['image'])
+    return '<img class="sp" style="width:%dpx" src="../../%s">' % (px, 'data/' + CREATURE[ident]['image'])
 
 
 def minimap_img(rel, px=40):
-    return '<img class="sp" style="width:%dpx" src="../../HamQuestSLClient/images/minimap/%s.png">' % (px, rel)
+    return '<img class="sp" style="width:%dpx" src="../../data/images/minimap/%s.png">' % (px, rel)
 
 
 def esc(s):
@@ -394,12 +394,12 @@ def page_html(figs):
 <p>Counts abbreviate: 1.5K is fifteen hundred, 12K twelve thousand.</p>
 <h3>Statistics (bottom right)</h3>
 <table class="small">
-<tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/attack.png"></td><td><b>Attack</b>: the dice you roll with yer weapon. No weapon is 0 (you can still punch).</td></tr>
-<tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/defend.png"></td><td><b>Defence</b>: the most yer armour can absorb from one hit.</td></tr>
-<tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/health.png"></td><td><b>Health</b>: what you have left, over the most you can have.</td></tr>
-<tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/speed.png"></td><td><b>Speed</b>: the moves in this turn.</td></tr>
-<tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/experience.png"></td><td><b>Experience</b>: points over the amount for the next level.</td></tr>
-<tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/level.png"></td><td><b>Level</b>.</td></tr>
+<tr><td class="i"><img class="sp" style="width:28px" src="../../data/images/statistics/attack.png"></td><td><b>Attack</b>: the dice you roll with yer weapon. No weapon is 0 (you can still punch).</td></tr>
+<tr><td class="i"><img class="sp" style="width:28px" src="../../data/images/statistics/defend.png"></td><td><b>Defence</b>: the most yer armour can absorb from one hit.</td></tr>
+<tr><td class="i"><img class="sp" style="width:28px" src="../../data/images/statistics/health.png"></td><td><b>Health</b>: what you have left, over the most you can have.</td></tr>
+<tr><td class="i"><img class="sp" style="width:28px" src="../../data/images/statistics/speed.png"></td><td><b>Speed</b>: the moves in this turn.</td></tr>
+<tr><td class="i"><img class="sp" style="width:28px" src="../../data/images/statistics/experience.png"></td><td><b>Experience</b>: points over the amount for the next level.</td></tr>
+<tr><td class="i"><img class="sp" style="width:28px" src="../../data/images/statistics/level.png"></td><td><b>Level</b>.</td></tr>
 </table>
 </div></div>
 <h2>What every slot is</h2>

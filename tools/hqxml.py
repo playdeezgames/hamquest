@@ -1,6 +1,7 @@
 """Loader for the original HamQuest XML config, mirroring the C# semantics.
 
-Mirrors HamQuestEngine/Item/Descriptor.cs PropertyValuePair.LoadPropertyValuesFromXmlNode:
+Mirrors the original C# PropertyValuePair.LoadPropertyValuesFromXmlNode (HamQuestEngine/Item/Descriptor.cs,
+removed from the tree; `git show csharp-final:HamQuestEngine/Item/Descriptor.cs`):
   * `template="a,b,c"` loads each file's root element recursively and concatenates properties;
     identifiers concatenate (template identifiers first, then the node's own).
   * later properties replace earlier ones of the same name (Descriptor.SetProperty).
