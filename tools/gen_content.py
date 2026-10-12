@@ -64,6 +64,16 @@ DATA_FIXES = {
 }
 
 
+# The game's voice (vault rule, user 2026-10-12): "yer", never "your" or "you're", in every player-facing string.
+# Applied to all message text, including the original's, as one deliberate departure from the XML.
+def yer(text):
+    text = re.sub(r"\bYour\b", "Yer", text)
+    text = re.sub(r"\byour\b", "yer", text)
+    text = re.sub(r"\bYou're\b", "Yer", text)
+    text = re.sub(r"\byou're\b", "yer", text)
+    return text
+
+
 # Messages the C# engine asks for but messages.xml never defined: the original showed the raw
 # identifier (e.g. "NeedRainbowKey") in the message log. The port supplies real text (D1).
 EXTRA_MESSAGES = {
@@ -643,15 +653,15 @@ class Gen:
         out = []
         for m in self.messages:
             d = {'ident': m.ident}
-            d['text'] = m.str_('text', required=True)
+            d['text'] = yer(m.str_('text', required=True))
             d['color'] = m.str_('text-color', required=True)
             d['sound'] = m.str_('sound-effect')
             d['always_tutorial'] = m.has('always-tutorial')
             if d['always_tutorial']:
                 m.raw('always-tutorial')
             d['tutorial_image'] = self.image(m.str_('tutorial-image-path')) if m.has('tutorial-image-path') else ''
-            d['tutorial_title'] = m.str_('tutorial-title-text')
-            d['tutorial_text'] = m.str_('tutorial-description-text')
+            d['tutorial_title'] = yer(m.str_('tutorial-title-text'))
+            d['tutorial_text'] = yer(m.str_('tutorial-description-text'))
             if d['sound']:
                 self.enum('Sound_Effect', d['sound'])
             m.leftover()
@@ -1025,8 +1035,12 @@ def emit(gen, items, creatures, player, messages, terrains, groups):
             w('\t},')
         w('}')
     body = '\n'.join(L) + '\n'
-    digest = hashlib.sha256(body.encode('utf-8')).hexdigest()[:16]
-    # CONTENT_HASH identifies the rules data (saves are only valid for the data they were made with)
+    # CONTENT_HASH identifies the rules data (saves are only valid for the data they were made with).
+    # The wording of messages is not rules data: fixing a typo must not invalidate anyone's save, so the
+    # MESSAGES table is left out (the message ids, which a save does depend on, are in the enum).
+    a = body.index('MESSAGES := [Message_Id]Message_Def{')
+    b = body.index('\n}\n', a)
+    digest = hashlib.sha256((body[:a] + body[b:]).encode('utf-8')).hexdigest()[:16]
     return body.replace('package content\n', 'package content\n\nCONTENT_HASH :: u64(0x%s)\n' % digest, 1)
 
 

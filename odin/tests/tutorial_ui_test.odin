@@ -176,3 +176,19 @@ mercy_is_explained_for_one_command :: proc(t: ^testing.T) {
 	hint = {}
 	testing.expect(t, ui.coach_text(a, &hint).title != c.title)
 }
+
+@(test)
+messages_take_the_box_back_from_the_lesson :: proc(t: ^testing.T) {
+	a := new(ui.App)
+	defer free(a)
+	ui.app_new_tutorial(a, 12)
+	hint: ui.Text_Buf
+	press(a, .Right, 2) // silent moves: the lesson stays
+	testing.expect(t, ui.coach_text(a, &hint).ok)
+	press(a, .Space) // resting says something: the log wins
+	hint = {}
+	testing.expect(t, !ui.coach_text(a, &hint).ok)
+	press(a, .H) // and H brings the lesson back
+	hint = {}
+	testing.expect(t, ui.coach_text(a, &hint).ok)
+}

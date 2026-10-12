@@ -37,6 +37,7 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **D29 Coach dismissal: Enter (or a tap on the coach box) hides the lesson until the next room** (user, 2026-10-12); the message log returns meanwhile. A key (H) recalls it. The hidden state is UI-only, not saved.
 - **D30 Tutorial finish: a dialog** (user, 2026-10-12) saying the tutorial is done, with Enter: start a real game and Esc: back to the title. Nothing is saved or flagged (D23).
 - **D31 A tutorial run is not saved** (user, 2026-10-12). Consequences I am taking: the real game's seed and log stay in the app untouched while the tutorial runs, so its save is never overwritten and "Return to your game" restores it by replay; closing the page loses only the tutorial; tips already seen carry into the tutorial world unchanged. The tutorial finish dialog's Enter returns to a real game in progress if there is one, otherwise starts a new one.
+- **D32 The voice is "yer"** (user, 2026-10-12, vault rule: say "yer", never "your" or "you're", in every player-facing string and the itch copy). Applied to the tutorial, the UI strings, the itch description, devlog and manual, and to every game message by one rule in `tools/gen_content.py` (`yer()`), a deliberate departure from the XML. `CONTENT_HASH` no longer covers message wording, so text edits never invalidate saves (this one change moved the hash once). Guarded by the `text_uses_the_yer_voice` test.
 
 ## Findings
 

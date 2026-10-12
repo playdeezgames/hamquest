@@ -2,17 +2,17 @@
 
 *A brutal little maze crawl. Collect the sixteen pieces of the MegaHam, find the Rainbow Key, and get out alive. You will not get out alive.*
 
-HamQuest is a turn-based dungeon crawl on an eight by eight maze of rooms and passages. Every dead end is locked, every key is lying in the open somewhere else, and almost everything between you and the exit would like to eat you. Your character has five hit points, a dagger, some ham and a torch. Good luck.
+HamQuest is a turn-based dungeon crawl on an eight by eight maze of rooms and passages. Every dead end is locked, every key is lying in the open somewhere else, and almost everything between you and the exit would like to eat you. Yer character has five hit points, a dagger, some ham and a torch. Good luck.
 
 This is a **rebuild**: the original was a C# game written between 2007 and 2011 (WinForms first, then Silverlight) that no browser can run any more. It has been brought back to life in Odin and WebAssembly, so it plays right here on the page.
 
 ## What you do
 
-- Explore the maze. Rooms are dark; your light source decides how far you can see, and it burns down.
+- Explore the maze. Rooms are dark; yer light source decides how far you can see, and it burns down.
 - Collect the **16 pieces of the MegaHam**. They sit in dead ends behind locked doors.
 - Find the **coloured keys** that open the coloured doors. Keys are never behind locks, so the maze can always be solved. It just does not feel like it.
 - Fight what you meet by walking into it, or do not. Armour makes you tougher and *slower*. Boots make you quick.
-- Spend your gold in the four shops (one visit each).
+- Spend yer gold in the four shops (one visit each).
 - Kill the **Summoner** for the Rainbow Key, then walk out of the exit with all sixteen pieces.
 
 Easy? The original was not, and neither is this one. Monsters get more numerous every time you pick up a piece of the MegaHam.
@@ -31,7 +31,7 @@ Easy? The original was not, and neither is this one. Monsters get more numerous 
 | Close a pop-up | Enter / Esc | Tap |
 | In a shop: choose, buy one, buy all, leave | Up/Down, Enter, A, Esc | Tap a row (tap again to buy) or a button |
 
-The game **saves by itself** in your browser and picks up where you left off when you come back. Starting a new game (F2) replaces it. If you die, that is that.
+The game **saves by itself** in yer browser and picks up where you left off when you come back. Starting a new game (F2) replaces it. If you die, that is that.
 
 ## Tips
 

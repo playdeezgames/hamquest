@@ -236,7 +236,7 @@ def monsters_table():
              'portal', 'minotaur', 'necromancer', 'summoner', 'dragon']
     notes = {
         'thief': 'Very fast. Steals gold, and now and then a piece of the MegaHam (which goes back into the maze).',
-        'ghoul': 'Drains your experience points when it hits.',
+        'ghoul': 'Drains yer experience points when it hits.',
         'portal': 'Teleports you to another room when it hits (the Amulet blocks it).',
         'necromancer': 'Calls more of the dead to fight beside it. Carries the Amulet of Yendor.',
         'summoner': 'Calls monsters to fight beside it. **Carries the Rainbow Key.**',
@@ -282,7 +282,7 @@ def inventory_legend():
         'Amulet': 'Blocks portals and teleporting monsters, but you cannot leave the maze while you carry it. Press Y to put it down and be carried off.',
         'Tools': 'Disarms a trap you walk onto (used up).',
         'Quest': 'Piece of the MegaHam. You need all %d.' % ITEM['Quest']['item_count'],
-        'Compass': 'The Ring of Detection: quest rooms show on your minimap.',
+        'Compass': 'The Ring of Detection: quest rooms show on yer minimap.',
         'Gold': 'Money. Every coin pile you pick up is added to this.',
     }
     for it in sorted(ITEMS, key=lambda d: (d['inv_row'], d['inv_col'])):
@@ -337,12 +337,12 @@ def page_html(figs):
 <h1>The goal</h1>
 <p>You are alone in a maze of {G.groups_maze[0] if hasattr(G,'groups_maze') else 8} by 8 rooms and passages. Every dead end is a locked room. Somewhere in those rooms lie <b>{ITEM['Quest']['item_count']} pieces of the MegaHam</b>. Collect all of them, take the <b>Rainbow Key</b> from the <b>Summoner</b>, and walk into the <b>exit</b> (it is in a dead end too). Anything else you pick up along the way is there to keep you alive until then.</p>
 <div class="box"><b>You start with</b> {PLAYER['initial_health']} health, a dagger, five hams, three potions, some clothes, a match and a torch. Each level adds one health. The game is hard on purpose: many new characters die in their first few rooms. Avoid fights you cannot win, find better gear, and eat.</div>
-<p>The game saves itself in your browser as you play, so closing the page does not lose your place. If you die, the run is over: the next game is a new maze.</p>
+<p>The game saves itself in yer browser as you play, so closing the page does not lose yer place. If you die, the run is over: the next game is a new maze.</p>
 
 <div class="page"></div><h1>The screen</h1>
 <div class="fig"><img src="{annotated}" style="max-width:92%"><div class="cap">The whole screen. The numbers match the list below.</div></div>
 <table>
-<tr><td><span class="n">1</span></td><td><b>The room.</b> The map of the room you are in, 15 by 15 tiles. It is dark: you only see what your light reaches, so a torch shows more than a match. Monsters outside your light are not drawn.</td></tr>
+<tr><td><span class="n">1</span></td><td><b>The room.</b> The map of the room you are in, 15 by 15 tiles. It is dark: you only see what yer light reaches, so a torch shows more than a match. Monsters outside yer light are not drawn.</td></tr>
 <tr><td><span class="n">2</span></td><td><b>The minimap.</b> The maze, 8 by 8 rooms. Only rooms you have been in are drawn. See the next page.</td></tr>
 <tr><td><span class="n">3</span></td><td><b>Inventory.</b> What you carry. Every kind of item has a fixed slot; the number is how many you have.</td></tr>
 <tr><td><span class="n">4</span></td><td><b>Statistics</b>: attack, defence, health, speed, experience and level.</td></tr>
@@ -353,13 +353,13 @@ def page_html(figs):
 
 <div class="page">
 <h1>Reading the minimap</h1>
-<p>The minimap is your map of the maze: each room you have visited is a small square in the grey panel, and it fills in as you explore. A room shows its <b>shape</b>, its <b>open sides</b>, any <b>locked doors</b> and a <b>marker</b>.</p>
+<p>The minimap is yer map of the maze: each room you have visited is a small square in the grey panel, and it fills in as you explore. A room shows its <b>shape</b>, its <b>open sides</b>, any <b>locked doors</b> and a <b>marker</b>.</p>
 <h2>Shapes and sides</h2>
 <table>
 <tr><td class="i"><img class="sp" style="width:34px" src="room.png"></td><td><b>A chamber</b> (a room). The dark bars on the edge show which sides open onto a neighbouring room.</td></tr>
 <tr><td class="i"><img class="sp" style="width:34px" src="pass.png"></td><td><b>A passage.</b> A narrower connection, usually between other rooms.</td></tr>
 <tr><td class="i"><img class="sp" style="width:34px" src="quest.png"></td><td><b>A chamber that holds a piece of the MegaHam.</b> Only shown while you carry the Ring of Detection.</td></tr>
-<tr><td class="i"><img class="sp" style="width:34px" src="here.png"></td><td><b>You are here.</b> The white and magenta box on a room is your current room.</td></tr>
+<tr><td class="i"><img class="sp" style="width:34px" src="here.png"></td><td><b>You are here.</b> The white and magenta box on a room is yer current room.</td></tr>
 <tr><td class="i"><img class="sp" style="width:34px" src="deadend.png"></td><td><b>A dead end with its door.</b> Dead ends have one way in and it is locked. The coloured bar on the side is the lock; its colour tells you which key opens it.</td></tr>
 </table>
 <h2>Door colours</h2>
@@ -390,12 +390,12 @@ def page_html(figs):
 <div class="fig"><img src="{inv}"><div class="cap">The inventory grid. Letters are columns, numbers are rows.</div></div>
 </div><div>
 <h3>Reading a slot</h3>
-<p>Each kind of thing has its own square, so the key to a red door is always in the same place. The small number is how many you carry. A <b>teal frame</b> means it is in use (your weapon, your armour, your light). A <b>red or yellow bar</b> on an item in use means it is nearly worn out: yellow under half, red under a quarter.</p>
+<p>Each kind of thing has its own square, so the key to a red door is always in the same place. The small number is how many you carry. A <b>teal frame</b> means it is in use (yer weapon, yer armour, yer light). A <b>red or yellow bar</b> on an item in use means it is nearly worn out: yellow under half, red under a quarter.</p>
 <p>Counts abbreviate: 1.5K is fifteen hundred, 12K twelve thousand.</p>
 <h3>Statistics (bottom right)</h3>
 <table class="small">
-<tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/attack.png"></td><td><b>Attack</b>: the dice you roll with your weapon. No weapon is 0 (you can still punch).</td></tr>
-<tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/defend.png"></td><td><b>Defence</b>: the most your armour can absorb from one hit.</td></tr>
+<tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/attack.png"></td><td><b>Attack</b>: the dice you roll with yer weapon. No weapon is 0 (you can still punch).</td></tr>
+<tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/defend.png"></td><td><b>Defence</b>: the most yer armour can absorb from one hit.</td></tr>
 <tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/health.png"></td><td><b>Health</b>: what you have left, over the most you can have.</td></tr>
 <tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/speed.png"></td><td><b>Speed</b>: the moves in this turn.</td></tr>
 <tr><td class="i"><img class="sp" style="width:28px" src="../../HamQuestSLClient/images/statistics/experience.png"></td><td><b>Experience</b>: points over the amount for the next level.</td></tr>
@@ -409,22 +409,22 @@ def page_html(figs):
 <div class="page">
 <h1>How the rules work</h1>
 <h2>Moves and turns</h2>
-<p>Every key press that does something is one <b>move</b>, and bumping into a wall or a locked door still counts. Your <b>speed</b> (the number next to the boot) is how many moves make a <b>turn</b>; it is rolled again at the end of each turn, between 2 and 12, and your armour changes it (see below). Your light burns a little at the end of every turn.</p>
+<p>Every key press that does something is one <b>move</b>, and bumping into a wall or a locked door still counts. Yer <b>speed</b> (the number next to the boot) is how many moves make a <b>turn</b>; it is rolled again at the end of each turn, between 2 and 12, and yer armour changes it (see below). Yer light burns a little at the end of every turn.</p>
 <p>Monsters have their own speed. For every move you make, each monster in the room acts <i>its speed divided by yours</i> times. A fast monster against a slow, armoured you can hit you twice in a move.</p>
 <h2>Fighting</h2>
-<p>Walk into a monster to hit it. You roll a number of dice equal to your <b>attack</b>; each die has a one in two chance of hitting. Your hits minus a random <b>defence roll</b> from the monster is the damage. If that is zero or less you missed. With no weapon you have a one in six chance of scratching for 1.</p>
-<p>Monsters hit you the same way: their attack dice, minus a defence roll from your armour (one roll per piece you wear). The points of damage your armour absorbs wear it down, and the damage you deal wears your weapon. Which gear you wear is picked for you: in attack mode a two-handed weapon wins and the shield stays off; in defend mode the shield stays on and you use the best one-handed weapon.</p>
+<p>Walk into a monster to hit it. You roll a number of dice equal to yer <b>attack</b>; each die has a one in two chance of hitting. Yer hits minus a random <b>defence roll</b> from the monster is the damage. If that is zero or less you missed. With no weapon you have a one in six chance of scratching for 1.</p>
+<p>Monsters hit you the same way: their attack dice, minus a defence roll from yer armour (one roll per piece you wear). The points of damage yer armour absorbs wear it down, and the damage you deal wears yer weapon. Which gear you wear is picked for you: in attack mode a two-handed weapon wins and the shield stays off; in defend mode the shield stays on and you use the best one-handed weapon.</p>
 {weapons_table()}
 {armour_table()}
 <h2>Staying alive</h2>
 <ul>
 <li><b>Hams</b> are eaten automatically as soon as you are hurt and move: each heals one point.</li>
 <li>A <b>potion</b> is used automatically when a hit would kill you, and restores {ITEM['Potion']['healing_amount']}. It saves you once per potion.</li>
-<li><b>Rest</b> with <kbd>Space</kbd>: heals one point and finishes your turn, but only when no monster is in the room.</li>
+<li><b>Rest</b> with <kbd>Space</kbd>: heals one point and finishes yer turn, but only when no monster is in the room.</li>
 <li>Levelling up heals you completely. The first level needs {PLAYER['initial_xp_goal']} XP and every level after that needs twice as much.</li>
 </ul>
 <h2>Light</h2>
-<p>Everything beyond your light is black. A brighter light shows more of the room and more monsters before they reach you.</p>
+<p>Everything beyond yer light is black. A brighter light shows more of the room and more monsters before they reach you.</p>
 {lights_table()}
 </div>
 
@@ -435,11 +435,11 @@ def page_html(figs):
 <tr><td class="i">{item_img('Quest')}</td><td><b>A piece of the MegaHam.</b> Pick up all {ITEM['Quest']['item_count']}. Each one you take wakes up some of the traps you have seen so far, so the maze gets more dangerous as you go.</td></tr>
 <tr><td class="i">{item_img('Exit')}</td><td><b>The exit.</b> It only lets you through with all the pieces and the Rainbow Key, and never while you carry the Amulet.</td></tr>
 <tr><td class="i">{item_img('Chest')}</td><td><b>A chest.</b> Walk into it to open it: something appears in its place (food, gold, a weapon, armour, a light, even a trap or a portal), and you walk onto it to take it.</td></tr>
-<tr><td class="i">{item_img('DartTrap')}</td><td><b>A trap.</b> Hidden until you stand next to it, then it shows as this. Walking onto one hurts; with thieves' tools in your pack it is disarmed and the tools are used up. Walking <i>around</i> it is free.</td></tr>
+<tr><td class="i">{item_img('DartTrap')}</td><td><b>A trap.</b> Hidden until you stand next to it, then it shows as this. Walking onto one hurts; with thieves' tools in yer pack it is disarmed and the tools are used up. Walking <i>around</i> it is free.</td></tr>
 <tr><td class="i">{item_img('Food')}</td><td><b>Ham.</b> A poison ham looks exactly like a lovely one. Walking onto it without the mysterious green liquid (the antidote) hurts you; goblins drop them now and then.</td></tr>
 <tr><td class="i">{item_img('Portal')}</td><td><b>A portal.</b> Throws you to a random room, once (the portal is used up). Useful for escape, a nuisance when you wanted to be here. The Amulet makes you immune.</td></tr>
 <tr><td class="i">{item_img('Amulet')}</td><td><b>The Amulet of Yendor.</b> Protects you from portals and teleporting monsters, but you cannot leave while you hold it. <kbd>Y</kbd> drops it and sends you away.</td></tr>
-<tr><td class="i">{item_img('Compass')}</td><td><b>The Ring of Detection.</b> Shows the rooms that hold pieces of the MegaHam on your minimap.</td></tr>
+<tr><td class="i">{item_img('Compass')}</td><td><b>The Ring of Detection.</b> Shows the rooms that hold pieces of the MegaHam on yer minimap.</td></tr>
 </table>
 <h2>Shops</h2>
 <p>There are four shops, each in a dead end. A shop sells what its shelves happen to hold when you enter (the stock is random), and it <b>disappears once you have been in it</b>, so spend what you can. Entering a shop makes noise: expect more monsters to find you afterwards.</p>
@@ -449,7 +449,7 @@ def page_html(figs):
 
 <div class="page">
 <h1>The monsters</h1>
-<p class="small">Attack dice each hit on one chance in two. Defence is the largest number the monster can roll to cancel your hits. Speed is its actions per <i>your</i> turn. Most monsters drop something when they die: coins, food, and often better weapons and armour than you will find on the floor. <b>Wandering monsters:</b> the more often you walk through a room, the likelier a monster appears there.</p>
+<p class="small">Attack dice each hit on one chance in two. Defence is the largest number the monster can roll to cancel yer hits. Speed is its actions per <i>yer</i> turn. Most monsters drop something when they die: coins, food, and often better weapons and armour than you will find on the floor. <b>Wandering monsters:</b> the more often you walk through a room, the likelier a monster appears there.</p>
 <div class="mon">{monsters_table()}</div>
 </div>
 
@@ -471,7 +471,7 @@ def page_html(figs):
 <h2>Tips</h2>
 <ul>
 <li>Do not fight at the start. Walk away from what you do not have to kill; a fast monster is only dangerous while you are slow.</li>
-<li>Boots double your moves per turn. Platemail halves them. Heavy armour makes everything else around you act more often per move.</li>
+<li>Boots double yer moves per turn. Platemail halves them. Heavy armour makes everything else around you act more often per move.</li>
 <li>Check the minimap before you open a door: a red mark means someone is in there.</li>
 <li>Each piece of the MegaHam you pick up wakes some of the traps you have seen: pick them up when you are healthy and have an exit.</li>
 <li>Keep one potion in reserve for the boss rooms. Dead ends are where the dangerous things live.</li>

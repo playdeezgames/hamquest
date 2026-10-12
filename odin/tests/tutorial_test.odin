@@ -304,3 +304,36 @@ tutorial_has_no_wandering_monsters_or_tips :: proc(t: ^testing.T) {
 	testing.expect_value(t, n.mode, game.Game_Mode.Normal)
 	testing.expect_value(t, game.quest_required(n), game.quest_item_total())
 }
+
+// The voice (vault rule, D32): "yer", never "your" or "you're", in anything the player reads.
+has_word :: proc(s, word: string) -> bool {
+	lower := make([]u8, len(s))
+	defer delete(lower)
+	for i in 0 ..< len(s) {
+		c := s[i]
+		if c >= 'A' && c <= 'Z' {c += 32}
+		lower[i] = c
+	}
+	l := string(lower)
+	for i in 0 ..= len(l) - len(word) {
+		if l[i:i + len(word)] != word {continue}
+		before_ok := i == 0 || !(l[i - 1] >= 'a' && l[i - 1] <= 'z')
+		j := i + len(word)
+		after_ok := j >= len(l) || !(l[j] >= 'a' && l[j] <= 'z')
+		if before_ok && after_ok {return true}
+	}
+	return false
+}
+
+@(test)
+text_uses_the_yer_voice :: proc(t: ^testing.T) {
+	for m in content.Message_Id {
+		d := content.MESSAGES[m]
+		for s in ([?]string{d.text, d.tutorial_title, d.tutorial_text}) {
+			testing.expectf(t, !has_word(s, "your") && !has_word(s, "you're"), "message %v says your/you're: %s", m, s)
+		}
+	}
+	for l in game.TUT_LESSONS {
+		testing.expectf(t, !has_word(l.title, "your") && !has_word(l.text, "your") && !has_word(l.text, "you're"), "lesson says your: %s", l.title)
+	}
+}

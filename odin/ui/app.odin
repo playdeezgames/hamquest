@@ -215,8 +215,12 @@ pop_tip :: proc(a: ^App) {
 
 command :: proc(a: ^App, cmd: game.Command, arg: int = 0) {
 	if a.world.state == .Play && a.world.mode == .Normal {record(a, cmd, arg)}
+	before := a.world.msg_serial
 	game.step_command(&a.world, cmd, arg)
 	collect_events(a)
+	// anything new in the message log (a blow, a pick-up) takes the box back from the lesson: feedback
+	// for what just happened matters more than the lesson, which H brings back
+	if a.world.msg_serial != before && a.world.mode == .Tutorial {a.coach_hidden = true}
 	if room_id(&a.world) != a.coach_room {
 		a.coach_room = room_id(&a.world)
 		a.coach_hidden = false // the lesson of a new room is shown again (D29)
@@ -438,7 +442,7 @@ TITLE_ITEM_STEP :: 40
 title_label :: proc(a: ^App, item: Title_Item) -> string {
 	switch item {
 	case .Continue: return "Continue tutorial" if a.world.mode == .Tutorial else "Continue"
-	case .Real_Game: return "Return to your game"
+	case .Real_Game: return "Return to yer game"
 	case .New_Game: return "New Game"
 	case .Tutorial: return "Restart tutorial" if a.world.mode == .Tutorial && game_in_progress(a) else "Tutorial"
 	case .Credits: return "Credits"
@@ -564,7 +568,7 @@ coach_text :: proc(a: ^App, hint: ^Text_Buf) -> Coach_Text {
 	if w.tut.mercy {
 		return {
 			"That would have been the end of you",
-			"In the real game that blow ends your run. Here we shall pretend it did not happen. Back to the door with you, and your hams are restocked.",
+			"In the real game that blow ends yer run. Here we shall pretend it did not happen. Back to the door with you, and yer hams are restocked.",
 			.None,
 			true,
 		}

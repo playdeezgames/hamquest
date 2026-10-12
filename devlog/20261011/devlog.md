@@ -1,4 +1,4 @@
-# HamQuest is back, and it runs in your browser
+# HamQuest is back, and it runs in yer browser
 
 *October 11, 2026*
 
