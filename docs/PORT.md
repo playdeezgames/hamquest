@@ -30,6 +30,7 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **D22 Tutorial voice: jokey**, in the manner of the original's pop-ups (user, 2026-10-11). Wording is in `TUT_LESSONS`; keep lines short for the coach strip.
 - **D23 No reward for finishing the tutorial** (user, 2026-10-11): no flag, bonus or credits line; on completion it simply offers a real game.
 - **D24 Layout before the coach UI** (user, 2026-10-12): the screen layout is reworked first (TODO item 22: borders, padding, room for a coach area; frame size open), then tutorial T2 is built in the new layout. No temporary overlay.
+- **D25 Frame size 800x600** (user, 2026-10-12) for the reworked layout: the 480x480 map stays 15x15 tiles of 32 px; borders and padding around every area; a roomier right panel (minimap, pack, statistics); a message and coach area under the map. Exact placement still to be drawn and approved before it is built.
 
 ## Findings
 

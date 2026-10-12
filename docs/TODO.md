@@ -105,8 +105,8 @@ stay decided unless an item below says it should be reopened.
     are packed edge to edge with no borders, no breathing room, and nowhere to put the tutorial coach, the
     shop or a larger font without covering something.
     - Give every area a border and some padding; decide what each area is for before moving anything.
-    - Reconsider the logical size (a wider frame would give the panel and a message/coach area real room;
-      the web build already fits any window, D17) and whether the 32 by 32 map stays at 15 by 15 tiles.
+    - Frame size decided (D25): 800 by 600, map stays 480 by 480 (15 by 15 tiles of 32 px); placement still to be
+      drawn and approved.
     - Touch buttons and tap targets, the coach strip (tutorial T2), shop and tip dialogs, accessibility text
       size (item 15) and the future options screen all depend on this, so settle it before more UI is built.
 
