@@ -29,6 +29,7 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **D21 Menu scope: minimal** (user, 2026-10-11). Title screen with Continue (only when a valid save exists), New Game, Tutorial (disabled until built), Credits, and Quit on native. Keyboard, touch and mouse. No pause menu, options or rebinding yet (TODO item 5 stays open for those). Boot goes to the title instead of straight into the saved game; Continue loads it.
 - **D22 Tutorial voice: jokey**, in the manner of the original's pop-ups (user, 2026-10-11). Wording is in `TUT_LESSONS`; keep lines short for the coach strip.
 - **D23 No reward for finishing the tutorial** (user, 2026-10-11): no flag, bonus or credits line; on completion it simply offers a real game.
+- **D24 Layout before the coach UI** (user, 2026-10-12): the screen layout is reworked first (TODO item 22: borders, padding, room for a coach area; frame size open), then tutorial T2 is built in the new layout. No temporary overlay.
 
 ## Findings
 

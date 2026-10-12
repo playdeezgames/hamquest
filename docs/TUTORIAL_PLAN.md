@@ -163,4 +163,4 @@ the user's eye.
 
 The user asked for the screen layout to be rethought: it is far too tight and needs borders (TODO item 22).
 The coach strip in T2 has to be built knowing that: either as a deliberately temporary overlay on the
-message strip, or after the layout is reworked. Decide before T2.
+message strip, or after the layout is reworked. Decided (D24): the layout is reworked first, then T2 is built in it.
