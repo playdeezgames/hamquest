@@ -12,7 +12,7 @@ python3 tools/gen_font.py             # odin/ui/font_gen.odin from assets/fonts/
 ~/ODIN/odin build odin/platform/native -vet -out:build/hamquest && build/hamquest --seed 1   # native SDL2 client
 tools/build_web.sh                    # build/web (wasm + page); serve with python3 -m http.server 8137 -d build/web
 tools/parity.sh                       # native vs wasm frame hashes (needs build/hamquest and build/web)
-tools/ship.sh [--push]                # tests, zip build/hamquest-html5.zip, butler push only with --push
+tools/ship.sh [--push]                # tests, zip build/hamquest-html5.zip, butler push only with --push (./shippit.sh wraps it)
 tools/test.sh                         # stale checks, odin check -vet (native + js_wasm32), odin test; must end ALL TESTS PASSED
 ~/ODIN/odin test odin/tests -define:ODIN_TEST_THREADS=1 -define:ODIN_TEST_NAMES=tests.content_counts  # one test
 ```

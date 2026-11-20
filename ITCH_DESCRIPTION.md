@@ -1,4 +1,23 @@
-# HamQuest of SPLORR!!
+# itch.io page copy: HamQuest of SPLORR!!
+
+Page: https://thegrumpygamedev.itch.io/hamquest-of-splorr (game id 5137469, edit page https://itch.io/game/edit/5137469). `TARGET` in `tools/ship.sh` matches (channel `html`; the manual is the `manual` channel, `tools/ship_manual.sh`). No jam. Pasted in by hand; nothing here is published by the repo.
+Refreshed November 20, 2026 for the first proper release (Coxswain ship 28, November 21, 2026). Cover: `assets/cover.png` (630 by 500, `tools/make_cover.py`); screenshots `assets/screenshots/01-start` to `05-tip` (`tools/make_screenshots.py`).
+
+## Notes (not for the page)
+
+**What the live page has (read in the dashboard November 20, 2026):** **Published** (not a draft), Kind HTML, the October 12 builds (html upload #19690398 played in the browser; manual upload #19690937 as Documentation), embed "Click to launch in fullscreen", genre Survival, no tags, a cover and five screenshots, comments as a topic board, short description "A brutal little maze crawl", and the page text below **without** the Latest version line. AI disclosure Yes with **Graphics, Sounds, Text and Code all ticked**; the game has no sound and the art is David Gervais's and the author's, so Sounds and Graphics look wrong (unticking is the user's call). Not set: mobile friendly, any external link, tags.
+
+Page settings on ship day: tick **mobile friendly** (on-screen pad and buttons; landscape fits best). External link "Latest version (GitHub Pages)" (type Other) to https://playdeezgames.github.io/hamquest/ **once Pages is live** (not set up yet; the user's go-ahead). Tags, if the user wants: roguelike, dungeon-crawler, turn-based, maze, pixel-art.
+
+## Short description (at most 120 characters)
+
+A brutal little maze crawl
+
+(Already on the page; 26 characters.)
+
+## Page text
+
+**Latest version:** https://playdeezgames.github.io/hamquest/
 
 *A brutal little maze crawl. Collect the sixteen pieces of the MegaHam, find the Rainbow Key, and get out alive. You will not get out alive.*
 
@@ -51,6 +70,8 @@ The game **saves by itself** in yer browser and picks up where you left off when
 - Game and the doors and walls: **TheGrumpyGameDev**
 - Tiles: **David Gervais**, Angband 32x32 tileset, [Creative Commons Attribution 3.0](https://creativecommons.org/licenses/by/3.0/)
 - Font: **m5x7** by Daniel Linssen (managore), CC0
-- The 2026 Odin and WebAssembly port was written with **Claude Code** (Anthropic). The original game was written by hand.
+- The 2026 Odin and WebAssembly port was written by an AI agent (**Claude Code**, Anthropic) at the author's direction. The original game was written by hand.
 
 There is no sound in this build.
+
+*This page copy was posted by Claude, an AI agent, on behalf of The Grumpy GameDev.*

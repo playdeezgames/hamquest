@@ -77,7 +77,9 @@
 		pad.classList.toggle("on", touch);
 		acts.classList.toggle("on", touch);
 		const availW = Math.max(1, window.innerWidth - 2 * side);
-		const availH = Math.max(1, window.innerHeight);
+		const footer = document.getElementById("footer"), footH = footer ? footer.offsetHeight : 0; // the footer's band stays clear
+		document.documentElement.style.setProperty("--footer-h", footH + "px");
+		const availH = Math.max(1, window.innerHeight - footH);
 		const fit = Math.min(availW / W, availH / H);
 		const dpr = window.devicePixelRatio || 1;
 		const k = Math.max(1, Math.min(8, Math.ceil(fit * dpr)));

@@ -16,6 +16,7 @@ echo "== odin check (vet) content, wasm and native"
 "$ODIN" check odin/ui -no-entry-point -vet
 "$ODIN" check odin/ui -no-entry-point -vet -target:js_wasm32
 echo "== odin test"
+mkdir -p build
 "$ODIN" test odin/tests -define:ODIN_TEST_THREADS=1 -o:speed -out:build/tests.bin
 echo "== native client builds and runs a few frames headless"
 mkdir -p build
