@@ -102,7 +102,7 @@ content_locks_are_consistent :: proc(t: ^testing.T) {
 	}
 }
 
-// Names the rules rely on (see docs/game-reference.md section 4).
+// Names the rules rely on (see design/game-reference.md section 4).
 @(test)
 content_rule_items_exist :: proc(t: ^testing.T) {
 	testing.expect_value(t, content.PLAYER.quest_item, content.Item_Kind.Quest)

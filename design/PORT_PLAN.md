@@ -18,7 +18,7 @@ odin/
 tools/
   gen_content.py   XML + CQM -> odin/content/*.odin   (D2)
   build.sh  test.sh  serve.sh  ship.sh   (ship pushes only with --push)
-docs/
+design/
   PORT_PLAN.md  game-reference.md (rules spec)  PORT.md (decision + findings log)
 ```
 
@@ -41,11 +41,11 @@ Core/platform split follows Kordanor's Cabal: the page owns the `requestAnimatio
 
 ## Milestones
 
-Each milestone ends with `tools/test.sh` green and a findings entry in `docs/PORT.md` (done / verified / not verified / consequences).
+Each milestone ends with `tools/test.sh` green and a findings entry in `design/PORT.md` (done / verified / not verified / consequences).
 
-**M0 Repo hygiene (small).** Add `.gitignore`; decide whether to `git rm --cached` the committed `bin/`, `obj/`, `*.deploy`, `.pfx`. Create `odin/`, `tools/`, `docs/`. Verify Odin nightly and `odin check` on a hello-wasm. Add the vault `Games/HamQuest` note (or defer, see open questions).
+**M0 Repo hygiene (small).** Add `.gitignore`; decide whether to `git rm --cached` the committed `bin/`, `obj/`, `*.deploy`, `.pfx`. Create `odin/`, `tools/`, `design/`. Verify Odin nightly and `odin check` on a hello-wasm. Add the vault `Games/HamQuest` note (or defer, see open questions).
 
-**M1 Rules spec.** Write `docs/game-reference.md` from the C#: turn order, combat roll, defend rollers, step/speed model, light burn, equipment auto-equip (Attack vs Defend config), healing items (Eaten/Save), shops (Vanish/Teleport/Persist), doors/keys/locks, portals/teleport, traps/hidden, spawners, special attacks (thief, ghoul, teleport, generator/summon, dragon), quest + rainbow key + amulet win logic, XP/levels. List every place the spec departs from the C# (D1) with a reason.
+**M1 Rules spec.** Write `design/game-reference.md` from the C#: turn order, combat roll, defend rollers, step/speed model, light burn, equipment auto-equip (Attack vs Defend config), healing items (Eaten/Save), shops (Vanish/Teleport/Persist), doors/keys/locks, portals/teleport, traps/hidden, spawners, special attacks (thief, ghoul, teleport, generator/summon, dragon), quest + rainbow key + amulet win logic, XP/levels. List every place the spec departs from the C# (D1) with a reason.
 
 **M2 Content generator.** `tools/gen_content.py` (stdlib only): resolves `template=` chains, types the untyped values, maps `type="X"` to a closed set of Odin variants, emits enums + tables for items, creatures, terrains, messages, property groups, themes, generator tables, and the 29 CQM maps as `[15][15]u8`. Also emits the atlas rects. Test: golden counts (items, creatures, terrains, messages = 179) and a stale-file check.
 

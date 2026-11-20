@@ -2,7 +2,7 @@ package game
 
 import content "../content"
 
-// Tutorial lessons (D18 to D20, docs/TUTORIAL_PLAN.md). A lesson belongs to a room and has a goal
+// Tutorial lessons (D18 to D20, design/TUTORIAL_PLAN.md). A lesson belongs to a room and has a goal
 // that is checked after every command; once met it stays done. Which lesson to show is a pure
 // function of the world (tutorial_current), so a replayed save shows the same thing, and a player
 // who wanders off the intended path simply gets the lesson of whatever room they are in, or a

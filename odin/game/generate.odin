@@ -3,7 +3,7 @@ package game
 import content "../content"
 
 // World generation (M3). Mirrors the structure of the original Maze.populateMaze and Map.Generate
-// (see docs/game-reference.md section 2): a random spanning tree maze, locks on every dead end,
+// (see design/game-reference.md section 2): a random spanning tree maze, locks on every dead end,
 // doors beside them, keys in cells that are not dead ends, items and creatures by placement rule,
 // and the player in a cell that is not a dead end. All searches are bounded (A8).
 

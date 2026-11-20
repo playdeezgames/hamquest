@@ -6,7 +6,7 @@ Its assessment in one line: the best-engineered of the small games and the easie
 but short on variety and meta progression, with no sound and a brutal cold start.
 
 Sizes: **S** under a day, **M** a few days, **L** a week or more. Items marked **[user]** need a decision or an
-asset from the user. Nothing here is started. Rules that are already decided (D1 to D17 in `docs/PORT.md`)
+asset from the user. Nothing here is started. Rules that are already decided (D1 to D17 in `design/PORT.md`)
 stay decided unless an item below says it should be reopened.
 
 ## A. Blockers: Steam will not take it, or the page cannot be built, without these

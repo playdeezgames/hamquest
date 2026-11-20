@@ -102,7 +102,7 @@ Gen_Stats :: struct {
 
 Game_Mode :: enum u8 {
 	Normal,
-	Tutorial, // the hand-built training level (docs/TUTORIAL_PLAN.md, D18 to D20)
+	Tutorial, // the hand-built training level (design/TUTORIAL_PLAN.md, D18 to D20)
 }
 
 // Tutorial bookkeeping. Only touched in Tutorial mode, so a Normal world never changes because of it.

@@ -12,6 +12,7 @@ python3 tools/gen_font.py             # odin/ui/font_gen.odin from assets/fonts/
 ~/ODIN/odin build odin/platform/native -vet -out:build/hamquest && build/hamquest --seed 1   # native SDL2 client
 tools/build_web.sh                    # build/web (wasm + page); serve with python3 -m http.server 8137 -d build/web
 tools/parity.sh                       # native vs wasm frame hashes (needs build/hamquest and build/web)
+tools/pages.sh                        # GitHub Pages: rebuild docs/ (generated; commit it, push to update the site)
 tools/ship.sh [--push]                # tests, zip build/hamquest-html5.zip, butler push only with --push (./shippit.sh wraps it)
 tools/test.sh                         # stale checks, odin check -vet (native + js_wasm32), odin test; must end ALL TESTS PASSED
 ~/ODIN/odin test odin/tests -define:ODIN_TEST_THREADS=1 -define:ODIN_TEST_NAMES=tests.content_counts  # one test
@@ -34,10 +35,10 @@ The user's notes vault (`/home/yermom/git/bok-of-splorr/splorr`, Obsidian markdo
 | `odin/` | the game (see above) and its tests (`odin/tests`) |
 | `data/` | the original's XML config, `.cqm` maps, images, sounds: the generator's input |
 | `tools/` | generator, atlas packer, font baker, build/test/ship scripts, cover, screenshots and manual makers |
-| `docs/` | `PORT_PLAN.md`, `PORT.md` (decision log D1 to D32 and findings), `game-reference.md` (rules spec), `TODO.md` (Steam hit list), `TUTORIAL_PLAN.md` |
+| `design/` | port notes (moved from `docs/` November 20, 2026, when `docs/` became the generated GitHub Pages site): `PORT_PLAN.md`, `PORT.md` (decision log D1 to D32 and findings), `game-reference.md` (rules spec), `TODO.md` (Steam hit list), `TUTORIAL_PLAN.md` |
 | `assets/`, `manual/`, `devlog/`, `ITCH_DESCRIPTION.md` | release material for the itch.io page |
 
-## The original's architecture (what `data/` and `docs/game-reference.md` describe; the source is at tag `csharp-final`)
+## The original's architecture (what `data/` and `design/game-reference.md` describe; the source is at tag `csharp-final`)
 
 **Data-driven, stringly-typed engine.** Almost all game content is XML in `data/config/` (originally `HamQuestSLClient/config/`) (`creatures.xml`, `items.xml`, `messages.xml`, `terrains.xml`, `themes.xml`, `propertyGroups.xml`, plus per-entity files under `creatures/` and `items/`). Each top-level XML lists files; entities can inherit with a `template="a.xml,b.xml"` attribute (comma list, concatenated, later wins; identifiers are *appended*).
 
@@ -55,7 +56,7 @@ The user's notes vault (`/home/yermom/git/bok-of-splorr/splorr`, Obsidian markdo
 
 ## Quirks of the original, and what the port did
 
-These are the original's traps. Each was a decision taken with the user; the outcomes are in `docs/PORT.md` and `docs/game-reference.md`. Do not "fix" one silently: record it in `docs/PORT.md` and the generator's tables.
+These are the original's traps. Each was a decision taken with the user; the outcomes are in `design/PORT.md` and `design/game-reference.md`. Do not "fix" one silently: record it in `design/PORT.md` and the generator's tables.
 
 1. **`Descriptor.GetProperty<T>` swallows every exception and returns `default(T)`.** A missing property, a wrong type, or a typo silently becomes 0/null/false. Much of the game's behaviour (including bugs) may depend on that. Port with an explicit "missing → zero" rule, and consider a debug mode that logs misses.
 2. **Iteration-order dependence.** `WeightedGenerator<T>.Generate` walks a `Dictionary`, so results for a given random roll depend on insertion order (which is XML order today). Reproducing the same weighted results needs the same order. `MinimalValue` is wrong (starts at `default`, so it is never above 0).
@@ -72,23 +73,23 @@ These are the original's traps. Each was a decision taken with the user; the out
 13. **No automated game tests exist.** The only way to check behaviour is to play the WPF build on Windows. Any equivalence testing must be written fresh.
 14. **Assets**: 32x32 PNG tiles in per-folder files (555 PNGs, duplicated between clients), 3 sound samples (`.wav`/`.mp3`) of unknown licence (filenames carry freesound-style IDs and author names: `j1987`, `wildweasel`, `CGEffex`; unused in v1). **Tile art provenance is settled (user, 2026-10-11):** David Gervais's 32x32 Angband tiles (CC BY 3.0, needs credit and a licence link) plus the user's own doors and walls; see `assets/CREDITS.md`. The samples still need provenance before sound returns.
 
-Port documents (read these before touching port code): `docs/PORT_PLAN.md` (plan and milestones), `docs/game-reference.md` (rules extracted from the C#, with **[CHECK]**/**[BUG?]** markers), `docs/PORT.md` (decision and findings log; add an entry per milestone). Extra quirks found while writing the reference: the maze is a spanning tree (locks only on leaves, keys only on non-leaves, so key order is solvable by construction); shop purchases are free because the price is read as `uint` from an `int` and the exception is swallowed; a blocked move still advances the step tracker; `SpawnMonsters` can spin forever.
+Port documents (read these before touching port code): `design/PORT_PLAN.md` (plan and milestones), `design/game-reference.md` (rules extracted from the C#, with **[CHECK]**/**[BUG?]** markers), `design/PORT.md` (decision and findings log; add an entry per milestone). Extra quirks found while writing the reference: the maze is a spanning tree (locks only on leaves, keys only on non-leaves, so key order is solvable by construction); shop purchases are free because the price is read as `uint` from an `int` and the exception is swallowed; a blocked move still advances the step tracker; `SpawnMonsters` can spin forever.
 
 ## Decisions (settled with the user)
 
 - **D1 Fidelity: modernise freely.** The original is a design reference, not a spec to match. Fix bugs and rebalance where it helps; still log each notable change in the port record so it is a choice, not an accident.
 - **D2 Content: generate Odin tables** from `config/**/*.xml` and `maps/*.cqm` at build time; no runtime XML parsing or file IO in wasm. Generated files must be checked for staleness by the test script.
 - **D3 Audio: ship without sound at first.** Port visuals only; the three samples are excluded until their provenance and licences are confirmed. The 32x32 tile art is kept for now, but its author is also unrecorded: confirm before release.
-- **D5-D10 (see `docs/PORT.md`):** framebuffer + packed atlas rendering; fixed 8x8 maze; tune balance while implementing; native SDL2 client in addition to wasm; title "HamQuest of SPLORR!!"; vault note now; 640x560 landscape (reworked to 800x600 by D25/D26: map 480x480 with bordered boxes, panel right, messages below).
+- **D5-D10 (see `design/PORT.md`):** framebuffer + packed atlas rendering; fixed 8x8 maze; tune balance while implementing; native SDL2 client in addition to wasm; title "HamQuest of SPLORR!!"; vault note now; 640x560 landscape (reworked to 800x600 by D25/D26: map 480x480 with bordered boxes, panel right, messages below).
 - **D4 Release scope beyond a straight port:** save and resume (namespaced `localStorage` key, validated JSON), touch/phone controls, and `?seed=N` for reproducible runs.
 
-- **D17 (see `docs/PORT.md`):** the web build fits the window (itch.io launches it full screen).
-- **D11-D13 (see `docs/PORT.md`):** shops charge the displayed price (original bug: free); blocked moves still cost a step; first-time tutorial pop-ups kept with a persistent "stop tutorial".
+- **D17 (see `design/PORT.md`):** the web build fits the window (itch.io launches it full screen).
+- **D11-D13 (see `design/PORT.md`):** shops charge the displayed price (original bug: free); blocked moves still cost a step; first-time tutorial pop-ups kept with a persistent "stop tutorial".
 
-- **D14-D16 (see `docs/PORT.md`):** the original's lethality is confirmed, so M4 rules stand and difficulty stays as the original for v1; next is M5 (renderer/HUD, native SDL2 window first).
-- **D18 to D32 (see `docs/PORT.md`):** the tutorial (a fixed hand-authored level, a mercy rule, no save, no reward, jokey wording, coach in the message box with a pulsing highlight; D18 to D23, D27 to D31); a title menu first (D20, D21); the 800x600 bordered layout (D24 to D26); and the **"yer" voice** (D32).
+- **D14-D16 (see `design/PORT.md`):** the original's lethality is confirmed, so M4 rules stand and difficulty stays as the original for v1; next is M5 (renderer/HUD, native SDL2 window first).
+- **D18 to D32 (see `design/PORT.md`):** the tutorial (a fixed hand-authored level, a mercy rule, no save, no reward, jokey wording, coach in the message box with a pulsing highlight; D18 to D23, D27 to D31); a title menu first (D20, D21); the 800x600 bordered layout (D24 to D26); and the **"yer" voice** (D32).
 
 ## Still open
 
 - Sound sample provenance (needed before sound returns). Tile art is settled: Gervais CC BY 3.0 + the user's own, credited in `assets/CREDITS.md` and to be shown in the game's About/itch page.
-- Remaining **[CHECK]** items in `docs/game-reference.md` (rainbow/"all" key behaviour).
+- Remaining **[CHECK]** items in `design/game-reference.md` (rainbow/"all" key behaviour).

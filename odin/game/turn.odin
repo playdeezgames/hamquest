@@ -3,7 +3,7 @@ package game
 import content "../content"
 
 // The turn engine (M4): commands in, world changed, messages and events out. Mirrors
-// PlayerMoveHandler, CreatureMoveHandler, Creature, Map.MoveCreatures and Maze (docs/game-reference.md
+// PlayerMoveHandler, CreatureMoveHandler, Creature, Map.MoveCreatures and Maze (design/game-reference.md
 // sections 3 to 9). Every loop is bounded.
 
 CREATURE_STEPS_PER_TURN_CAP :: 64

@@ -2,7 +2,7 @@ package game
 
 import content "../content"
 
-// Player rules (docs/game-reference.md sections 5 to 8). The player is not in World.creatures: its
+// Player rules (design/game-reference.md sections 5 to 8). The player is not in World.creatures: its
 // position is World.player and its inventory, equipment and wounds live directly on the World.
 
 MAX_CHAIN :: 64

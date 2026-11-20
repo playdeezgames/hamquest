@@ -7,7 +7,7 @@ Refreshed November 20, 2026 for the first proper release (Coxswain ship 28, Nove
 
 **What the live page has (read in the dashboard November 20, 2026):** **Published** (not a draft), Kind HTML, the October 12 builds (html upload #19690398 played in the browser; manual upload #19690937 as Documentation), embed "Click to launch in fullscreen", genre Survival, no tags, a cover and five screenshots, comments as a topic board, short description "A brutal little maze crawl", and the page text below **without** the Latest version line. AI disclosure Yes with **Graphics, Sounds, Text and Code all ticked**; the game has no sound and the art is David Gervais's and the author's, so Sounds and Graphics look wrong (unticking is the user's call). Not set: mobile friendly, any external link, tags.
 
-Page settings on ship day: tick **mobile friendly** (on-screen pad and buttons; landscape fits best). External link "Latest version (GitHub Pages)" (type Other) to https://playdeezgames.github.io/hamquest/ **once Pages is live** (not set up yet; the user's go-ahead). Tags, if the user wants: roguelike, dungeon-crawler, turn-based, maze, pixel-art.
+Page settings on ship day: tick **mobile friendly** (on-screen pad and buttons; landscape fits best). External link "Latest version (GitHub Pages)" (type Other) to https://playdeezgames.github.io/hamquest/ (Pages set up locally November 20, 2026 at the user's go-ahead; live once pushed and enabled). Tags, if the user wants: roguelike, dungeon-crawler, turn-based, maze, pixel-art.
 
 ## Short description (at most 120 characters)
 

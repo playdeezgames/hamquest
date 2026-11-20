@@ -23,7 +23,7 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - **D15 Difficulty: keep the original** (no Easy option, no softened opening) for v1. Revisit only if playtesting shows it is unplayable cold; tutorial pop-ups carry the guidance.
 - **D16 Next: M5 renderer and HUD**, with the native SDL2 window (D8) so feel can be judged early; no text harness.
 - **D17 Fit to window:** the itch.io page launches full screen, so the web build scales the picture to the best fit of the window (whole-number nearest-neighbour enlargement, then a smooth resize to the exact fit), not whole-number steps only.
-- **D18 Tutorial form: a fixed, hand-authored training level** built from the real content and rules (user, 2026-10-11), not a random run with hints. Plan in `docs/TUTORIAL_PLAN.md`; its other questions are still open.
+- **D18 Tutorial form: a fixed, hand-authored training level** built from the real content and rules (user, 2026-10-11), not a random run with hints. Plan in `design/TUTORIAL_PLAN.md`; its other questions are still open.
 - **D19 Tutorial failure: mercy rule** (user, 2026-10-11). In the tutorial the player cannot die: a lethal blow restores health, returns the player to the room entrance, resets that room's creatures and says the real game would have ended the run. Tutorial-only (`mode == .Tutorial`); normal rules untouched.
 - **D20 Title menu comes first** (user, 2026-10-11): the tutorial is entered from a title menu, so the menu (TODO item 5) is built before the tutorial. No first-launch prompt stopgap. Scope of the menu is open.
 - **D21 Menu scope: minimal** (user, 2026-10-11). Title screen with Continue (only when a valid save exists), New Game, Tutorial (disabled until built), Credits, and Quit on native. Keyboard, touch and mouse. No pause menu, options or rebinding yet (TODO item 5 stays open for those). Boot goes to the title instead of straight into the saved game; Continue loads it.
@@ -43,14 +43,14 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 ## Findings
 
 ### M0 (2026-10-10)
-- Done: `.gitignore` added (build output, legacy `bin/obj`); `odin/{game,content,platform/web/page,tests}`, `tools/`, `docs/` created.
+- Done: `.gitignore` added (build output, legacy `bin/obj`); `odin/{game,content,platform/web/page,tests}`, `tools/`, `design/` created.
 - Verified: Odin `dev-2026-07-nightly:ab0131c` builds a minimal `js_wasm32` module with `-o:size` (17.6 KB). Python 3.12 and node 22 available (node for running wasm tests).
 - Done (approved): `git rm --cached` of 782 tracked build files (`bin/`, `obj/`, `Bin/`, `app.publish/*.deploy`, `*.csproj.user`, the WPF temporary `.pfx`). Files remain on disk; removal is staged, not committed. No unique asset lived only under `bin/` (checked). `*.pfx` added to `.gitignore`.
 - Not verified: nothing about the C# can be built or run here.
 
 ### M1 (in progress)
 - **[CHECK] items resolved from the data (not from play):** (a) speed: player `speed-roll` is 2 to 12 moves per turn, scaled by armour (boots x2.0, clothes/chainmail x0.75, platemail x0.5, helmet/shield x1.0), and creatures get `speed / playerSpeed` steps per player move; so plate is slow *and* lets monsters act more often per move. Direction is consistent, so port as written. (b) The Amulet drops **only** from the Necromancer (`item-drops`, 100%; `item-count` 0, placement None). While carried it blocks portals and portal-monster teleports but also blocks the exit; `Y` drops it and teleports you. A boss reward with a trade-off, not a curse. Keep.
-- `docs/game-reference.md` drafted from code. Findings with consequences for the port:
+- `design/game-reference.md` drafted from code. Findings with consequences for the port:
   1. **The maze is a spanning tree.** All locks sit on leaf portals and all keys on non-leaf cells, so key/door ordering is solvable by construction. Port generation tests can assert this instead of solving.
   2. **Shopping is free** (price read as `uint` from an `int`; exception swallowed). Decision needed: keep, or charge the displayed price. Affects economy and whether gold matters at all beyond thieves.
   3. **`SpawnMonsters` can hang** when no visited cell has a trap or no `spawns` item is present. The port needs a defined fallback (spawn at a random free interior tile).
@@ -184,5 +184,5 @@ Decisions and findings log, in the style of Kordanor's Cabal's `PORT.md`. Plan: 
 - Done (user: "time to remove the old C# version"): `HamQuestEngine`, `HamQuestEngineSL`, `PDGBoardGames`, `PDGBoardGamesSL`, `PDBBoardGames.Tests`, `HamQuestWpfClient` and the code of `HamQuestSLClient` are deleted from the tree (about 540 files). The tag **`csharp-final`** (the commit just before) keeps all of it: `git show csharp-final:HamQuestEngine/Item/Descriptor.cs`.
 - Kept and moved: the original's data, `HamQuestSLClient/{config,maps,images,sounds}` to `data/{config,maps,images,sounds}` (`git mv`, history follows). The generator, atlas packer, cover and manual tools read `data/`. The sounds are still unused and unlicensed.
 - The generated file's header comment changed (it names `data/`); `CONTENT_HASH` deliberately hashes the old header text, so the hash is unchanged (`0x8bca3dc5e26abd18`) and saves from build #2112169 stay valid.
-- `CLAUDE.md` and `README.md` rewritten for the new layout; the draft port plan section is gone from `CLAUDE.md` (the plan is in `docs/PORT_PLAN.md`). `docs/game-reference.md` still cites C# file names; they resolve through the tag.
+- `CLAUDE.md` and `README.md` rewritten for the new layout; the draft port plan section is gone from `CLAUDE.md` (the plan is in `design/PORT_PLAN.md`). `design/game-reference.md` still cites C# file names; they resolve through the tag.
 - Verified: `tools/test.sh` green (80 tests, parity hashes unchanged), cover and manual rebuild from `data/`. Not pushed.

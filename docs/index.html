@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>HamQuest of SPLORR!!</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #101010; overflow: hidden; }
+  /* the footer's band (credits, back links) is kept clear: platform.js sets --footer-h to its height */
+  body { box-sizing: border-box; padding-bottom: var(--footer-h, 0px); display: flex; align-items: center; justify-content: center; -webkit-user-select: none; user-select: none; }
+  /* the canvas holds a whole-number enlargement of the picture; the browser resizes that smoothly to the exact fit */
+  canvas { outline: none; touch-action: none; background: #fff; }
+  #msg { position: fixed; left: 0; right: 0; top: 40%; text-align: center; color: #ddd; font: 16px monospace; }
+  .touch { position: fixed; top: 0; bottom: var(--footer-h, 0px); display: none; flex-direction: column; justify-content: center; gap: 2vmin; padding: 0 1vmin; }
+  .touch.on { display: flex; }
+  #pad { left: 0; } #acts { right: 0; }
+  .touch button { font: bold 3.2vmin monospace; width: 13vmin; min-width: 56px; height: 11vmin; min-height: 48px; border-radius: 10px;
+    border: 2px solid #666; background: #2a2a2a; color: #eee; touch-action: none; }
+  .touch button:active { background: #555; }
+  .row { display: flex; gap: 2vmin; justify-content: center; }
+  /* Credits and back links under the picture; platform.js keeps the picture above it. */
+  footer { position: fixed; left: 0; right: 0; bottom: 0; padding: 3px 8px 5px; text-align: center; color: #777;
+    font: 11px/1.4 monospace; touch-action: auto; -webkit-user-select: text; user-select: text; }
+  footer a { color: #aaa; }
+</style>
+</head>
+<body>
+<canvas id="screen" width="800" height="600" tabindex="0"></canvas>
+<div id="msg">loading...</div>
+<div id="pad" class="touch">
+  <div class="row"><button data-key="Up">&#9650;</button></div>
+  <div class="row"><button data-key="Left">&#9664;</button><button data-key="Right">&#9654;</button></div>
+  <div class="row"><button data-key="Down">&#9660;</button></div>
+  <div class="row"><button data-key="Space">Rest</button></div>
+</div>
+<div id="acts" class="touch">
+  <div class="row"><button data-key="Enter">OK</button></div>
+  <div class="row"><button data-key="Escape">Esc</button></div>
+  <div class="row"><button data-key="Tab">Mode</button></div>
+  <div class="row"><button data-key="Y">Amulet</button></div>
+  <div class="row"><button data-key="F2">New</button></div>
+  <div class="row"><button data-key="C">Credits</button></div>
+</div>
+<footer id="footer">
+  HamQuest of SPLORR!! by TheGrumpyGameDev (game 2007 to 2011, doors and walls). Tiles by David Gervais (<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>), font m5x7 by Daniel Linssen. Odin port (2026) by an AI agent, Claude Code, at the author's direction.<span class="ll-only" hidden> Feedback by LootLocker.</span><br>
+  <span class="ll-only" hidden><a href="#" id="feedback-link">Send feedback</a> · </span><a href="https://thegrumpygamedev.itch.io/">itch.io</a> · <a href="https://playdeezgames.github.io/oeuvre-of-splorr/">more games</a>
+</footer>
+<script src="odin.js"></script>
+<script src="lootlocker.js"></script>
+<script>
+  // Feedback through the shared SPLORR!! LootLocker kit (splorr/Tech/LootLocker.md in the vault). This game has no
+  // LootLocker game yet (creating one is the user's call): until domain and key are filled in and the console has
+  // Game feedback categories, the lookup fails and the link stays hidden.
+  (function () {
+    const LL_DOMAIN = "", LL_KEY = "";
+    if (!LL_DOMAIN || !LL_KEY) { return; }
+    const ll = LootLocker({ domain: LL_DOMAIN, key: LL_KEY, version: "1.0.0", idKey: "hq.ll-player" });
+    ll.feedbackCategories("game").then(cats => {
+      if (!cats.length) { return; }
+      const feedback = ll.feedbackDialog({ game: "HamQuest of SPLORR!!" });
+      for (const el of document.querySelectorAll(".ll-only")) { el.hidden = false; }
+      document.getElementById("feedback-link").addEventListener("click", e => { e.preventDefault(); feedback.open(); });
+    }).catch(() => { /* offline or not set up: no link */ });
+  })();
+</script>
+<script src="platform.js"></script>
+</body>
+</html>

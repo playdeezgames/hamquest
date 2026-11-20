@@ -1,6 +1,6 @@
 # Tutorial mode: plan (draft, not agreed)
 
-Written 2026-10-11 after the manual. Decisions get D18+ in `docs/PORT.md` once taken.
+Written 2026-10-11 after the manual. Decisions get D18+ in `design/PORT.md` once taken.
 This is TODO item 9's "short guided first run" made concrete; D15 (difficulty stays as the original) is untouched:
 the tutorial teaches the real game, it does not soften it.
 
@@ -122,7 +122,7 @@ instead restores health, puts the player back at the room entrance, resets that 
 
 ### 8. Docs and release material
 
-`docs/game-reference.md` gets a short "tutorial mode" section; `docs/PORT.md` D18+ and a milestone entry; the
+`design/game-reference.md` gets a short "tutorial mode" section; `design/PORT.md` D18+ and a milestone entry; the
 manual gets one paragraph ("or press H"); the itch description and a devlog entry; vault game note.
 
 ## Milestones (each ends with `tools/test.sh` green and a findings entry)
