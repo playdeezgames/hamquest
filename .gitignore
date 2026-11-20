@@ -2,6 +2,7 @@
 build/
 odin/out/
 *.wasm
+!docs/*.wasm
 /odin/*/odin
 *.bin
 __pycache__/
